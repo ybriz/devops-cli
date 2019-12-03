@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>devops</ToolCommandName>    
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Juan Elosegui</Authors>
+    <Company>PwC</Company>
+    <Product>devops-cli</Product>
+    <RepositoryUrl>http://matlka360isp001:8080/tfs/DefaultCollection/Foundation/_git/Jmelosegui.DevOpsCLI</RepositoryUrl>
+    <PackageTags>DevOps TFS</PackageTags>
+    <Description>﻿devops is a command line tool designed to interact with the Azure DevOps and Azure DevOps Server APIs</Description>
+    <RootNamespace>Jmelosegui.DevOpsCLI</RootNamespace>
+
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+    <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="2.4.4" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Nerdbank.GitVersioning" Version="3.0.28" />
+  </ItemGroup>
+
+</Project>

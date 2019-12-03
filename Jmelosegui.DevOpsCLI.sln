@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{64CE00CA-D08D-4D16-8A2E-9FF7C91121B0}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		LICENSE = LICENSE
+		README.md = README.md
+		version.json = version.json
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jmelosegui.DevOpsCLI", "DevOpsCLI\Jmelosegui.DevOpsCLI.csproj", "{CDFE3ADA-CC83-40A9-B331-DFC9481E2A5F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CDFE3ADA-CC83-40A9-B331-DFC9481E2A5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDFE3ADA-CC83-40A9-B331-DFC9481E2A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDFE3ADA-CC83-40A9-B331-DFC9481E2A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDFE3ADA-CC83-40A9-B331-DFC9481E2A5F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {351994FA-F734-4310-B05F-D7D96755EEE3}
+	EndGlobalSection
+EndGlobal
