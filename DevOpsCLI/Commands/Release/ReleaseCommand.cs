@@ -7,13 +7,12 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
-    [Command("variable-group", Description = "Commands for managing Variable Groups.")]
-    [Subcommand(typeof(VariableGroupListCommand))]
-    [Subcommand(typeof(VariableGroupExportCommand))]
-    [Subcommand(typeof(VariableGroupImportCommand))]
-    public class VariableGroupCommand : CommandBase
+    [Command("release", Description = "Commands for managing Releases.")]
+    [Subcommand(typeof(ReleaseCreateCommand))]
+    [Subcommand(typeof(ReleaseListCommand))]
+    public class ReleaseCommand : CommandBase
     {
-        public VariableGroupCommand(ILogger<BuildCommand> logger)
+        public ReleaseCommand(ILogger<ReleaseCommand> logger)
             : base(logger)
         {
         }

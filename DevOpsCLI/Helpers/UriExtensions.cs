@@ -18,7 +18,7 @@ namespace Jmelosegui.DevOpsCLI.Helpers
         /// <param name="uri">Original request Uri.</param>
         /// <param name="parameters">Collection of key-value pairs.</param>
         /// <returns>Updated request Uri.</returns>
-        public static Uri ApplyParameters(this Uri uri, IDictionary<string, string> parameters)
+        public static Uri ApplyParameters(this Uri uri, IDictionary<string, object> parameters)
         {
             Ensure.ArgumentNotNull(uri, "uri");
 
@@ -29,7 +29,7 @@ namespace Jmelosegui.DevOpsCLI.Helpers
 
             // to prevent values being persisted across requests
             // use a temporary dictionary which combines new and existing parameters
-            IDictionary<string, string> p = new Dictionary<string, string>(parameters);
+            IDictionary<string, object> p = new Dictionary<string, object>(parameters);
 
             string queryString;
             if (uri.IsAbsoluteUri)
@@ -55,13 +55,13 @@ namespace Jmelosegui.DevOpsCLI.Helpers
             {
                 if (!p.ContainsKey(existing.Key))
                 {
-                    p.Add(existing);
+                    p.Add(existing.Key, existing.Value);
                 }
             }
 
             Func<string, string, string> mapValueFunc = (key, value) => key == "q" ? value : Uri.EscapeDataString(value);
 
-            string query = string.Join("&", p.Select(kvp => kvp.Key + "=" + mapValueFunc(kvp.Key, kvp.Value)));
+            string query = string.Join("&", p.Select(kvp => kvp.Key + "=" + mapValueFunc(kvp.Key, GetFormattedValue(kvp.Value))));
             if (uri.IsAbsoluteUri)
             {
                 var uriBuilder = new UriBuilder(uri)
@@ -72,6 +72,26 @@ namespace Jmelosegui.DevOpsCLI.Helpers
             }
 
             return new Uri(uri + "?" + query, UriKind.Relative);
+        }
+
+        private static string GetFormattedValue(object value)
+        {
+            string result;
+
+            switch (value)
+            {
+                case null:
+                    result = null;
+                    break;
+                case DateTime d:
+                    result = d.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                    break;
+                default:
+                    result = value.ToString();
+                    break;
+            }
+
+            return result;
         }
     }
 }

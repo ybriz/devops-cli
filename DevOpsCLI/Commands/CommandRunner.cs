@@ -6,7 +6,9 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using McMaster.Extensions.CommandLineUtils;
 
     [Command("devops")]
+    [Subcommand(typeof(BuildCommand))]
     [Subcommand(typeof(ReleaseCommand))]
+    [Subcommand(typeof(ReleaseDefinitionCommand))]
     [Subcommand(typeof(VariableGroupCommand))]
     [HelpOption("-h|--help")]
     public sealed class CommandRunner

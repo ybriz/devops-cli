@@ -16,7 +16,7 @@ namespace Jmelosegui.DevOpsCLI
                 .AddLogging(configure =>
                 {
                     configure.AddConsole();
-                    configure.SetMinimumLevel(LogLevel.Warning);
+                    configure.SetMinimumLevel(LogLevel.Debug);
                 })
                 .BuildServiceProvider();
 

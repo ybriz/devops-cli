@@ -38,14 +38,14 @@ namespace Jmelosegui.DevOpsCLI.Http
 
         public Uri ServiceUrl { get; }
 
-        public Task<IApiResponse<T>> Get<T>(Uri uri, IDictionary<string, string> parameters, string accepts)
+        public Task<IApiResponse<T>> Get<T>(Uri uri, IDictionary<string, object> parameters, string accepts)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
 
             return this.SendData<T>(uri.ApplyParameters(parameters), HttpMethod.Get, null, accepts, null, CancellationToken.None);
         }
 
-        public Task<IApiResponse<T>> Patch<T>(Uri uri, object body, IDictionary<string, string> parameters, string accepts)
+        public Task<IApiResponse<T>> Patch<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
             Ensure.ArgumentNotNull(body, nameof(body));
@@ -53,7 +53,7 @@ namespace Jmelosegui.DevOpsCLI.Http
             return this.SendData<T>(uri.ApplyParameters(parameters), HttpMethod.Patch, body, accepts, null, CancellationToken.None);
         }
 
-        public Task<IApiResponse<T>> Put<T>(Uri uri, object body, IDictionary<string, string> parameters, string accepts)
+        public Task<IApiResponse<T>> Put<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
             Ensure.ArgumentNotNull(body, nameof(body));
@@ -61,7 +61,7 @@ namespace Jmelosegui.DevOpsCLI.Http
             return this.SendData<T>(uri.ApplyParameters(parameters), HttpMethod.Put, body, accepts, null, CancellationToken.None);
         }
 
-        public Task<IApiResponse<T>> Post<T>(Uri uri, object body, IDictionary<string, string> parameters, string accepts)
+        public Task<IApiResponse<T>> Post<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
             Ensure.ArgumentNotNull(body, nameof(body));
@@ -175,7 +175,6 @@ namespace Jmelosegui.DevOpsCLI.Http
             this.authenticator.Apply(request);
 
             HttpResponseMessage responseMessage = await this.httpClient.SendAsync(request.ToHttpMessage(), cancellationToken).ConfigureAwait(false);
-
             Response response = await Response.FromHttpResponseMessage(responseMessage);
             HandleErrors(response);
             return response;

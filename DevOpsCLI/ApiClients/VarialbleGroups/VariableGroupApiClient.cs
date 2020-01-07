@@ -28,10 +28,15 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
         {
             Ensure.ArgumentNotNullOrEmptyString(projectName, nameof(projectName));
 
-            var parameters = this.GetParameters();
+            var parameters = new Dictionary<string, object>
+            {
+                { "api-version", "4.1-preview.1" },
+            };
+
             var endPointUrl = new Uri($"{projectName}/{EndPoint}", UriKind.Relative);
-            var response = await this.Connection.Get<GenericCollectionResponse<VariableGroup>>(endPointUrl, parameters, null)
-                                                .ConfigureAwait(false);
+            var response = await this.Connection
+                                     .Get<GenericCollectionResponse<VariableGroup>>(endPointUrl, parameters, null)
+                                     .ConfigureAwait(false);
 
             return response.Body.Values;
         }
@@ -40,11 +45,16 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
         {
             Ensure.ArgumentNotNullOrEmptyString(projectName, nameof(projectName));
 
-            var parameters = this.GetParameters();
+            var parameters = new Dictionary<string, object>
+            {
+                { "api-version", "4.1-preview.1" },
+            };
+
             var endPointUrl = new Uri($"{projectName}/{EndPoint}/{variableGroupId}", UriKind.Relative);
 
-            var response = await this.Connection.Get<string>(endPointUrl, parameters, null)
-                                           .ConfigureAwait(false);
+            var response = await this.Connection
+                                     .Get<string>(endPointUrl, parameters, null)
+                                     .ConfigureAwait(false);
 
             return response.Body;
         }
@@ -53,32 +63,29 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
         {
             Ensure.ArgumentNotNullOrEmptyString(projectName, nameof(projectName));
 
-            var parameters = this.GetParameters();
+            var parameters = new Dictionary<string, object>
+            {
+                { "api-version", "4.1-preview.1" },
+            };
             Uri endPointUrl;
             IApiResponse<string> response;
 
             if (variableGroupId > 0)
             {
                 endPointUrl = new Uri($"{projectName}/{EndPoint}/{variableGroupId}/", UriKind.Relative);
-                response = await this.Connection.Put<string>(endPointUrl, jsonBody, parameters, null)
-                                           .ConfigureAwait(false);
+                response = await this.Connection
+                                     .Put<string>(endPointUrl, jsonBody, parameters, null)
+                                     .ConfigureAwait(false);
             }
             else
             {
                 endPointUrl = new Uri($"{projectName}/{EndPoint}/", UriKind.Relative);
-                response = await this.Connection.Post<string>(endPointUrl, jsonBody, parameters, null)
-                                           .ConfigureAwait(false);
+                response = await this.Connection
+                                     .Post<string>(endPointUrl, jsonBody, parameters, null)
+                                     .ConfigureAwait(false);
             }
 
             return response.Body;
-        }
-
-        private Dictionary<string, string> GetParameters()
-        {
-            return new Dictionary<string, string>
-            {
-                { "api-version", "4.1-preview.1" },
-            };
         }
     }
 }

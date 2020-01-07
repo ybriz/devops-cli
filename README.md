@@ -1,9 +1,9 @@
 ﻿# Jmelosegui.DevOpsCLI .NET Core tool
 
-Jmelosegui.DevOpsCLI is a command line tool designed to interact with the TFS apis
+DevOpsCLI is a command line tool designed to interact with the TFS apis
 
 
-### Using the Jmelosegui.DevOpsCLI .NET Core tool
+### Using the DevOpsCLI .NET Core tool
 
 Perform a one-time install of the `Jmelosegui.DevOpsCLI` tool using the following dotnet CLI command:
 

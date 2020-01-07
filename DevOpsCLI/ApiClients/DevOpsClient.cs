@@ -26,12 +26,21 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
             this.Connection = connection;
 
             this.BuildDefinition = new BuildDefinitionApiClient(connection);
+
+            this.ReleaseDefinition = new ReleaseDefinitionApiClient(connection);
+
+            this.Release = new ReleaseApiClient(connection);
+
             this.VariableGroup = new VariableGroupApiClient(connection);
         }
 
         public IConnection Connection { get; }
 
         public IBuildDefinitionApiClient BuildDefinition { get; }
+
+        public IReleaseDefinitionApiClient ReleaseDefinition { get; }
+
+        public IReleaseApiClient Release { get; }
 
         public IVariableGroupApiClient VariableGroup { get; }
     }

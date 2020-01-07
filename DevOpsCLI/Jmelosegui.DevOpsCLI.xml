@@ -9,6 +9,16 @@
             Gets the underlying connection.
             </summary>
         </member>
+        <member name="P:Jmelosegui.DevOpsCLI.ApiClients.ReleaseDefinitionApiClient.Connection">
+            <summary>
+            Gets the underlying connection.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOpsCLI.ApiClients.ReleaseApiClient.Connection">
+            <summary>
+            Gets the underlying connection.
+            </summary>
+        </member>
         <member name="P:Jmelosegui.DevOpsCLI.ApiClients.VariableGroupApiClient.Connection">
             <summary>
             Gets the underlying connection.
@@ -116,7 +126,7 @@
             Extensions for working with Uris.
             </summary>
         </member>
-        <member name="M:Jmelosegui.DevOpsCLI.Helpers.UriExtensions.ApplyParameters(System.Uri,System.Collections.Generic.IDictionary{System.String,System.String})">
+        <member name="M:Jmelosegui.DevOpsCLI.Helpers.UriExtensions.ApplyParameters(System.Uri,System.Collections.Generic.IDictionary{System.String,System.Object})">
             <summary>
             Merge a dictionary of values with an existing <see cref="T:System.Uri"/>.
             </summary>

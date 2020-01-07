@@ -9,11 +9,11 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
     using Jmelosegui.DevOpsCLI.Http;
     using Jmelosegui.DevOpsCLI.Models;
 
-    public sealed class BuildDefinitionApiClient : IBuildDefinitionApiClient
+    public sealed class ReleaseDefinitionApiClient : IReleaseDefinitionApiClient
     {
-        private const string EndPoint = "_apis/build/definitions";
+        private const string EndPoint = "_apis/release/definitions";
 
-        public BuildDefinitionApiClient(IConnection connection)
+        public ReleaseDefinitionApiClient(IConnection connection)
         {
             this.Connection = connection;
         }
@@ -23,14 +23,14 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
         /// </summary>
         public IConnection Connection { get; private set; }
 
-        public async Task<IEnumerable<BuildDefinition>> GetAllAsync(string projectName)
+        public async Task<IEnumerable<ReleaseDefinition>> GetAllAsync(string projectName)
         {
             var parameters = new Dictionary<string, object>
             {
                 { "api-version", "4.1" },
             };
 
-            var response = await this.Connection.Get<GenericCollectionResponse<BuildDefinition>>(new Uri($"{projectName}/{EndPoint}", UriKind.Relative), parameters, null)
+            var response = await this.Connection.Get<GenericCollectionResponse<ReleaseDefinition>>(new Uri($"{projectName}/{EndPoint}", UriKind.Relative), parameters, null)
                                            .ConfigureAwait(false);
 
             return response.Body.Values;
