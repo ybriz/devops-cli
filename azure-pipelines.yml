@@ -38,3 +38,9 @@ steps:
     packagesToPush: '$(Build.SourcesDirectory)/**/*.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'feedz'
+
+- task: DeleteFiles@1
+  displayName: 'Clean up Nuget package files'
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: '**/*.nupkg'

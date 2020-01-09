@@ -18,6 +18,13 @@ If you need to install a pre-release version please specify the `--version` argu
 ```
 dotnet tool install -g Jmelosegui.DevOpsCLI --version 1.0.2-beta
 ```
+
+If you need to use a CI build please specify the `--add-source` argument
+
+```
+dotnet tool install -g Jmelosegui.DevOpsCLI --add-source https://f.feedz.io/jmelosegui/oss/nuget/index.json
+```
+
 To know all the available commands run
 
 ```
