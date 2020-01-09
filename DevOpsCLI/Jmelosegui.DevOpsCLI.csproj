@@ -11,7 +11,7 @@
     <Authors>Juan Elosegui</Authors>
     <Company>PwC</Company>
     <Product>devops-cli</Product>
-    <RepositoryUrl>http://matlka360isp001:8080/tfs/DefaultCollection/Foundation/_git/Jmelosegui.DevOpsCLI</RepositoryUrl>
+    <RepositoryUrl>https://github.com/jmelosegui/DevOps-CLI</RepositoryUrl>
     <PackageTags>DevOps TFS</PackageTags>
     <Description>﻿devops is a command line tool designed to interact with the Azure DevOps and Azure DevOps Server APIs</Description>
     <RootNamespace>Jmelosegui.DevOpsCLI</RootNamespace>
