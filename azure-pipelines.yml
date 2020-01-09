@@ -37,4 +37,4 @@ steps:
     command: 'push'
     packagesToPush: '$(Build.SourcesDirectory)/**/*.nupkg'
     nuGetFeedType: 'external'
-    publishFeedCredentials: 'GitHub-Packages'
+    publishFeedCredentials: 'feedz'
