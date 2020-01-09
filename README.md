@@ -1,4 +1,6 @@
-﻿# DevOpsCLI .NET Core tool
+# DevOpsCLI .NET Core tool
+
+[![Build Status](https://dev.azure.com/elosegui/OSS/_apis/build/status/jmelosegui.DevOps-CLI?branchName=master)](https://dev.azure.com/elosegui/OSS/_build/latest?definitionId=2&branchName=master)
 
 DevOpsCLI is a command line tool designed to interact with the TFS apis
 
