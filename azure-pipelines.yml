@@ -32,8 +32,9 @@ steps:
     configuration: '$(BuildConfiguration)'
 
 - task: NuGetCommand@2
+  displayName: 'Nuget Push'
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.BinariesDirectory)/**/*.nupkg'
+    packagesToPush: '$(Build.SourcesDirectory)/**/*.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'GitHub-Packages'
