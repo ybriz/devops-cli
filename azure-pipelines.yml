@@ -1,0 +1,33 @@
+trigger:
+- master
+
+pool: 'Default'
+
+variables:
+  solution: '$(Build.SourcesDirectory)/Jmelosegui.DevOpsCLI.sln'
+  BuildConfiguration: 'Release'
+  BuildPlatform: 'Any Cpu'
+  MSBuildPath: '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin"'
+
+steps:
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet 5.2.0'
+  inputs:
+    versionSpec: 5.2.0
+
+- task: NuGetCommand@2
+  displayName: 'Nuget Restore'
+  inputs:
+    command: 'restore'
+    restoreSolution: '$(solution)'
+    feedsToUse: 'config'
+    nugetConfigPath: '$(Build.SourcesDirectory)/nuget.config'
+
+- task: VSBuild@1
+  displayName: 'Build Solution'
+  inputs:
+    solution: 
+    msbuildArgs: '/t:Publish /p:OutDir=$(Build.BinariesDirectory)'
+    platform: '$(BuildPlatform)'
+    configuration: '$(BuildConfiguration)'
+
