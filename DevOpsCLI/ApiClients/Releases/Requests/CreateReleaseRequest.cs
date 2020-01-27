@@ -20,7 +20,9 @@ namespace Jmelosegui.DevOpsCLI.ApiClients.Releases.Requests
         public Dictionary<string, ConfigurationVariableValue> Variables { get; set; }
     }
 
+#pragma warning disable SA1402 // File may only contain a single type
     public class ConfigurationVariableValue
+#pragma warning restore SA1402 // File may only contain a single type
     {
         public bool AllowOverride { get; set; }
 

@@ -8,6 +8,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Jmelosegui.DevOpsCLI.ApiClients.Releases.Requests;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
+    using Newtonsoft.Json;
 
     [Command("create", Description = "Request (create) a release given a release definition.")]
     public class ReleaseCreateCommand : CommandBase
@@ -60,6 +61,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
             };
 
             var result = this.DevOpsClient.Release.CreateAsync(this.ProjectName, request).Result;
+
+            Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
 
             return ExitCodes.Ok;
         }
