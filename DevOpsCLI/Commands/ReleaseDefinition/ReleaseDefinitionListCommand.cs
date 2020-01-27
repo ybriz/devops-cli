@@ -5,9 +5,9 @@ namespace Jmelosegui.DevOpsCLI.Commands
 {
     using System;
     using System.Collections.Generic;
-    using Jmelosegui.DevOpsCLI.Models;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
+    using Newtonsoft.Json;
 
     [Command("list", Description = "Get a list of release definitions.")]
     public class ReleaseDefinitionListCommand : CommandBase
@@ -29,14 +29,11 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 this.ProjectName = Prompt.GetString("> ProjectName:", null, ConsoleColor.DarkGray);
             }
 
-            IEnumerable<ReleaseDefinition> releaseDefinitions = this.DevOpsClient.ReleaseDefinition.GetAllAsync(this.ProjectName).Result;
+            IEnumerable<Models.ReleaseDefinition> releaseDefinitions = this.DevOpsClient.ReleaseDefinition.GetAllAsync(this.ProjectName).Result;
 
             Console.WriteLine();
 
-            foreach (var releaseDefinition in releaseDefinitions)
-            {
-                Console.WriteLine($"{releaseDefinition.Name} ({releaseDefinition.Id})");
-            }
+            Console.WriteLine(JsonConvert.SerializeObject(releaseDefinitions, Formatting.Indented));
 
             return ExitCodes.Ok;
         }

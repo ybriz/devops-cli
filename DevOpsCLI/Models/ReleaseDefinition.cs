@@ -3,6 +3,7 @@
 
 namespace Jmelosegui.DevOpsCLI.Models
 {
+    using System.Collections.Generic;
     using Newtonsoft.Json;
 
     public class ReleaseDefinition
@@ -17,5 +18,7 @@ namespace Jmelosegui.DevOpsCLI.Models
 
         [JsonProperty("_links")]
         public LinkDetails Links { get; set; }
+
+        public List<ReleaseEnviroment> Environments { get; set; }
     }
 }

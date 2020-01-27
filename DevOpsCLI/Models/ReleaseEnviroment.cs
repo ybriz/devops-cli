@@ -3,10 +3,10 @@
 
 namespace Jmelosegui.DevOpsCLI.Models
 {
-    public class LinkDetails
+    public class ReleaseEnviroment
     {
-        public Link Self { get; set; }
+        public int Id { get; set; }
 
-        public Link Web { get; set; }
+        public string Name { get; set; }
     }
 }

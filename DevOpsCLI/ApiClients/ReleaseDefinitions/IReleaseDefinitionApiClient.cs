@@ -10,5 +10,7 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
     public interface IReleaseDefinitionApiClient
     {
         Task<IEnumerable<ReleaseDefinition>> GetAllAsync(string projectName);
+
+        Task<string> GetAsync(string projectName, int releaseDefinitionId);
     }
 }
