@@ -54,7 +54,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
             EnvironmentStatus status;
 
-            Enum.TryParse(Status, out status);
+            Enum.TryParse(this.Status, out status);
 
             while (status <= 0)
             {

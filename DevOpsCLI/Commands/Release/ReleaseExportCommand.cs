@@ -42,21 +42,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
             string release = this.DevOpsClient.Release.GetAsync(this.ProjectName, this.ReleaseId).Result;
 
-            if (string.IsNullOrEmpty(this.OutputFile))
-            {
-                Console.Write(release);
-            }
-            else
-            {
-                string outputDirectory = Path.GetDirectoryName(this.OutputFile);
-
-                if (!string.IsNullOrEmpty(outputDirectory) && !Directory.Exists(outputDirectory))
-                {
-                    Directory.CreateDirectory(outputDirectory);
-                }
-
-                File.WriteAllText(this.OutputFile, release);
-            }
+            this.PrintOrExport(this.OutputFile, release);
 
             return ExitCodes.Ok;
         }

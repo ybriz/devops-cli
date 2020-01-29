@@ -4,6 +4,7 @@
 namespace Jmelosegui.DevOpsCLI
 {
     using System;
+    using System.IO;
     using Jmelosegui.DevOpsCLI.ApiClients;
     using Jmelosegui.DevOpsCLI.Http;
     using McMaster.Extensions.CommandLineUtils;
@@ -48,6 +49,25 @@ namespace Jmelosegui.DevOpsCLI
             this.DevOpsClient = new DevOpsClient(new Uri(this.ServiceUrl), new Credentials(string.Empty, this.Token));
 
             return ExitCodes.Ok;
+        }
+
+        protected virtual void PrintOrExport(string outputFile, string content)
+        {
+            if (string.IsNullOrEmpty(outputFile))
+            {
+                Console.Write(content);
+            }
+            else
+            {
+                string outputDirectory = Path.GetDirectoryName(outputFile);
+
+                if (!string.IsNullOrEmpty(outputDirectory) && !Directory.Exists(outputDirectory))
+                {
+                    Directory.CreateDirectory(outputDirectory);
+                }
+
+                File.WriteAllText(outputFile, content);
+            }
         }
     }
 }

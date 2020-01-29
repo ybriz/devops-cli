@@ -8,9 +8,9 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("update", Description = "Update the status of a release environment.")]
-    public class Export : CommandBase
+    public class ReleaseEnvironmentExportCommand : CommandBase
     {
-        public Export(ILogger<CommandBase> logger)
+        public ReleaseEnvironmentExportCommand(ILogger<CommandBase> logger)
             : base(logger)
         {
         }
@@ -23,6 +23,9 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
         [Option("-eid|--environment-id", "Environment Id", CommandOptionType.SingleValue)]
         public int EnvironmentId { get; set; }
+
+        [Option("--output-file", "File to export the release details. If this value is not provided the output will be the console.", CommandOptionType.SingleValue)]
+        public string OutputFile { get; set; }
 
         protected override int OnExecute(CommandLineApplication app)
         {

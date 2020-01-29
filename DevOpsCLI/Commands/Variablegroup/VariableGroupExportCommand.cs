@@ -44,21 +44,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
             string variableGroup = this.DevOpsClient.VariableGroup.GetAsync(this.ProjectName, this.VariableGroupId).Result;
 
-            if (string.IsNullOrEmpty(this.OutputFile))
-            {
-                Console.Write(variableGroup);
-            }
-            else
-            {
-                string outputDirectory = Path.GetDirectoryName(this.OutputFile);
-
-                if (!string.IsNullOrEmpty(outputDirectory) && !Directory.Exists(outputDirectory))
-                {
-                    Directory.CreateDirectory(outputDirectory);
-                }
-
-                File.WriteAllText(this.OutputFile, variableGroup);
-            }
+            this.PrintOrExport(this.OutputFile, variableGroup);
 
             return ExitCodes.Ok;
         }
