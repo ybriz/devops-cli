@@ -6,7 +6,6 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Jmelosegui.DevOpsCLI.ApiClients.Releases.Requests;
     using Jmelosegui.DevOpsCLI.Helpers;
     using Jmelosegui.DevOpsCLI.Http;
     using Jmelosegui.DevOpsCLI.Models;
@@ -64,6 +63,44 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
             var response = await this.Connection
                          .Get<string>(endPointUrl, parameters, null)
                          .ConfigureAwait(false);
+
+            return response.Body;
+        }
+
+        public async Task<string> UpdateEnvironmentAsync(string projectName, int releaseId, int environmentId, EnvironmentStatus status, string comment)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "api-version", "5.0-preview.6" },
+            };
+
+            var endPointUrl = new Uri($"{projectName}/{EndPoint}/{releaseId}/environments/{environmentId}", UriKind.Relative);
+
+            var body = new UpdateEnvironmentRequest
+            {
+                Status = status,
+                Comment = comment,
+            };
+
+            var response = await this.Connection
+                      .Patch<string>(endPointUrl, body, parameters, null)
+                      .ConfigureAwait(false);
+
+            return response.Body;
+        }
+
+        public async Task<string> GetEnvironmentAsync(string projectName, int releaseId, int environmentId)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "api-version", "5.1-preview.6" },
+            };
+
+            var endPointUrl = new Uri($"{projectName}/{EndPoint}/{releaseId}/environments/{environmentId}", UriKind.Relative);
+
+            var response = await this.Connection
+                      .Get<string>(endPointUrl, parameters, null)
+                      .ConfigureAwait(false);
 
             return response.Body;
         }

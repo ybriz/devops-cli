@@ -17,6 +17,8 @@ namespace Jmelosegui.DevOpsCLI.Http
 
         Task<IApiResponse<T>> Patch<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts);
 
+        Task<HttpStatusCode> Patch(Uri uri, object body, IDictionary<string, object> parameters, string accepts);
+
         Task<IApiResponse<T>> Put<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts);
 
         Task<IApiResponse<T>> Post<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts);

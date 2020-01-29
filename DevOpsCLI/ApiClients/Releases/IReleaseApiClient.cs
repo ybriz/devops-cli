@@ -5,7 +5,6 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Jmelosegui.DevOpsCLI.ApiClients.Releases.Requests;
     using Jmelosegui.DevOpsCLI.Models;
 
     public interface IReleaseApiClient
@@ -15,5 +14,9 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
         Task<IEnumerable<Release>> GetAllAsync(string projectName);
 
         Task<string> GetAsync(string projectName, int releaseId);
+
+        Task<string> UpdateEnvironmentAsync(string projectName, int releaseId, int environmentId, EnvironmentStatus status, string comment);
+
+        Task<string> GetEnvironmentAsync(string projectName, int releaseId, int environmentId);
     }
 }

@@ -5,7 +5,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 {
     using System;
     using System.Collections.Generic;
-    using Jmelosegui.DevOpsCLI.ApiClients.Releases.Requests;
+    using Jmelosegui.DevOpsCLI.Models;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;

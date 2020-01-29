@@ -53,6 +53,34 @@ namespace Jmelosegui.DevOpsCLI.Http
             return this.SendData<T>(uri.ApplyParameters(parameters), HttpMethod.Patch, body, accepts, null, CancellationToken.None);
         }
 
+        public async Task<HttpStatusCode> Patch(Uri uri, object body, IDictionary<string, object> parameters, string accepts)
+        {
+            Ensure.ArgumentNotNull(uri, nameof(uri));
+            Ensure.ArgumentNotNull(body, nameof(body));
+
+            var request = new Request
+            {
+                Method = HttpMethod.Patch,
+                BaseAddress = this.ServiceUrl,
+                Endpoint = uri.ApplyParameters(parameters),
+                ContentType = "application/json",
+            };
+
+            if (!string.IsNullOrEmpty(accepts))
+            {
+                request.Headers["Accept"] = accepts;
+            }
+
+            if (body != null)
+            {
+                request.Body = body;
+                this.jsonPipeline.SerializeRequest(request);
+            }
+
+            var response = await this.Run<object>(request, CancellationToken.None).ConfigureAwait(false);
+            return response.HttpResponse.StatusCode;
+        }
+
         public Task<IApiResponse<T>> Put<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
