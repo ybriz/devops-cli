@@ -51,5 +51,21 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
 
             return response.Body.Values;
         }
+
+        public async Task<string> GetAsync(string projectName, int releaseId)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "api-version", "5.0" },
+            };
+
+            var endPointUrl = new Uri($"{projectName}/{EndPoint}/{releaseId}", UriKind.Relative);
+
+            var response = await this.Connection
+                         .Get<string>(endPointUrl, parameters, null)
+                         .ConfigureAwait(false);
+
+            return response.Body;
+        }
     }
 }

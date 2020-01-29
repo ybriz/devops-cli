@@ -3,13 +3,13 @@
 
 namespace Jmelosegui.DevOpsCLI.Commands
 {
-    using System;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
     [Command("release", Description = "Commands for managing Releases.")]
-    [Subcommand(typeof(ReleaseCreateCommand))]
     [Subcommand(typeof(ReleaseListCommand))]
+    [Subcommand(typeof(ReleaseCreateCommand))]
+    [Subcommand(typeof(ReleaseExportCommand))]
     public class ReleaseCommand : CommandBase
     {
         public ReleaseCommand(ILogger<ReleaseCommand> logger)

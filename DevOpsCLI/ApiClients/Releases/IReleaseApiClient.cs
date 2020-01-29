@@ -13,5 +13,7 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
         Task<Release> CreateAsync(string projectName, CreateReleaseRequest request);
 
         Task<IEnumerable<Release>> GetAllAsync(string projectName);
+
+        Task<string> GetAsync(string projectName, int releaseId);
     }
 }
