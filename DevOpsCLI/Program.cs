@@ -3,6 +3,7 @@
 
 namespace Jmelosegui.DevOpsCLI
 {
+    using System;
     using Jmelosegui.DevOpsCLI.Commands;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.DependencyInjection;
@@ -28,11 +29,12 @@ namespace Jmelosegui.DevOpsCLI
                 app.Conventions
                    .UseDefaultConventions()
                    .UseConstructorInjection(servicesProvider);
+
                 return app.Execute(args);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                logger.LogError(ex, ex.Message);
+                Console.Error.WriteLine(ex.Message);
                 return ExitCodes.UnknownError;
             }
         }

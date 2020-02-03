@@ -7,7 +7,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
-    [Command("update", Description = "Update the status of a release environment.")]
+    [Command("export", Description = "Export release environment.")]
     public class ReleaseEnvironmentExportCommand : CommandBase
     {
         public ReleaseEnvironmentExportCommand(ILogger<CommandBase> logger)
