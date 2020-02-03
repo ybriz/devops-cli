@@ -25,7 +25,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         [Option("-eid|--environment-id", "Environment Id", CommandOptionType.SingleValue)]
         public int EnvironmentId { get; set; }
 
-        [Option("-s|--status", "Comments", CommandOptionType.SingleValue)]
+        [Option("-s|--status", "Status to update to (valid values here https://docs.microsoft.com/en-us/rest/api/azure/devops/release/releases/update%20release%20environment?view=azure-devops-rest-5.1#environmentstatus )", CommandOptionType.SingleValue)]
         public string Status { get; set; }
 
         [Option("--comment", "Comments", CommandOptionType.SingleValue)]
@@ -54,11 +54,11 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
             EnvironmentStatus status;
 
-            Enum.TryParse(this.Status, out status);
+            Enum.TryParse(value: this.Status, ignoreCase: true, out status);
 
             while (status <= 0)
             {
-                Enum.TryParse(Prompt.GetString("> Environment Status:", null, ConsoleColor.DarkGray), out status);
+                Enum.TryParse(Prompt.GetString("> Environment Status:", null, ConsoleColor.DarkGray), ignoreCase: true, out status);
             }
 
             var result = this.DevOpsClient.Release.UpdateEnvironmentAsync(this.ProjectName, this.ReleaseId, this.EnvironmentId, status, this.Comment).Result;
