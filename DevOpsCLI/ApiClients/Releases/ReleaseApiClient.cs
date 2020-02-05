@@ -5,6 +5,7 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Jmelosegui.DevOpsCLI.Helpers;
     using Jmelosegui.DevOpsCLI.Http;
@@ -67,7 +68,7 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
             return response.Body;
         }
 
-        public async Task<string> UpdateEnvironmentAsync(string projectName, int releaseId, int environmentId, EnvironmentStatus status, string comment)
+        public async Task<string> UpdateEnvironmentAsync(string projectName, int releaseId, int environmentId, EnvironmentStatus status, string comments)
         {
             var parameters = new Dictionary<string, object>
             {
@@ -79,7 +80,7 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
             var body = new UpdateEnvironmentRequest
             {
                 Status = status,
-                Comment = comment,
+                Comments = comments,
             };
 
             var response = await this.Connection
@@ -100,6 +101,58 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
 
             var response = await this.Connection
                       .Get<string>(endPointUrl, parameters, null)
+                      .ConfigureAwait(false);
+
+            return response.Body;
+        }
+
+        public async Task<GenericCollectionResponse<ReleaseApproval>> GetApprovalsAsync(string projectName, IEnumerable<int> releaseIds, ApprovalStatus status = ApprovalStatus.Undefined, ApprovalType approvalType = ApprovalType.Undefined)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "api-version", "5.0" },
+            };
+
+            if (releaseIds.Count() > 0)
+            {
+                parameters["releaseIdsFilter"] = string.Join(',', releaseIds);
+            }
+
+            if (status != ApprovalStatus.Undefined)
+            {
+                parameters["statusFilter"] = status;
+            }
+
+            if (approvalType != ApprovalType.Undefined)
+            {
+                parameters["typeFilter"] = approvalType;
+            }
+
+            var endPointUrl = new Uri($"{projectName}/_apis/release/approvals", UriKind.Relative);
+
+            var response = await this.Connection.Get<GenericCollectionResponse<ReleaseApproval>>(endPointUrl, parameters, null)
+                                    .ConfigureAwait(false);
+
+            return response.Body;
+        }
+
+        public async Task<ReleaseApproval> UpdateApprovalsAsync(string projectName, UpdateApprovalRequest request)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "api-version", "5.0" },
+            };
+
+            var endPointUrl = new Uri($"{projectName}/_apis/release/approvals/{request.Id}", UriKind.Relative);
+
+            var body = new UpdateApprovalRequest
+            {
+                Status = request.Status,
+                Comments = request.Comments,
+            };
+
+            var response = await this.Connection
+                      .Patch<ReleaseApproval>(endPointUrl, body, parameters, null)
                       .ConfigureAwait(false);
 
             return response.Body;

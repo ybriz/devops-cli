@@ -15,8 +15,12 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
 
         Task<string> GetAsync(string projectName, int releaseId);
 
-        Task<string> UpdateEnvironmentAsync(string projectName, int releaseId, int environmentId, EnvironmentStatus status, string comment);
+        Task<string> UpdateEnvironmentAsync(string projectName, int releaseId, int environmentId, EnvironmentStatus status, string comments);
 
         Task<string> GetEnvironmentAsync(string projectName, int releaseId, int environmentId);
+
+        Task<GenericCollectionResponse<ReleaseApproval>> GetApprovalsAsync(string projectName, IEnumerable<int> releaseIds, ApprovalStatus status = ApprovalStatus.Undefined, ApprovalType approvalType = ApprovalType.Undefined);
+
+        Task<ReleaseApproval> UpdateApprovalsAsync(string projectName, UpdateApprovalRequest request);
     }
 }

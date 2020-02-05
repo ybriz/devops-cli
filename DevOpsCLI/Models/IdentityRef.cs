@@ -3,11 +3,15 @@
 
 namespace Jmelosegui.DevOpsCLI.Models
 {
-    public class ReleaseEnvironment
+    public class IdentityRef
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
-        public string Name { get; set; }
+        public string UniqueName { get; set; }
+
+        public string DisplayName { get; set; }
+
+        public string ImageUrl { get; set; }
 
         public string Url { get; set; }
     }

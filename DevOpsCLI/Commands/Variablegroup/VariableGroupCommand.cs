@@ -13,7 +13,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(VariableGroupImportCommand))]
     public class VariableGroupCommand : CommandBase
     {
-        public VariableGroupCommand(ILogger<BuildCommand> logger)
+        public VariableGroupCommand(ILogger<VariableGroupCommand> logger)
             : base(logger)
         {
         }

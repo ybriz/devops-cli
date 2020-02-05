@@ -9,6 +9,8 @@ namespace Jmelosegui.DevOpsCLI
     using Jmelosegui.DevOpsCLI.Http;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
 
     [HelpOption("-h| --help")]
     public abstract class CommandBase
@@ -30,6 +32,12 @@ namespace Jmelosegui.DevOpsCLI
             CommandOptionType.SingleValue)]
         public string Token { get; set; }
 
+        [Option(
+            "-p|--project",
+            "Tfs project name",
+            CommandOptionType.SingleValue)]
+        public string ProjectName { get; set; }
+
         protected ILogger Logger { get; }
 
         protected DevOpsClient DevOpsClient { get; private set; }
@@ -46,16 +54,37 @@ namespace Jmelosegui.DevOpsCLI
                 this.Token = Prompt.GetString("> Token:", null, ConsoleColor.DarkGray);
             }
 
+            while (string.IsNullOrEmpty(this.ProjectName))
+            {
+                this.ProjectName = Prompt.GetString("> ProjectName:", null, ConsoleColor.DarkGray);
+            }
+
             this.DevOpsClient = new DevOpsClient(new Uri(this.ServiceUrl), new Credentials(string.Empty, this.Token));
 
             return ExitCodes.Ok;
         }
 
-        protected virtual void PrintOrExport(string outputFile, string content)
+        protected virtual void PrintOrExport<T>(string outputFile, T content)
         {
+            string outPutContent;
+
+            if (typeof(T) == typeof(string))
+            {
+                outPutContent = content as string;
+            }
+            else
+            {
+                var settings = new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                };
+
+                outPutContent = JsonConvert.SerializeObject(content, settings);
+            }
+
             if (string.IsNullOrEmpty(outputFile))
             {
-                Console.Write(content);
+                Console.Write(outPutContent);
             }
             else
             {
@@ -66,7 +95,7 @@ namespace Jmelosegui.DevOpsCLI
                     Directory.CreateDirectory(outputDirectory);
                 }
 
-                File.WriteAllText(outputFile, content);
+                File.WriteAllText(outputFile, outPutContent);
             }
         }
     }

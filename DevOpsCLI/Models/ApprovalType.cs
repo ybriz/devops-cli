@@ -3,12 +3,14 @@
 
 namespace Jmelosegui.DevOpsCLI.Models
 {
-    public class ReleaseEnvironment
+    using System;
+
+    [Flags]
+    public enum ApprovalType
     {
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-
-        public string Url { get; set; }
+        Undefined = 0,
+        Predeploy = 1,
+        PostDeploy = 2,
+        All = Predeploy | PostDeploy,
     }
 }

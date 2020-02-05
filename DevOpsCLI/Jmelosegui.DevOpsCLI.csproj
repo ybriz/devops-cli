@@ -8,11 +8,10 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>devops</ToolCommandName>    
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Juan Elosegui</Authors>
-    <Company>PwC</Company>
+    <Authors>Juan Elosegui</Authors>    
     <Product>devops-cli</Product>
     <RepositoryUrl>https://github.com/jmelosegui/DevOps-CLI</RepositoryUrl>
-    <PackageTags>DevOps TFS</PackageTags>
+    <PackageTags>Azure DevOps TFS CI CD</PackageTags>
     <Description>﻿devops is a command line tool designed to interact with the Azure DevOps and Azure DevOps Server APIs</Description>
     <RootNamespace>Jmelosegui.DevOpsCLI</RootNamespace>
 
@@ -35,14 +34,6 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.0" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="Nerdbank.GitVersioning" Version="3.0.28" />
   </ItemGroup>
 
 </Project>

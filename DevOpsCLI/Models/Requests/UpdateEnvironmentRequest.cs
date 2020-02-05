@@ -9,7 +9,7 @@ namespace Jmelosegui.DevOpsCLI.Models
 
     public class UpdateEnvironmentRequest
     {
-        public string Comment { get; set; }
+        public string Comments { get; set; }
 
         public string ScheduledDeploymentTime { get; set; }
 

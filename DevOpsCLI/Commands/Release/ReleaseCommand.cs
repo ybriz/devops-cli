@@ -11,6 +11,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(ReleaseCreateCommand))]
     [Subcommand(typeof(ReleaseExportCommand))]
     [Subcommand(typeof(ReleaseEnvironmentCommand))]
+    [Subcommand(typeof(ReleaseApprovalCommand))]
     public class ReleaseCommand : CommandBase
     {
         public ReleaseCommand(ILogger<ReleaseCommand> logger)

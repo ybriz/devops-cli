@@ -18,23 +18,21 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
         }
 
-        [Option("-p|--project", "Tfs project name", CommandOptionType.SingleValue)]
-        public string ProjectName { get; set; }
-
-        [Option("--variable-group-id", "Variable group id. if this value is not provided the import command will create a new variable group otherwise it will attempt to update the variable group with the provided identifier.", CommandOptionType.SingleValue)]
+        [Option(
+            "--variable-group-id",
+            "Variable group id. if this value is not provided the import command will create a new variable group otherwise it will attempt to update the variable group with the provided identifier.",
+            CommandOptionType.SingleValue)]
         public int VariableGroupId { get; set; }
 
-        [Option("--input-file", "File containing the variable group details to add or update on the target project.", CommandOptionType.SingleValue)]
+        [Option(
+            "--input-file",
+            "File containing the variable group details to add or update on the target project.",
+            CommandOptionType.SingleValue)]
         public string InputFile { get; set; }
 
         protected override int OnExecute(CommandLineApplication app)
         {
             base.OnExecute(app);
-
-            while (string.IsNullOrEmpty(this.ProjectName))
-            {
-                this.ProjectName = Prompt.GetString("> ProjectName:", null, ConsoleColor.DarkGray);
-            }
 
             while (string.IsNullOrEmpty(this.InputFile))
             {

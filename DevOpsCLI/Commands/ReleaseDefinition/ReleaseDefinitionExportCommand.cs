@@ -16,23 +16,21 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
         }
 
-        [Option("-p|--project", "Tfs project name", CommandOptionType.SingleValue)]
-        public string ProjectName { get; set; }
-
-        [Option("-rdid|--release-definition-id", "Release definition id", CommandOptionType.SingleValue)]
+        [Option(
+            "-rdid|--release-definition-id",
+            "Release definition id",
+            CommandOptionType.SingleValue)]
         public int ReleaseDefinitionId { get; set; }
 
-        [Option("--output-file", "File to export the release definition details. If this value is not provided the output will be the console.", CommandOptionType.SingleValue)]
+        [Option(
+            "--output-file",
+            "File to export the release definition details. If this value is not provided the output will be the console.",
+            CommandOptionType.SingleValue)]
         public string OutputFile { get; set; }
 
         protected override int OnExecute(CommandLineApplication app)
         {
             base.OnExecute(app);
-
-            while (string.IsNullOrEmpty(this.ProjectName))
-            {
-                this.ProjectName = Prompt.GetString("> ProjectName:", null, ConsoleColor.DarkGray);
-            }
 
             while (this.ReleaseDefinitionId <= 0)
             {

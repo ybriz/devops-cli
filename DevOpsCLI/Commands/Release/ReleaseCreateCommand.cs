@@ -13,37 +13,44 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("create", Description = "Request (create) a release given a release definition.")]
     public class ReleaseCreateCommand : CommandBase
     {
-        public ReleaseCreateCommand(ILogger<CommandBase> logger)
+        public ReleaseCreateCommand(ILogger<ReleaseCreateCommand> logger)
             : base(logger)
         {
         }
 
-        [Option("-p|--project", "Tfs project name", CommandOptionType.SingleValue)]
-        public string ProjectName { get; set; }
-
-        [Option("-rdid|--release-definition-id", "Release definition id", CommandOptionType.SingleValue)]
+        [Option(
+            "-rdid|--release-definition-id",
+            "Release definition id",
+            CommandOptionType.SingleValue)]
         public int ReleaseDefinitionId { get; set; }
 
-        [Option("-desc|--description", "Description", CommandOptionType.SingleValue)]
+        [Option(
+            "-desc|--description",
+            "Description",
+            CommandOptionType.SingleValue)]
         public string Description { get; set; }
 
-        [Option("-r|--reason", "Reason", CommandOptionType.SingleValue)]
+        [Option(
+            "-r|--reason",
+            "Reason",
+            CommandOptionType.SingleValue)]
         public string Reason { get; set; }
 
-        [Option("--is-draft", "IsDraft", CommandOptionType.NoValue)]
+        [Option(
+            "--is-draft",
+            "IsDraft",
+            CommandOptionType.NoValue)]
         public bool IsDraft { get; set; }
 
-        [Option("-e|--environment", "Manual Environment", CommandOptionType.MultipleValue)]
+        [Option(
+            "-e|--environment",
+            "Manual Environment",
+            CommandOptionType.MultipleValue)]
         public IEnumerable<string> ManualEnvironments { get; private set; }
 
         protected override int OnExecute(CommandLineApplication app)
         {
             base.OnExecute(app);
-
-            while (string.IsNullOrEmpty(this.ProjectName))
-            {
-                this.ProjectName = Prompt.GetString("> ProjectName:", null, ConsoleColor.DarkGray);
-            }
 
             while (this.ReleaseDefinitionId <= 0)
             {

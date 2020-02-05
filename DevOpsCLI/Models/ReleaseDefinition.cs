@@ -19,6 +19,6 @@ namespace Jmelosegui.DevOpsCLI.Models
         [JsonProperty("_links")]
         public LinkDetails Links { get; set; }
 
-        public List<ReleaseEnviroment> Environments { get; set; }
+        public List<ReleaseEnvironment> Environments { get; set; }
     }
 }

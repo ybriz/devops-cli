@@ -16,9 +16,6 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
         }
 
-        [Option("-p|--project", "Tfs project name", CommandOptionType.SingleValue)]
-        public string ProjectName { get; set; }
-
         [Option("-rid|--release-id", "Release id", CommandOptionType.SingleValue)]
         public int ReleaseId { get; set; }
 
@@ -28,17 +25,12 @@ namespace Jmelosegui.DevOpsCLI.Commands
         [Option("-s|--status", "Status to update to (valid values here https://docs.microsoft.com/en-us/rest/api/azure/devops/release/releases/update%20release%20environment?view=azure-devops-rest-5.1#environmentstatus )", CommandOptionType.SingleValue)]
         public string Status { get; set; }
 
-        [Option("--comment", "Comments", CommandOptionType.SingleValue)]
-        public string Comment { get; set; }
+        [Option("-c|--comments", "Comments", CommandOptionType.SingleValue)]
+        public string Comments { get; set; }
 
         protected override int OnExecute(CommandLineApplication app)
         {
             base.OnExecute(app);
-
-            while (string.IsNullOrEmpty(this.ProjectName))
-            {
-                this.ProjectName = Prompt.GetString("> ProjectName:", null, ConsoleColor.DarkGray);
-            }
 
             while (this.ReleaseId <= 0)
             {
@@ -61,7 +53,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 Enum.TryParse(Prompt.GetString("> Environment Status:", null, ConsoleColor.DarkGray), ignoreCase: true, out status);
             }
 
-            var result = this.DevOpsClient.Release.UpdateEnvironmentAsync(this.ProjectName, this.ReleaseId, this.EnvironmentId, status, this.Comment).Result;
+            var result = this.DevOpsClient.Release.UpdateEnvironmentAsync(this.ProjectName, this.ReleaseId, this.EnvironmentId, status, this.Comments).Result;
 
             Console.WriteLine(result);
 

@@ -17,17 +17,9 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
         }
 
-        [Option("-p|--project", "Tfs project name", CommandOptionType.SingleValue)]
-        public string ProjectName { get; set; }
-
         protected override int OnExecute(CommandLineApplication app)
         {
             base.OnExecute(app);
-
-            while (string.IsNullOrEmpty(this.ProjectName))
-            {
-                this.ProjectName = Prompt.GetString("> ProjectName:", null, ConsoleColor.DarkGray);
-            }
 
             IEnumerable<Release> releases = this.DevOpsClient.Release.GetAllAsync(this.ProjectName).Result;
 

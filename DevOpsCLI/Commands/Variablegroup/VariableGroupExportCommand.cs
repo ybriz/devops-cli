@@ -18,23 +18,21 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
         }
 
-        [Option("-p|--project", "Tfs project name", CommandOptionType.SingleValue)]
-        public string ProjectName { get; set; }
-
-        [Option("--variable-group-id", "Variable group id", CommandOptionType.SingleValue)]
+        [Option(
+            "--variable-group-id",
+            "Variable group id",
+            CommandOptionType.SingleValue)]
         public int VariableGroupId { get; set; }
 
-        [Option("--output-file", "File to export the variable group details. If this value is not provided the output will be the console.", CommandOptionType.SingleValue)]
+        [Option(
+            "--output-file",
+            "File to export the variable group details. If this value is not provided the output will be the console.",
+            CommandOptionType.SingleValue)]
         public string OutputFile { get; set; }
 
         protected override int OnExecute(CommandLineApplication app)
         {
             base.OnExecute(app);
-
-            while (string.IsNullOrEmpty(this.ProjectName))
-            {
-                this.ProjectName = Prompt.GetString("> ProjectName:", null, ConsoleColor.DarkGray);
-            }
 
             while (this.VariableGroupId <= 0)
             {

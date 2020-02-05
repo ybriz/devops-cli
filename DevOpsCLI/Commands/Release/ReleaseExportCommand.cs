@@ -11,33 +11,31 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("export", Description = "Show the release details.")]
     public class ReleaseExportCommand : CommandBase
     {
-        public ReleaseExportCommand(ILogger<CommandBase> logger)
+        public ReleaseExportCommand(ILogger<ReleaseExportCommand> logger)
             : base(logger)
         {
         }
 
-        [Option("-p|--project", "Tfs project name", CommandOptionType.SingleValue)]
-        public string ProjectName { get; set; }
-
-        [Option("-rid|--release-id", "Release id", CommandOptionType.SingleValue)]
+        [Option(
+            "-rid|--release-id",
+            "Release id",
+            CommandOptionType.SingleValue)]
         public int ReleaseId { get; set; }
 
-        [Option("--output-file", "File to export the release details. If this value is not provided the output will be the console.", CommandOptionType.SingleValue)]
+        [Option(
+            "--output-file",
+            "File to export the release details. If this value is not provided the output will be the console.",
+            CommandOptionType.SingleValue)]
         public string OutputFile { get; set; }
 
         protected override int OnExecute(CommandLineApplication app)
         {
             base.OnExecute(app);
 
-            while (string.IsNullOrEmpty(this.ProjectName))
-            {
-                this.ProjectName = Prompt.GetString("> ProjectName:", null, ConsoleColor.DarkGray);
-            }
-
             while (this.ReleaseId <= 0)
             {
-                int.TryParse(Prompt.GetString("> ReleaseDefinitionId:", null, ConsoleColor.DarkGray), out int releaseDefinitionId);
-                this.ReleaseId = releaseDefinitionId;
+                int.TryParse(Prompt.GetString("> Release Id:", null, ConsoleColor.DarkGray), out int releaseId);
+                this.ReleaseId = releaseId;
             }
 
             string release = this.DevOpsClient.Release.GetAsync(this.ProjectName, this.ReleaseId).Result;
