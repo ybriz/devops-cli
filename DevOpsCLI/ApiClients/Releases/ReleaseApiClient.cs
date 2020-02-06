@@ -113,7 +113,7 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
                 { "api-version", "5.0" },
             };
 
-            if (releaseIds.Count() > 0)
+            if (releaseIds?.Count() > 0)
             {
                 parameters["releaseIdsFilter"] = string.Join(',', releaseIds);
             }
