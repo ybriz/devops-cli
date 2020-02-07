@@ -17,11 +17,29 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
         }
 
+        [Option(
+            "-rdid|--release-definition-id",
+            "Release definition id to filter the resutl",
+            CommandOptionType.SingleValue)]
+        public int ReleaseDefinitionId { get; set; }
+
+        [Option(
+            "--top",
+            "Number of releases to get. Default is 50.",
+            CommandOptionType.SingleValue)]
+        public int Top { get; set; }
+
         protected override int OnExecute(CommandLineApplication app)
         {
             base.OnExecute(app);
 
-            IEnumerable<Release> releases = this.DevOpsClient.Release.GetAllAsync(this.ProjectName).Result;
+            var releaseListRequest = new ReleaseListRequest
+            {
+                ReleaseDefinitionId = this.ReleaseDefinitionId,
+                Top = this.Top,
+            };
+
+            IEnumerable<Release> releases = this.DevOpsClient.Release.GetAllAsync(this.ProjectName, releaseListRequest).Result;
 
             Console.WriteLine();
 

@@ -39,12 +39,25 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
             return result.Body;
         }
 
-        public async Task<IEnumerable<Release>> GetAllAsync(string projectName)
+        public async Task<IEnumerable<Release>> GetAllAsync(string projectName, ReleaseListRequest releaseListRequest = null)
         {
             var parameters = new Dictionary<string, object>
             {
                 { "api-version", "5.0" },
             };
+
+            if (releaseListRequest != null)
+            {
+                if (releaseListRequest.ReleaseDefinitionId > 0)
+                {
+                    parameters["definitionId"] = releaseListRequest.ReleaseDefinitionId;
+                }
+
+                if (releaseListRequest.Top > 0)
+                {
+                    parameters["top"] = releaseListRequest.Top;
+                }
+            }
 
             var response = await this.Connection.Get<GenericCollectionResponse<Release>>(new Uri($"{projectName}/{EndPoint}", UriKind.Relative), parameters, null)
                                                 .ConfigureAwait(false);
