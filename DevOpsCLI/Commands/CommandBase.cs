@@ -64,7 +64,7 @@ namespace Jmelosegui.DevOpsCLI
             return ExitCodes.Ok;
         }
 
-        protected virtual void PrintOrExport<T>(string outputFile, T content)
+        protected virtual void PrintOrExport<T>(T content, string outputFile = null)
         {
             string outPutContent;
 

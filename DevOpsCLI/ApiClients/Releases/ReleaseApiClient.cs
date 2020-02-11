@@ -41,23 +41,12 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
 
         public async Task<IEnumerable<Release>> GetAllAsync(string projectName, ReleaseListRequest releaseListRequest = null)
         {
-            var parameters = new Dictionary<string, object>
-            {
-                { "api-version", "5.0" },
-            };
+            var parameters = new Dictionary<string, object>();
 
-            if (releaseListRequest != null)
-            {
-                if (releaseListRequest.ReleaseDefinitionId > 0)
-                {
-                    parameters["definitionId"] = releaseListRequest.ReleaseDefinitionId;
-                }
-
-                if (releaseListRequest.Top > 0)
-                {
-                    parameters["top"] = releaseListRequest.Top;
-                }
-            }
+            FluentDictionary.For(parameters)
+                            .Add("api-version", "5.0")
+                            .Add("definitionId", releaseListRequest.ReleaseDefinitionId, () => releaseListRequest.ReleaseDefinitionId > 0)
+                            .Add("$top", releaseListRequest.Top, () => releaseListRequest.Top > 0);
 
             var response = await this.Connection.Get<GenericCollectionResponse<Release>>(new Uri($"{projectName}/{EndPoint}", UriKind.Relative), parameters, null)
                                                 .ConfigureAwait(false);
@@ -67,10 +56,10 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
 
         public async Task<string> GetAsync(string projectName, int releaseId)
         {
-            var parameters = new Dictionary<string, object>
-            {
-                { "api-version", "5.0" },
-            };
+            var parameters = new Dictionary<string, object>();
+
+            FluentDictionary.For(parameters)
+                            .Add("api-version", "5.0");
 
             var endPointUrl = new Uri($"{projectName}/{EndPoint}/{releaseId}", UriKind.Relative);
 
@@ -83,10 +72,10 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
 
         public async Task<string> UpdateEnvironmentAsync(string projectName, int releaseId, int environmentId, EnvironmentStatus status, string comments)
         {
-            var parameters = new Dictionary<string, object>
-            {
-                { "api-version", "5.0-preview.6" },
-            };
+            var parameters = new Dictionary<string, object>();
+
+            FluentDictionary.For(parameters)
+                            .Add("api-version", "5.0");
 
             var endPointUrl = new Uri($"{projectName}/{EndPoint}/{releaseId}/environments/{environmentId}", UriKind.Relative);
 
@@ -105,10 +94,10 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
 
         public async Task<string> GetEnvironmentAsync(string projectName, int releaseId, int environmentId)
         {
-            var parameters = new Dictionary<string, object>
-            {
-                { "api-version", "5.1-preview.6" },
-            };
+            var parameters = new Dictionary<string, object>();
+
+            FluentDictionary.For(parameters)
+                            .Add("api-version", "5.1-preview.6");
 
             var endPointUrl = new Uri($"{projectName}/{EndPoint}/{releaseId}/environments/{environmentId}", UriKind.Relative);
 
@@ -126,20 +115,11 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
                 { "api-version", "5.0" },
             };
 
-            if (releaseIds?.Count() > 0)
-            {
-                parameters["releaseIdsFilter"] = string.Join(',', releaseIds);
-            }
-
-            if (status != ApprovalStatus.Undefined)
-            {
-                parameters["statusFilter"] = status;
-            }
-
-            if (approvalType != ApprovalType.Undefined)
-            {
-                parameters["typeFilter"] = approvalType;
-            }
+            FluentDictionary.For(parameters)
+                .Add("api-version", "5.0")
+                .Add("releaseIdsFilter", string.Join(',', releaseIds), () => releaseIds?.Count() > 0)
+                .Add("statusFilter", status, () => status != ApprovalStatus.Undefined)
+                .Add("typeFilter", approvalType, () => approvalType != ApprovalType.Undefined);
 
             var endPointUrl = new Uri($"{projectName}/_apis/release/approvals", UriKind.Relative);
 
@@ -151,10 +131,10 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
 
         public async Task<ReleaseApproval> UpdateApprovalsAsync(string projectName, UpdateApprovalRequest request)
         {
-            var parameters = new Dictionary<string, object>
-            {
-                { "api-version", "5.0" },
-            };
+            var parameters = new Dictionary<string, object>();
+
+            FluentDictionary.For(parameters)
+                            .Add("api-version", "5.0");
 
             var endPointUrl = new Uri($"{projectName}/_apis/release/approvals/{request.Id}", UriKind.Relative);
 

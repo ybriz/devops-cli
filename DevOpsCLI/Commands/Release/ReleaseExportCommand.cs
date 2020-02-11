@@ -40,7 +40,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
             string release = this.DevOpsClient.Release.GetAsync(this.ProjectName, this.ReleaseId).Result;
 
-            this.PrintOrExport(this.OutputFile, release);
+            this.PrintOrExport(release, this.OutputFile);
 
             return ExitCodes.Ok;
         }

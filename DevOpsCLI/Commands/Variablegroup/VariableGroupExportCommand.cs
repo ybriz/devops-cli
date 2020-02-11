@@ -42,7 +42,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
             string variableGroup = this.DevOpsClient.VariableGroup.GetAsync(this.ProjectName, this.VariableGroupId).Result;
 
-            this.PrintOrExport(this.OutputFile, variableGroup);
+            this.PrintOrExport(variableGroup, this.OutputFile);
 
             return ExitCodes.Ok;
         }

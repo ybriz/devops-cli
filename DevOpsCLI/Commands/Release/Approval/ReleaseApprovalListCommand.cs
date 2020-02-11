@@ -53,7 +53,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
             var approvalList = this.DevOpsClient.Release.GetApprovalsAsync(this.ProjectName, this.ReleaseIds, status).Result;
 
-            this.PrintOrExport(this.OutputFile, approvalList);
+            this.PrintOrExport(approvalList, this.OutputFile);
 
             return ExitCodes.Ok;
         }

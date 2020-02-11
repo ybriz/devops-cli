@@ -71,7 +71,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
             ReleaseApproval approval = this.DevOpsClient.Release.UpdateApprovalsAsync(this.ProjectName, request).Result;
 
-            this.PrintOrExport(this.OutputFile, approval);
+            this.PrintOrExport(approval, this.OutputFile);
 
             return ExitCodes.Ok;
         }
