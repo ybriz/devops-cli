@@ -3,6 +3,7 @@
 
 namespace Jmelosegui.DevOpsCLI.Models
 {
+    using System.Collections.Generic;
     using Newtonsoft.Json;
 
     public class Release
@@ -21,5 +22,10 @@ namespace Jmelosegui.DevOpsCLI.Models
         public ReleaseDefinition ReleaseDefinition { get; set; }
 
         public int ReleaseDifinitionRevision { get; set; }
+
+        public IEnumerable<ReleaseArtifact> Artifacts { get; set; }
+
+        public IEnumerable<ReleaseEnvironment> Environments { get; set; }
+
     }
 }

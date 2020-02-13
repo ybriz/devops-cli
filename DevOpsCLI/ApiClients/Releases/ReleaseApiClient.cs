@@ -46,7 +46,8 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
             FluentDictionary.For(parameters)
                             .Add("api-version", "5.0")
                             .Add("definitionId", releaseListRequest.ReleaseDefinitionId, () => releaseListRequest.ReleaseDefinitionId > 0)
-                            .Add("$top", releaseListRequest.Top, () => releaseListRequest.Top > 0);
+                            .Add("$top", releaseListRequest.Top, () => releaseListRequest.Top > 0)
+                            .Add("$expand", string.Join(',', releaseListRequest.ExpandPropterties), () => releaseListRequest.ExpandPropterties?.Any() == true);
 
             var response = await this.Connection.Get<GenericCollectionResponse<Release>>(new Uri($"{projectName}/{EndPoint}", UriKind.Relative), parameters, null)
                                                 .ConfigureAwait(false);

@@ -3,14 +3,16 @@
 
 namespace Jmelosegui.DevOpsCLI.Commands
 {
+    using System;
     using System.Collections.Generic;
+    using Jmelosegui.DevOpsCLI.Models;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
-    [Command("list", Description = "Get a list of release definitions.")]
-    public class ReleaseDefinitionListCommand : CommandBase
+    [Command("list", Description = "Get a list of build definitions.")]
+    public class BuildDefinitionListCommand : CommandBase
     {
-        public ReleaseDefinitionListCommand(ILogger<ReleaseDefinitionListCommand> logger)
+        public BuildDefinitionListCommand(ILogger<BuildDefinitionListCommand> logger)
             : base(logger)
         {
         }
@@ -19,9 +21,9 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            IEnumerable<Models.ReleaseDefinition> releaseDefinitions = this.DevOpsClient.ReleaseDefinition.GetAllAsync(this.ProjectName).Result;
+            IEnumerable<BuildDefinition> results = this.DevOpsClient.BuildDefinition.GetAllAsync(this.ProjectName).Result;
 
-            this.PrintOrExport(releaseDefinitions);
+            this.PrintOrExport(results);
 
             return ExitCodes.Ok;
         }

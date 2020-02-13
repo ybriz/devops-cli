@@ -31,6 +31,12 @@ namespace Jmelosegui.DevOpsCLI.Commands
         public int Top { get; set; }
 
         [Option(
+            "-ep|--expand-property",
+            "The property that should be expanded in the list of releases. More info here https://docs.microsoft.com/en-us/rest/api/azure/devops/release/releases/list?view=azure-devops-server-rest-5.0#releaseexpands",
+            CommandOptionType.MultipleValue)]
+        public IEnumerable<string> ExpandPropterties { get; private set; }
+
+        [Option(
             "--all-properties",
             "If present each item in the output list of releases will contain all the release properties",
             CommandOptionType.NoValue)]
@@ -44,6 +50,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
             {
                 ReleaseDefinitionId = this.ReleaseDefinitionId,
                 Top = this.Top,
+                ExpandPropterties = this.ExpandPropterties,
             };
 
             IEnumerable<Release> releases = this.DevOpsClient.Release.GetAllAsync(this.ProjectName, releaseListRequest).Result;

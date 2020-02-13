@@ -3,14 +3,14 @@
 
 namespace Jmelosegui.DevOpsCLI.Commands
 {
-    using System;
     using System.Collections.Generic;
-    using Jmelosegui.DevOpsCLI.ApiClients;
+    using System.Linq;
     using Jmelosegui.DevOpsCLI.Models;
+    using Jmelosegui.DevOpsCLI.Models.Requests;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
-    [Command("list", Description = "Get a list of build definitions.")]
+    [Command("list", Description = "Get a list of builds.")]
     public class BuildListCommand : CommandBase
     {
         public BuildListCommand(ILogger<BuildListCommand> logger)
@@ -18,18 +18,31 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
         }
 
+        [Option(
+            "-bdid|--build-definition-id",
+            "Release definition id to filter the resutl",
+            CommandOptionType.SingleValue)]
+        public int BuildDefinitionId { get; set; }
+
+        [Option(
+            "--top",
+            "Number of releases to get. Default is 50.",
+            CommandOptionType.SingleValue)]
+        public int Top { get; set; }
+
         protected override int OnExecute(CommandLineApplication app)
         {
             base.OnExecute(app);
 
-            IEnumerable<BuildDefinition> results = this.DevOpsClient.BuildDefinition.GetAllAsync(this.ProjectName).Result;
-
-            Console.WriteLine();
-
-            foreach (var buildDefinitionEntry in results)
+            var buildListRequest = new BuildListRequest
             {
-                Console.WriteLine($"{buildDefinitionEntry.Name} ({buildDefinitionEntry.Id})");
-            }
+                BuildDefinitionId = this.BuildDefinitionId,
+                Top = this.Top,
+            };
+
+            IEnumerable<Build> builds = this.DevOpsClient.Build.GetAllAsync(this.ProjectName, buildListRequest).Result;
+
+            this.PrintOrExport(builds.OrderByDescending(b => b.Id));
 
             return ExitCodes.Ok;
         }

@@ -9,6 +9,11 @@
             Gets the underlying connection.
             </summary>
         </member>
+        <member name="P:Jmelosegui.DevOpsCLI.ApiClients.BuildApiClient.Connection">
+            <summary>
+            Gets the underlying connection.
+            </summary>
+        </member>
         <member name="P:Jmelosegui.DevOpsCLI.ApiClients.ReleaseDefinitionApiClient.Connection">
             <summary>
             Gets the underlying connection.

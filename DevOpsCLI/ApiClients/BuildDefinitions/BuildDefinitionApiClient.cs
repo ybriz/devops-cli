@@ -6,6 +6,7 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Jmelosegui.DevOpsCLI.Helpers;
     using Jmelosegui.DevOpsCLI.Http;
     using Jmelosegui.DevOpsCLI.Models;
 
@@ -25,10 +26,10 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
 
         public async Task<IEnumerable<BuildDefinition>> GetAllAsync(string projectName)
         {
-            var parameters = new Dictionary<string, object>
-            {
-                { "api-version", "4.1" },
-            };
+            var parameters = new Dictionary<string, object>();
+
+            FluentDictionary.For(parameters)
+                            .Add("api-version", "4.1");
 
             var response = await this.Connection.Get<GenericCollectionResponse<BuildDefinition>>(new Uri($"{projectName}/{EndPoint}", UriKind.Relative), parameters, null)
                                            .ConfigureAwait(false);
