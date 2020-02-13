@@ -75,7 +75,7 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
             var parameters = new Dictionary<string, object>();
 
             FluentDictionary.For(parameters)
-                            .Add("api-version", "5.0");
+                            .Add("api-version", "5.0-preview.6");
 
             var endPointUrl = new Uri($"{projectName}/{EndPoint}/{releaseId}/environments/{environmentId}", UriKind.Relative);
 
@@ -110,10 +110,7 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
 
         public async Task<GenericCollectionResponse<ReleaseApproval>> GetApprovalsAsync(string projectName, IEnumerable<int> releaseIds, ApprovalStatus status = ApprovalStatus.Undefined, ApprovalType approvalType = ApprovalType.Undefined)
         {
-            var parameters = new Dictionary<string, object>
-            {
-                { "api-version", "5.0" },
-            };
+            var parameters = new Dictionary<string, object>();
 
             FluentDictionary.For(parameters)
                 .Add("api-version", "5.0")
