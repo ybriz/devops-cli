@@ -26,6 +26,5 @@ namespace Jmelosegui.DevOpsCLI.Models
         public IEnumerable<ReleaseArtifact> Artifacts { get; set; }
 
         public IEnumerable<ReleaseEnvironment> Environments { get; set; }
-
     }
 }
