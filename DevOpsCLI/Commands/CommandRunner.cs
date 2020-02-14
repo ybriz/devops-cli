@@ -3,6 +3,7 @@
 
 namespace Jmelosegui.DevOpsCLI.Commands
 {
+    using System;
     using McMaster.Extensions.CommandLineUtils;
 
     [Command("devops")]
@@ -14,10 +15,24 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [HelpOption("-h|--help")]
     public sealed class CommandRunner
     {
+        [Option(
+            "-v|--version",
+            "Gets the version of the devops cli tool.",
+            CommandOptionType.NoValue)]
+        public bool ShowVersion { get; set; }
+
         private int OnExecute(CommandLineApplication app)
         {
-            app.ShowHint();
-            return ExitCodes.UnknownError;
+            if (this.ShowVersion)
+            {
+                Console.WriteLine(ThisAssembly.AssemblyInformationalVersion);
+            }
+            else
+            {
+                app.ShowHint();
+            }
+
+            return ExitCodes.Ok;
         }
     }
 }
