@@ -10,7 +10,9 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Juan Elosegui</Authors>    
     <Product>devops-cli</Product>
+    <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/jmelosegui/DevOps-CLI</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/jmelosegui/DevOps-CLI</PackageProjectUrl>
     <PackageTags>Azure DevOps TFS CI CD</PackageTags>
     <Description>﻿devops is a command line tool designed to interact with the Azure DevOps and Azure DevOps Server APIs</Description>
     <RootNamespace>Jmelosegui.DevOpsCLI</RootNamespace>
