@@ -2,10 +2,10 @@
 
 [![Build Status](https://dev.azure.com/elosegui/OSS/_apis/build/status/jmelosegui.DevOps-CLI?branchName=master)](https://dev.azure.com/elosegui/OSS/_build/latest?definitionId=2&branchName=master)
 
-DevOpsCLI is a command line tool designed to interact with the TFS apis
+devops is a command line tool designed to interact with the TFS apis
 
 
-### Using the DevOpsCLI .NET Core tool
+### Using the devops .NET Core tool
 
 Perform a one-time install of the `Jmelosegui.DevOpsCLI` tool using the following dotnet CLI command:
 
