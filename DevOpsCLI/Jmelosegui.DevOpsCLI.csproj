@@ -14,7 +14,7 @@
     <PackageTags>Azure DevOps TFS CI CD</PackageTags>
     <Description>﻿devops is a command line tool designed to interact with the Azure DevOps and Azure DevOps Server APIs</Description>
     <RootNamespace>Jmelosegui.DevOpsCLI</RootNamespace>
-
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
     <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
   </PropertyGroup>
