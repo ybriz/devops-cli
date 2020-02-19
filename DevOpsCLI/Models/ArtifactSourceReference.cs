@@ -10,5 +10,11 @@ namespace Jmelosegui.DevOpsCLI.Models
         public IdName Version { get; set; }
 
         public IdName RequestedFor { get; set; }
+
+        public IdName Project { get; set; }
+
+        public IdName Branch { get; set; }
+
+        public IdName SourceVersion { get; set; }
     }
 }
