@@ -4,7 +4,8 @@
 namespace Jmelosegui.DevOpsCLI.Commands
 {
     using System;
-    using System.IO;
+    using System.Linq;
+    using Jmelosegui.DevOpsCLI.Models;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
@@ -23,6 +24,12 @@ namespace Jmelosegui.DevOpsCLI.Commands
         public int ReleaseDefinitionId { get; set; }
 
         [Option(
+            "-rdn|--release-definition-name",
+            "Release definition id",
+            CommandOptionType.SingleValue)]
+        public string ReleaseDefinitionName { get; set; }
+
+        [Option(
             "--output-file",
             "File to export the release definition details. If this value is not provided the output will be the console.",
             CommandOptionType.SingleValue)]
@@ -32,17 +39,51 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (this.ReleaseDefinitionId <= 0)
+            while (this.ReleaseDefinitionId <= 0 && string.IsNullOrEmpty(this.ReleaseDefinitionName))
             {
-                int.TryParse(Prompt.GetString("> ReleaseDefinitionId:", null, ConsoleColor.DarkGray), out int releaseDefinitionId);
-                this.ReleaseDefinitionId = releaseDefinitionId;
+                string value = Prompt.GetString("> ReleaseDefinition Id or Name:", null, ConsoleColor.DarkGray);
+
+                if (int.TryParse(value, out int releaseDefinitionId))
+                {
+                    this.ReleaseDefinitionId = releaseDefinitionId;
+                }
+                else
+                {
+                    this.ReleaseDefinitionName = value;
+                }
             }
 
-            string releaseDefinition = this.DevOpsClient.ReleaseDefinition.GetAsync(this.ProjectName, this.ReleaseDefinitionId).Result;
+            if (this.ReleaseDefinitionId == 0)
+            {
+                var releaseDefinition = this.GetReleaseDefinitionByName(this.ReleaseDefinitionName);
 
-            this.PrintOrExport(releaseDefinition, this.OutputFile);
+                if (releaseDefinition != null)
+                {
+                    this.ReleaseDefinitionId = releaseDefinition.Id;
+                }
+                else
+                {
+                    Console.WriteLine($"Cannot find a release definition named: {this.ReleaseDefinitionName}");
+                    return ExitCodes.ReleaseDefinitionNotFound;
+                }
+            }
+
+            string jsonReleaseDefinition = this.DevOpsClient.ReleaseDefinition.GetAsync(this.ProjectName, this.ReleaseDefinitionId).Result;
+
+            this.PrintOrExport(jsonReleaseDefinition, this.OutputFile);
 
             return ExitCodes.Ok;
+        }
+
+        private ReleaseDefinition GetReleaseDefinitionByName(string value)
+        {
+            ReleaseDefinition releaseDefinition = this.DevOpsClient
+                                                    .ReleaseDefinition
+                                                    .GetAllAsync(this.ProjectName)
+                                                    .Result
+                                                    .FirstOrDefault(rd => rd.Name.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0);
+
+            return releaseDefinition;
         }
     }
 }

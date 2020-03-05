@@ -7,5 +7,6 @@ namespace Jmelosegui.DevOpsCLI
     {
         public const int UnknownError = -1;
         public const int Ok = 0;
+        public const int ReleaseDefinitionNotFound = 1;
     }
 }
