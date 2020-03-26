@@ -2,6 +2,8 @@
 
 [![Build Status](https://dev.azure.com/elosegui/OSS/_apis/build/status/jmelosegui.DevOps-CLI?branchName=master)](https://dev.azure.com/elosegui/OSS/_build/latest?definitionId=2&branchName=master)
 
+[![NuGet Badge](https://buildstats.info/nuget/Jmelosegui.DevOpsCLI)](https://www.nuget.org/packages/Jmelosegui.DevOpsCLI/)
+
 devops is a command line tool designed to interact with the TFS apis
 
 

@@ -46,6 +46,8 @@ namespace Jmelosegui.DevOpsCLI.ApiClients
             FluentDictionary.For(parameters)
                             .Add("api-version", "5.0")
                             .Add("definitionId", releaseListRequest.ReleaseDefinitionId, () => releaseListRequest.ReleaseDefinitionId > 0)
+                            .Add("definitionEnvironmentId", releaseListRequest.DefinitionEnvironmentId, () => releaseListRequest.DefinitionEnvironmentId > 0)
+                            .Add("environmentStatusFilter", (int)releaseListRequest.EnvironmentStatusFilter, () => releaseListRequest.EnvironmentStatusFilter != EnvironmentStatus.Undefined)
                             .Add("$top", releaseListRequest.Top, () => releaseListRequest.Top > 0)
                             .Add("$expand", string.Join(',', releaseListRequest.ExpandPropterties), () => releaseListRequest.ExpandPropterties?.Any() == true);
 

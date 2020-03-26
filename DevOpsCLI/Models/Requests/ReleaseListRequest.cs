@@ -12,6 +12,10 @@ namespace Jmelosegui.DevOpsCLI.Models
 
         public int ReleaseDefinitionId { get; set; }
 
+        public int DefinitionEnvironmentId { get; set; }
+
+        public EnvironmentStatus EnvironmentStatusFilter { get; set; }
+
         public int Top { get; set; }
 
         public IEnumerable<string> ExpandPropterties

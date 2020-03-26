@@ -3,16 +3,19 @@
 
 namespace Jmelosegui.DevOpsCLI.Models
 {
+    using System;
+
+    [Flags]
     public enum EnvironmentStatus
     {
         Undefined = 0,
-        Queued,
-        Scheduled,
-        NotStarted,
-        InProgress,
-        Canceled,
-        Succeeded,
-        PartiallySucceeded,
-        Rejected,
+        NotStarted = 1,
+        InProgress = 2,
+        Succeeded = 4,
+        Canceled = 8,
+        Rejected = 16,
+        Queued = 32,
+        Scheduled = 64,
+        PartiallySucceeded = 128,
     }
 }

@@ -25,6 +25,12 @@ namespace Jmelosegui.DevOpsCLI.Commands
         public int ReleaseDefinitionId { get; set; }
 
         [Option(
+            "-deid|--definition-environment-id",
+            "Environment id value within the release definition to filter the resutl",
+            CommandOptionType.SingleValue)]
+        public int DefinitionEnvironmentId { get; set; }
+
+        [Option(
             "--top",
             "Number of releases to get. Default is 50.",
             CommandOptionType.SingleValue)]
@@ -37,6 +43,12 @@ namespace Jmelosegui.DevOpsCLI.Commands
         public IEnumerable<string> ExpandPropterties { get; private set; }
 
         [Option(
+            "-esf|--environment-status-filter",
+            "Set the environemnt status to filter the output list. More info here https://docs.microsoft.com/en-us/rest/api/azure/devops/release/releases/get%20release%20environment?view=azure-devops-rest-5.1#environmentstatus",
+            CommandOptionType.MultipleValue)]
+        public IEnumerable<string> EnvironmentStatusFilter { get; private set; }
+
+        [Option(
             "--all-properties",
             "If present each item in the output list of releases will contain all the release properties",
             CommandOptionType.NoValue)]
@@ -46,11 +58,23 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
+            EnvironmentStatus filterStatus = EnvironmentStatus.Undefined;
+
+            if (this.EnvironmentStatusFilter != null)
+            {
+                Enum.TryParse(
+                    value: string.Join(',', this.EnvironmentStatusFilter),
+                    ignoreCase: true,
+                    out filterStatus);
+            }
+
             var releaseListRequest = new ReleaseListRequest
             {
                 ReleaseDefinitionId = this.ReleaseDefinitionId,
+                DefinitionEnvironmentId = this.DefinitionEnvironmentId,
                 Top = this.Top,
                 ExpandPropterties = this.ExpandPropterties,
+                EnvironmentStatusFilter = filterStatus,
             };
 
             IEnumerable<Release> releases = this.DevOpsClient.Release.GetAllAsync(this.ProjectName, releaseListRequest).Result;
