@@ -4,11 +4,9 @@
 namespace Jmelosegui.DevOpsCLI.Commands
 {
     using System;
-    using Jmelosegui.DevOpsCLI.Models;
+    using Jmelosegui.DevOps.Client;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Serialization;
 
     [Command("update", Description = "Update status of an approval.")]
     public class ReleaseApprovalUpdateCommand : CommandBase

@@ -5,8 +5,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Jmelosegui.DevOpsCLI.Models;
-    using Jmelosegui.DevOpsCLI.Models.Requests;
+    using Jmelosegui.DevOps.Client;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 

@@ -3,9 +3,6 @@
 
 namespace Jmelosegui.DevOpsCLI.Commands
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 

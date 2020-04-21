@@ -4,8 +4,6 @@
 namespace Jmelosegui.DevOpsCLI.Commands
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
-    using Jmelosegui.DevOpsCLI.ApiClients;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 

@@ -6,7 +6,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Jmelosegui.DevOpsCLI.Models;
+    using Jmelosegui.DevOps.Client;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
@@ -68,12 +68,11 @@ namespace Jmelosegui.DevOpsCLI.Commands
                     out filterStatus);
             }
 
-            var releaseListRequest = new ReleaseListRequest
+            var releaseListRequest = new ReleaseListRequest(this.ExpandPropterties)
             {
                 ReleaseDefinitionId = this.ReleaseDefinitionId,
                 DefinitionEnvironmentId = this.DefinitionEnvironmentId,
                 Top = this.Top,
-                ExpandPropterties = this.ExpandPropterties,
                 EnvironmentStatusFilter = filterStatus,
             };
 

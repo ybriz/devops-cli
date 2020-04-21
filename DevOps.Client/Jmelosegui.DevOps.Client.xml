@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Jmelosegui.DevOps.Client</name>
+    </assembly>
+    <members>
+        <member name="P:Jmelosegui.DevOps.Client.BuildDefinitionApiClient.Connection">
+            <summary>
+            Gets the underlying connection.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.BuildApiClient.Connection">
+            <summary>
+            Gets the underlying connection.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.ReleaseDefinitionApiClient.Connection">
+            <summary>
+            Gets the underlying connection.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.ReleaseApiClient.Connection">
+            <summary>
+            Gets the underlying connection.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.VariableGroupApiClient.Connection">
+            <summary>
+            Gets the underlying connection.
+            </summary>
+        </member>
+        <member name="T:Jmelosegui.DevOps.Client.AuthenticationType">
+            <summary>
+            Authentication protocols.
+            </summary>
+        </member>
+        <member name="F:Jmelosegui.DevOps.Client.AuthenticationType.Anonymous">
+            <summary>
+            No credentials provided
+            </summary>
+        </member>
+        <member name="F:Jmelosegui.DevOps.Client.AuthenticationType.Basic">
+            <summary>
+            Username and password
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.ApiException.StatusCode">
+            <summary>
+            Gets the HTTP status code associated with the repsonse.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.ApiException.ApiError">
+            <summary>
+            Gets the raw exception payload from the response.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.ApiException.ApiErrorMessageSafe">
+            <summary>
+            Gets get the inner error message from the API response.
+            </summary>
+            <remarks>
+            Returns null if ApiError is not populated.
+            </remarks>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.AuthorizationException.#ctor(Jmelosegui.DevOps.Client.IResponse)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jmelosegui.DevOps.Client.AuthorizationException"/> class.
+            Constructs an instance of AuthorizationException.
+            </summary>
+            <param name="response">The HTTP payload from the server.</param>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.AuthorizationException.#ctor(Jmelosegui.DevOps.Client.IResponse,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jmelosegui.DevOps.Client.AuthorizationException"/> class.
+            Constructs an instance of AuthorizationException.
+            </summary>
+            <param name="response">The HTTP payload from the server.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.ForbiddenException.#ctor(Jmelosegui.DevOps.Client.IResponse)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jmelosegui.DevOps.Client.ForbiddenException"/> class.
+            Constructs an instance of ForbiddenException.
+            </summary>
+            <param name="response">The HTTP payload from the server.</param>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.ForbiddenException.#ctor(Jmelosegui.DevOps.Client.IResponse,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jmelosegui.DevOps.Client.ForbiddenException"/> class.
+            Constructs an instance of ForbiddenException.
+            </summary>
+            <param name="response">The HTTP payload from the server.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.NotFoundException.#ctor(Jmelosegui.DevOps.Client.IResponse)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jmelosegui.DevOps.Client.NotFoundException"/> class.
+            Constructs an instance of NotFoundException.
+            </summary>
+            <param name="response">The HTTP payload from the server.</param>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.NotFoundException.#ctor(Jmelosegui.DevOps.Client.IResponse,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jmelosegui.DevOps.Client.NotFoundException"/> class.
+            Constructs an instance of NotFoundException.
+            </summary>
+            <param name="response">The HTTP payload from the server.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="T:Jmelosegui.DevOps.Client.Ensure">
+            <summary>
+              Ensure input parameters.
+            </summary>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.Ensure.ArgumentNotNull(System.Object,System.String)">
+            <summary>
+            Checks an argument to ensure it isn't null.
+            </summary>
+            <param name = "value">The argument value to check.</param>
+            <param name = "name">The name of the argument.</param>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.Ensure.ArgumentNotNullOrEmptyString(System.String,System.String)">
+            <summary>
+            Checks a string argument to ensure it isn't null or empty.
+            </summary>
+            <param name = "value">The argument value to check.</param>
+            <param name = "name">The name of the argument.</param>
+        </member>
+        <member name="T:Jmelosegui.DevOps.Client.UriExtensions">
+            <summary>
+            Extensions for working with Uris.
+            </summary>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.UriExtensions.ApplyParameters(System.Uri,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Merge a dictionary of values with an existing <see cref="T:System.Uri"/>.
+            </summary>
+            <param name="uri">Original request Uri.</param>
+            <param name="parameters">Collection of key-value pairs.</param>
+            <returns>Updated request Uri.</returns>
+        </member>
+        <member name="T:Jmelosegui.DevOps.Client.ApiResponse`1">
+            <summary>
+            Wrapper for a response from the API.
+            </summary>
+            <typeparam name="T">Payload contained in the response.</typeparam>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.ApiResponse`1.#ctor(Jmelosegui.DevOps.Client.IResponse)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jmelosegui.DevOps.Client.ApiResponse`1"/> class.
+            Create a ApiResponse from an existing request.
+            </summary>
+            <param name="response">An existing request to wrap.</param>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.ApiResponse`1.#ctor(Jmelosegui.DevOps.Client.IResponse,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jmelosegui.DevOps.Client.ApiResponse`1"/> class.
+            Create a ApiResponse from an existing request and object.
+            </summary>
+            <param name="response">An existing request to wrap.</param>
+            <param name="bodyAsObject">The payload from an existing request.</param>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.ApiResponse`1.Body">
+            <summary>
+            Gets the payload of the response.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.ApiResponse`1.HttpResponse">
+            <summary>
+            Gets the context of the response.
+            </summary>
+        </member>
+        <member name="T:Jmelosegui.DevOps.Client.IConnection">
+            <summary>
+            A connection for making HTTP requests against URI endpoints.
+            </summary>
+        </member>
+        <member name="T:Jmelosegui.DevOps.Client.IResponse">
+            <summary>
+            Represents a generic HTTP response.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.IResponse.Body">
+            <summary>
+            Gets raw response body. Typically a string, but when requesting files (i.e certificates), it will be a byte array.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.IResponse.Headers">
+            <summary>
+            Gets information about the API.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.IResponse.StatusCode">
+            <summary>
+            Gets the response status code.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.IResponse.ContentType">
+            <summary>
+            Gets the content type of the response.
+            </summary>
+        </member>
+        <member name="T:Jmelosegui.DevOps.Client.IApiResponse`1">
+            <summary>
+            A response from an API call that includes the deserialized object instance.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.IApiResponse`1.Body">
+            <summary>
+            Gets object deserialized from the JSON response body.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.IApiResponse`1.HttpResponse">
+            <summary>
+            Gets the original non-deserialized http response.
+            </summary>
+        </member>
+        <member name="T:Jmelosegui.DevOps.Client.JsonHttpPipeline">
+            <summary>
+                Responsible for serializing the request and response as JSON and
+                adding the proper JSON response header.
+            </summary>
+        </member>
+    </members>
+</doc>

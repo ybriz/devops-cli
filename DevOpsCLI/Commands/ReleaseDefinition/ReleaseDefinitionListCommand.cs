@@ -5,6 +5,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Jmelosegui.DevOps.Client;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
@@ -22,11 +23,11 @@ namespace Jmelosegui.DevOpsCLI.Commands
             CommandOptionType.NoValue)]
         public bool IncludeAllProperties { get; set; }
 
-        protected override int OnExecute(CommandLineApplication app) 
+        protected override int OnExecute(CommandLineApplication app)
         {
             base.OnExecute(app);
 
-            IEnumerable<Models.ReleaseDefinition> releaseDefinitions = this.DevOpsClient.ReleaseDefinition.GetAllAsync(this.ProjectName).Result;
+            IEnumerable<ReleaseDefinition> releaseDefinitions = this.DevOpsClient.ReleaseDefinition.GetAllAsync(this.ProjectName).Result;
 
             if (this.IncludeAllProperties)
             {

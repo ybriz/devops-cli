@@ -5,8 +5,7 @@ namespace Jmelosegui.DevOpsCLI
 {
     using System;
     using System.IO;
-    using Jmelosegui.DevOpsCLI.ApiClients;
-    using Jmelosegui.DevOpsCLI.Http;
+    using Jmelosegui.DevOps.Client;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
