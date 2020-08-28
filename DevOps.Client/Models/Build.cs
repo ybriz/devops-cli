@@ -7,8 +7,8 @@ namespace Jmelosegui.DevOps.Client
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
-
         public string BuildNumber { get; set; }
+
+        public BuildDefinition Definition { get; set; }
     }
 }

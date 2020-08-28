@@ -2,14 +2,14 @@
 
 [![Build Status](https://dev.azure.com/elosegui/OSS/_apis/build/status/jmelosegui.DevOps-CLI?branchName=master)](https://dev.azure.com/elosegui/OSS/_build/latest?definitionId=2&branchName=master)
 
-[![NuGet Badge](https://buildstats.info/nuget/Jmelosegui.DevOpsCLI)](https://www.nuget.org/packages/Jmelosegui.DevOpsCLI/)
+[![NuGet Badge](https://buildstats.info/nuget/Jmelosegui.DevOpsCLI?includePreReleases=true)](https://www.nuget.org/packages/Jmelosegui.DevOpsCLI/)
 
-[![NuGet Badge](https://buildstats.info/nuget/Jmelosegui.DevOps.Client)](https://www.nuget.org/packages/Jmelosegui.DevOps.Client/)
+[![NuGet Badge](https://buildstats.info/nuget/Jmelosegui.DevOps.Client?includePreReleases=true)](https://www.nuget.org/packages/Jmelosegui.DevOps.Client/)
 
 DevOps Client is library designed to interact with the TFS apis.
 
-This project is split into 2 packages:
-- **Jmelosegui.DevOps.Client** - A netstandard library that contain a Rest client for the different endpoints in the [Azure DevOps Api](https://docs.microsoft.com/en-us/rest/api/azure/devops/?view=azure-devops-rest-5.1) collection.
+This project is split into two packages:
+- **Jmelosegui.DevOps.Client** - A netstandard library that contains a Rest client for the different endpoints in the [Azure DevOps Api](https://docs.microsoft.com/en-us/rest/api/azure/devops/?view=azure-devops-rest-5.1) collection.
 - **Jmelosegui.DevOpsCLI** - A CLI tool CLI that allows you to interact with [Azure DevOps](https://azure.microsoft.com/en-us/services/devops/) from the command line.
 
 
