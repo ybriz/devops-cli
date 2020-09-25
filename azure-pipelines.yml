@@ -27,7 +27,7 @@ steps:
   displayName: 'Build Solution'
   inputs:
     solution: 
-    msbuildArgs: '/t:Publish /p:OutDir=$(Build.BinariesDirectory)'
+    msbuildArgs: '/t:Publish /p:OutDir=$(Build.BinariesDirectory) /p:ContinuousIntegrationBuild=true'
     platform: '$(BuildPlatform)'
     configuration: '$(BuildConfiguration)'
 
