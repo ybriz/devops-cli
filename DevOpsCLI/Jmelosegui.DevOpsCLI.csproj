@@ -23,8 +23,7 @@
     
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
     <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
-
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    
   </PropertyGroup>
 
   <ItemGroup>
