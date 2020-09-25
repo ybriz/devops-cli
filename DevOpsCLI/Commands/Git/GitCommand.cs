@@ -5,7 +5,6 @@ namespace Jmelosegui.DevOpsCLI.Commands
 {
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
-    using System.Linq;
 
     [Command("git", Description = "Commands for managing git repositories is Azure DevOps.")]
     [Subcommand(typeof(CommitCommand))]
