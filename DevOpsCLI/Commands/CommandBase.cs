@@ -5,6 +5,8 @@ namespace Jmelosegui.DevOpsCLI
 {
     using System;
     using System.IO;
+    using System.Linq;
+    using System.Reflection;
     using Jmelosegui.DevOps.Client;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
@@ -37,28 +39,45 @@ namespace Jmelosegui.DevOpsCLI
             CommandOptionType.SingleValue)]
         public string ProjectName { get; set; }
 
+        public bool IsCommandGroup
+        {
+            get
+            {
+                return this.GetType()
+                           .GetCustomAttributes<SubcommandAttribute>()
+                           .Any();
+            }
+        }
+
         protected ILogger Logger { get; }
 
         protected DevOpsClient DevOpsClient { get; private set; }
 
         protected virtual int OnExecute(CommandLineApplication app)
         {
-            while (string.IsNullOrEmpty(this.ServiceUrl))
+            if (this.IsCommandGroup)
             {
-                this.ServiceUrl = Prompt.GetString("> ServiceURL:", null, ConsoleColor.DarkGray);
+                app.ShowHelp(true);
             }
-
-            while (string.IsNullOrEmpty(this.Token))
+            else
             {
-                this.Token = Prompt.GetString("> Token:", null, ConsoleColor.DarkGray);
-            }
+                while (string.IsNullOrEmpty(this.ServiceUrl))
+                {
+                    this.ServiceUrl = Prompt.GetString("> ServiceURL:", null, ConsoleColor.DarkGray);
+                }
 
-            while (string.IsNullOrEmpty(this.ProjectName))
-            {
-                this.ProjectName = Prompt.GetString("> ProjectName:", null, ConsoleColor.DarkGray);
-            }
+                while (string.IsNullOrEmpty(this.Token))
+                {
+                    this.Token = Prompt.GetPassword("> Token:", null, ConsoleColor.DarkGray);
+                }
 
-            this.DevOpsClient = new DevOpsClient(new Uri(this.ServiceUrl), new Credentials(string.Empty, this.Token));
+                while (string.IsNullOrEmpty(this.ProjectName))
+                {
+                    this.ProjectName = Prompt.GetString("> ProjectName:", null, ConsoleColor.DarkGray);
+                }
+
+                this.DevOpsClient = new DevOpsClient(new Uri(this.ServiceUrl), new Credentials(string.Empty, this.Token));
+            }
 
             return ExitCodes.Ok;
         }
