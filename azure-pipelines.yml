@@ -10,6 +10,12 @@ variables:
   MSBuildPath: '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin"'
 
 steps:
+- task: DeleteFiles@1
+  displayName: 'Clean up Nuget package files'
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: '**/*.nupkg'
+
 - task: NuGetToolInstaller@0
   displayName: 'Use NuGet 5.2.0'
   inputs:
@@ -35,12 +41,6 @@ steps:
   displayName: 'Nuget Push'
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.SourcesDirectory)/**/*.nupkg'
+    packagesToPush: '$(Build.SourcesDirectory)/**/*.nupkg;!$(Build.SourcesDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'feedz'
-
-- task: DeleteFiles@1
-  displayName: 'Clean up Nuget package files'
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)'
-    Contents: '**/*.nupkg'
