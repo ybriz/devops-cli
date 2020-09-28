@@ -27,6 +27,8 @@ namespace Jmelosegui.DevOps.Client
 
             this.BuildDefinition = new BuildDefinitionApiClient(connection);
 
+            this.Git = new GitApiClient(connection);
+
             this.Release = new ReleaseApiClient(connection);
 
             this.ReleaseDefinition = new ReleaseDefinitionApiClient(connection);
@@ -39,6 +41,8 @@ namespace Jmelosegui.DevOps.Client
         public IBuildApiClient Build { get; }
 
         public IBuildDefinitionApiClient BuildDefinition { get; }
+
+        public IGitApiClient Git { get; }
 
         public IReleaseApiClient Release { get; }
 

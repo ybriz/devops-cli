@@ -6,11 +6,11 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
-    [Command("environment", Description = "Commands for managing environments.")]
-    [Subcommand(typeof(ReleaseEnvironmentUpdateCommand))]
-    public class ReleaseEnvironmentCommand : CommandBase
+    [Command("git", Description = "Commands for managing git repositories is Azure DevOps.")]
+    [Subcommand(typeof(CommitCommand))]
+    public sealed class GitCommand : CommandBase
     {
-        public ReleaseEnvironmentCommand(ILogger<ReleaseEnvironmentCommand> logger)
+        public GitCommand(ILogger<GitCommand> logger)
             : base(logger)
         {
         }
