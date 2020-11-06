@@ -29,6 +29,12 @@ namespace Jmelosegui.DevOpsCLI.Commands
             CommandOptionType.SingleValue)]
         public int Top { get; set; }
 
+        [Option(
+            "-bn|--build-number",
+            "Buil Number to filter response",
+            CommandOptionType.SingleValue)]
+        public string BuildNumber { get; set; }
+
         protected override int OnExecute(CommandLineApplication app)
         {
             base.OnExecute(app);
@@ -37,6 +43,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
             {
                 BuildDefinitionId = this.BuildDefinitionId,
                 Top = this.Top,
+                BuildNumber = this.BuildNumber,
             };
 
             IEnumerable<Build> builds = this.DevOpsClient.Build.GetAllAsync(this.ProjectName, buildListRequest).Result;

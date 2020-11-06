@@ -28,7 +28,8 @@ namespace Jmelosegui.DevOps.Client
             FluentDictionary.For(parameters)
                             .Add("api-version", "4.1")
                             .Add("definitions", buildListRequest.BuildDefinitionId, () => buildListRequest.BuildDefinitionId > 0)
-                            .Add("$top", buildListRequest.Top, () => buildListRequest.Top > 0);
+                            .Add("$top", buildListRequest.Top, () => buildListRequest.Top > 0)
+                            .Add("buildNumber", buildListRequest.BuildNumber, () => !string.IsNullOrEmpty(buildListRequest.BuildNumber));
 
             var response = await this.Connection.Get<GenericCollectionResponse<Build>>(new Uri($"{projectName}/{EndPoint}", UriKind.Relative), parameters, null)
                                .ConfigureAwait(false);

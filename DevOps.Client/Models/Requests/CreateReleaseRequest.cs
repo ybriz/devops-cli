@@ -13,6 +13,8 @@ namespace Jmelosegui.DevOps.Client
 
         public bool IsDraft { get; set; }
 
+        public IEnumerable<ReleaseArtifactMetadata> Artifacts { get; set; }
+
         public IEnumerable<string> ManualEnvironments { get; set; }
 
         public string Reason { get; set; }

@@ -11,6 +11,8 @@ namespace Jmelosegui.DevOps.Client
 
         public int Top { get; set; }
 
+        public string BuildNumber { get; set; }
+
         public IEnumerable<string> IncludeProperties { get; set; }
     }
 }

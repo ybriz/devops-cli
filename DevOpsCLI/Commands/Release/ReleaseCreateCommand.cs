@@ -6,9 +6,11 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using System;
     using System.Collections.Generic;
     using Jmelosegui.DevOps.Client;
+    using Jmelosegui.DevOpsCLI.Model;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     [Command("create", Description = "Request (create) a release given a release definition.")]
     public class ReleaseCreateCommand : CommandBase
@@ -43,6 +45,12 @@ namespace Jmelosegui.DevOpsCLI.Commands
         public bool IsDraft { get; set; }
 
         [Option(
+            "-arts|--artifacts",
+            "Json string that represent the list of ArtifactsMetadata that will be use in the release(i.e [{'Alias': 'artifact-alias', 'Id': 'artifact-id'}])",
+            CommandOptionType.SingleValue)]
+        public string Artifacts { get; private set; }
+
+        [Option(
             "-e|--environment",
             "Manual Environment",
             CommandOptionType.MultipleValue)]
@@ -66,6 +74,38 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 ManualEnvironments = this.ManualEnvironments,
                 Reason = this.Reason,
             };
+
+            if (!string.IsNullOrEmpty(this.Artifacts))
+            {
+                try
+                {
+                    JsonSerializerSettings settings = new JsonSerializerSettings();
+                    settings.MissingMemberHandling = MissingMemberHandling.Error;
+
+                    List<ArtifactDTO> artifactsMetadata = JsonConvert.DeserializeObject<List<ArtifactDTO>>(this.Artifacts, settings);
+
+                    List<ReleaseArtifactMetadata> releaseArtifactMetadataList = new List<ReleaseArtifactMetadata>();
+                    foreach (var artifact in artifactsMetadata)
+                    {
+                        releaseArtifactMetadataList.Add(
+                            new ReleaseArtifactMetadata
+                            {
+                                Alias = artifact.Alias,
+                                InstanceReference = new BuildVersion
+                                {
+                                    Id = artifact.Id,
+                                },
+                            });
+                    }
+
+                    request.Artifacts = releaseArtifactMetadataList;
+                }
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine("There was an error parsing the parameter 'artifacts'. Error: {0}", ex.Message);
+                    return ExitCodes.UnknownError;
+                }
+            }
 
             var result = this.DevOpsClient.Release.CreateAsync(this.ProjectName, request).Result;
 
