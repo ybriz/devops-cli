@@ -46,7 +46,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
         [Option(
             "-arts|--artifacts",
-            "Json string that represent the list of ArtifactsMetadata that will be use in the release(i.e [{'Alias': 'artifact-alias', 'Id': 'artifact-id'}])",
+            "Json string that represent the list of ArtifactsMetadata that will be use in the release(i.e [{'Name': 'artifact-name', 'Alias': 'artifact-alias', 'Id': 'artifact-id'}])",
             CommandOptionType.SingleValue)]
         public string Artifacts { get; private set; }
 
@@ -94,6 +94,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
                                 InstanceReference = new BuildVersion
                                 {
                                     Id = artifact.Id,
+                                    Name = artifact.Name,
                                 },
                             });
                     }
