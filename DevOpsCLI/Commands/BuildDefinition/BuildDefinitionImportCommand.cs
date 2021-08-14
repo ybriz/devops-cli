@@ -1,4 +1,4 @@
-// Copyright (c) All contributors. All rights reserved.
+﻿// Copyright (c) All contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Jmelosegui.DevOpsCLI.Commands
@@ -8,19 +8,19 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
-    [Command("import", Description = "CReate or update variable group.")]
-    public class VariableGroupImportCommand : CommandBase
+    [Command("import", Description = "Imports a BuildDefinition.")]
+    public class BuildDefinitionImportCommand : CommandBase
     {
-        public VariableGroupImportCommand(ILogger<VariableGroupExportCommand> logger)
+        public BuildDefinitionImportCommand(ILogger<BuildDefinitionImportCommand> logger)
             : base(logger)
         {
         }
 
         [Option(
-            "--variable-group-id",
-            "Variable group id. if this value is not provided the import command will create a new variable group otherwise it will attempt to update the variable group with the provided identifier.",
+            "-bdid|--build-definition-id",
+            "Build definition id. if this value is not provided the import command will create a new build definition group otherwise it will attempt to update the build definition with the provided identifier.",
             CommandOptionType.SingleValue)]
-        public int VariableGroupId { get; set; }
+        public int BuildDefinitionId { get; set; }
 
         [Option(
             "--input-file",
@@ -44,7 +44,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
             string jsonBody = File.ReadAllText(this.InputFile);
 
-            string variableGroup = this.DevOpsClient.VariableGroup.AddOrUpdateAsync(this.ProjectName, this.VariableGroupId, jsonBody).GetAwaiter().GetResult();
+            string variableGroup = this.DevOpsClient.BuildDefinition.AddOrUpdateAsync(this.ProjectName, this.BuildDefinitionId, jsonBody).GetAwaiter().GetResult();
 
             Console.WriteLine(variableGroup);
 

@@ -53,7 +53,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 Enum.TryParse(Prompt.GetString("> Environment Status:", null, ConsoleColor.DarkGray), ignoreCase: true, out status);
             }
 
-            var result = this.DevOpsClient.Release.UpdateEnvironmentAsync(this.ProjectName, this.ReleaseId, this.EnvironmentId, status, this.Comments).Result;
+            var result = this.DevOpsClient.Release.UpdateEnvironmentAsync(this.ProjectName, this.ReleaseId, this.EnvironmentId, status, this.Comments).GetAwaiter().GetResult();
 
             Console.WriteLine(result);
 

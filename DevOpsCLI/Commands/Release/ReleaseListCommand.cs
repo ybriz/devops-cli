@@ -76,7 +76,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 EnvironmentStatusFilter = filterStatus,
             };
 
-            IEnumerable<Release> releases = this.DevOpsClient.Release.GetAllAsync(this.ProjectName, releaseListRequest).Result;
+            IEnumerable<Release> releases = this.DevOpsClient.Release.GetAllAsync(this.ProjectName, releaseListRequest).GetAwaiter().GetResult();
 
             if (this.IncludeAllProperties)
             {

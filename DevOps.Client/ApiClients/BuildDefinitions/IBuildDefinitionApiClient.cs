@@ -9,5 +9,9 @@ namespace Jmelosegui.DevOps.Client
     public interface IBuildDefinitionApiClient
     {
         Task<IEnumerable<BuildDefinition>> GetAllAsync(string projectName);
+
+        Task<string> GetAsync(string projectName, int buildDefinitionId);
+
+        Task<string> AddOrUpdateAsync(string projectName, int buildDefinitionId, string jsonBody);
     }
 }

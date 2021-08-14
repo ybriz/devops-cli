@@ -108,7 +108,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 }
             }
 
-            var result = this.DevOpsClient.Release.CreateAsync(this.ProjectName, request).Result;
+            var result = this.DevOpsClient.Release.CreateAsync(this.ProjectName, request).GetAwaiter().GetResult();
 
             Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
 

@@ -37,7 +37,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 this.ReleaseId = releaseId;
             }
 
-            string release = this.DevOpsClient.Release.GetAsync(this.ProjectName, this.ReleaseId).Result;
+            string release = this.DevOpsClient.Release.GetAsync(this.ProjectName, this.ReleaseId).GetAwaiter().GetResult();
 
             this.PrintOrExport(release, this.OutputFile);
 

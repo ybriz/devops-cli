@@ -9,25 +9,25 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
-    [Command("export", Description = "Show ReleaseDefinition details.")]
-    public class ReleaseDefinitionExportCommand : CommandBase
+    [Command("export", Description = "Show BuildDefinition details.")]
+    public class BuildDefinitionExportCommand : CommandBase
     {
-        public ReleaseDefinitionExportCommand(ILogger<ReleaseDefinitionExportCommand> logger)
+        public BuildDefinitionExportCommand(ILogger<BuildDefinitionExportCommand> logger)
             : base(logger)
         {
         }
 
         [Option(
-            "-rdid|--release-definition-id",
-            "Release definition id",
+            "-bdid|--build-definition-id",
+            "Build definition id",
             CommandOptionType.SingleValue)]
-        public int ReleaseDefinitionId { get; set; }
+        public int BuildDefinitionId { get; set; }
 
         [Option(
-            "-rdn|--release-definition-name",
-            "Release definition id",
+            "-bdn|--build-definition-name",
+            "Build definition name",
             CommandOptionType.SingleValue)]
-        public string ReleaseDefinitionName { get; set; }
+        public string BuildDefinitionName { get; set; }
 
         [Option(
             "--output-file",
@@ -39,38 +39,38 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (this.ReleaseDefinitionId <= 0 && string.IsNullOrEmpty(this.ReleaseDefinitionName))
+            while (this.BuildDefinitionId <= 0 && string.IsNullOrEmpty(this.BuildDefinitionName))
             {
                 string value = Prompt.GetString("> ReleaseDefinition Id or Name:", null, ConsoleColor.DarkGray);
 
-                if (int.TryParse(value, out int releaseDefinitionId))
+                if (int.TryParse(value, out int buildDefinitionId))
                 {
-                    this.ReleaseDefinitionId = releaseDefinitionId;
+                    this.BuildDefinitionId = buildDefinitionId;
                 }
                 else
                 {
-                    this.ReleaseDefinitionName = value;
+                    this.BuildDefinitionName = value;
                 }
             }
 
-            if (this.ReleaseDefinitionId == 0)
+            if (this.BuildDefinitionId == 0)
             {
-                var releaseDefinition = this.GetReleaseDefinitionByName(this.ReleaseDefinitionName);
+                var buildDefinition = this.GetBuildDefinitionByName(this.BuildDefinitionName);
 
-                if (releaseDefinition != null)
+                if (buildDefinition != null)
                 {
-                    this.ReleaseDefinitionId = releaseDefinition.Id;
+                    this.BuildDefinitionId = buildDefinition.Id;
                 }
                 else
                 {
-                    Console.Error.WriteLine($"Cannot find a release definition named: {this.ReleaseDefinitionName}");
+                    Console.WriteLine($"Cannot find a build definition named: {this.BuildDefinitionName}");
                     return ExitCodes.ResourceNotFound;
                 }
             }
 
             try
             {
-                string jsonReleaseDefinition = this.DevOpsClient.ReleaseDefinition.GetAsync(this.ProjectName, this.ReleaseDefinitionId).GetAwaiter().GetResult();
+                string jsonReleaseDefinition = this.DevOpsClient.BuildDefinition.GetAsync(this.ProjectName, this.BuildDefinitionId).GetAwaiter().GetResult();
 
                 this.PrintOrExport(jsonReleaseDefinition, this.OutputFile);
 
@@ -81,18 +81,18 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 Console.Error.WriteLine(ex.Message);
                 return ExitCodes.ResourceNotFound;
             }
-}
+        }
 
-        private ReleaseDefinition GetReleaseDefinitionByName(string value)
+        private BuildDefinition GetBuildDefinitionByName(string value)
         {
-            ReleaseDefinition releaseDefinition = this.DevOpsClient
-                                                    .ReleaseDefinition
+            BuildDefinition buildDefinition = this.DevOpsClient
+                                                    .BuildDefinition
                                                     .GetAllAsync(this.ProjectName)
                                                     .GetAwaiter()
                                                     .GetResult()
                                                     .FirstOrDefault(rd => rd.Name.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0);
 
-            return releaseDefinition;
+            return buildDefinition;
         }
     }
 }

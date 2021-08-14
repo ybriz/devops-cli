@@ -51,7 +51,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 }
             }
 
-            var approvalList = this.DevOpsClient.Release.GetApprovalsAsync(this.ProjectName, this.ReleaseIds, status).Result;
+            var approvalList = this.DevOpsClient.Release.GetApprovalsAsync(this.ProjectName, this.ReleaseIds, status).GetAwaiter().GetResult();
 
             this.PrintOrExport(approvalList, this.OutputFile);
 

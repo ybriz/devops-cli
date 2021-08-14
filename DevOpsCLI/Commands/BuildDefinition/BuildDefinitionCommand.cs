@@ -8,6 +8,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
     [Command("build-definition", Description = "Commands for managing builds definitnions.")]
     [Subcommand(typeof(BuildDefinitionListCommand))]
+    [Subcommand(typeof(BuildDefinitionExportCommand))]
+    [Subcommand(typeof(BuildDefinitionImportCommand))]
     public class BuildDefinitionCommand : CommandBase
     {
         public BuildDefinitionCommand(ILogger<BuildDefinitionCommand> logger)

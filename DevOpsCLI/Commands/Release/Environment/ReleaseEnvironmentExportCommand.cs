@@ -40,7 +40,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 this.EnvironmentId = environmentId;
             }
 
-            var result = this.DevOpsClient.Release.GetEnvironmentAsync(this.ProjectName, this.ReleaseId, this.EnvironmentId).Result;
+            var result = this.DevOpsClient.Release.GetEnvironmentAsync(this.ProjectName, this.ReleaseId, this.EnvironmentId).GetAwaiter().GetResult();
 
             Console.WriteLine(result);
 

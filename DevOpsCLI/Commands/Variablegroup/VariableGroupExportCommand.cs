@@ -37,7 +37,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 this.VariableGroupId = variableGroupId;
             }
 
-            string variableGroup = this.DevOpsClient.VariableGroup.GetAsync(this.ProjectName, this.VariableGroupId).Result;
+            string variableGroup = this.DevOpsClient.VariableGroup.GetAsync(this.ProjectName, this.VariableGroupId).GetAwaiter().GetResult();
 
             this.PrintOrExport(variableGroup, this.OutputFile);
 

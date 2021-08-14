@@ -19,7 +19,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            var list = this.DevOpsClient.VariableGroup.GetAllAsync(this.ProjectName).Result;
+            var list = this.DevOpsClient.VariableGroup.GetAllAsync(this.ProjectName).GetAwaiter().GetResult();
 
             Console.WriteLine();
 

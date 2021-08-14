@@ -20,7 +20,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            IEnumerable<BuildDefinition> results = this.DevOpsClient.BuildDefinition.GetAllAsync(this.ProjectName).Result;
+            IEnumerable<BuildDefinition> results = this.DevOpsClient.BuildDefinition.GetAllAsync(this.ProjectName).GetAwaiter().GetResult();
 
             this.PrintOrExport(results);
 

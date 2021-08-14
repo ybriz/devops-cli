@@ -67,7 +67,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 Comments = this.Comments,
             };
 
-            ReleaseApproval approval = this.DevOpsClient.Release.UpdateApprovalsAsync(this.ProjectName, request).Result;
+            ReleaseApproval approval = this.DevOpsClient.Release.UpdateApprovalsAsync(this.ProjectName, request).GetAwaiter().GetResult();
 
             this.PrintOrExport(approval, this.OutputFile);
 

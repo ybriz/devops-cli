@@ -46,7 +46,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 BuildNumber = this.BuildNumber,
             };
 
-            IEnumerable<Build> builds = this.DevOpsClient.Build.GetAllAsync(this.ProjectName, buildListRequest).Result;
+            IEnumerable<Build> builds = this.DevOpsClient.Build.GetAllAsync(this.ProjectName, buildListRequest).GetAwaiter().GetResult();
 
             this.PrintOrExport(builds.OrderByDescending(b => b.Id));
 
