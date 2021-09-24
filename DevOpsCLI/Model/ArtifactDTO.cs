@@ -1,10 +1,9 @@
-﻿namespace Jmelosegui.DevOpsCLI.Model
+﻿// Copyright (c) All contributors. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace Jmelosegui.DevOpsCLI.Model
 {
     using Newtonsoft.Json;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Text;
 
     internal class ArtifactDTO
     {

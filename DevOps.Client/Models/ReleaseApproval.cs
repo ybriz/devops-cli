@@ -25,5 +25,7 @@ namespace Jmelosegui.DevOps.Client
         public int Attempt { get; set; }
 
         public IdentityRef Approver { get; set; }
+
+        public int Rank { get; set; }
     }
 }
