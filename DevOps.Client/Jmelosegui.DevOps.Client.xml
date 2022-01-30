@@ -19,6 +19,14 @@
             Gets the underlying connection.
             </summary>
         </member>
+        <member name="M:Jmelosegui.DevOps.Client.GitApiClient.CreateRepositoryAsync(System.String,System.String)">
+            <summary>
+            Create a git repository in a team project.
+            </summary>
+            <param name="projectName">Name of the project within the organization where the repository will be created</param>
+            <param name="repositoryName">Name of the repository</param>
+            <returns>The <see cref="T:Jmelosegui.DevOps.Client.Models.GitRepository"/> created.</returns>
+        </member>
         <member name="M:Jmelosegui.DevOps.Client.GitApiClient.GetCommitsAsync(System.String,Jmelosegui.DevOps.Client.Models.Requests.CommitListRequest)">
             <summary>
             Retrieve git commits for a project.
@@ -44,6 +52,14 @@
             <param name="includeHiddenRepositories">[optional] True to include hidden repositories. The default value is false.</param>
             <param name="includeLinks">[optional] True to include reference links. The default value is false.</param>
             <returns>A list of <see cref="T:Jmelosegui.DevOps.Client.Models.GitRepository"/>.</returns>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.IGitApiClient.CreateRepositoryAsync(System.String,System.String)">
+            <summary>
+            Create a git repository in a team project.
+            </summary>
+            <param name="projectName">Name of the project within the organization where the repository will be created</param>
+            <param name="repositoryName">Name of the repository</param>
+            <returns>The <see cref="T:Jmelosegui.DevOps.Client.Models.GitRepository"/> created.</returns>
         </member>
         <member name="P:Jmelosegui.DevOps.Client.ReleaseDefinitionApiClient.Connection">
             <summary>

@@ -27,5 +27,13 @@ namespace Jmelosegui.DevOps.Client
         /// <param name="includeLinks">[optional] True to include reference links. The default value is false.</param>
         /// <returns>A list of <see cref="GitRepository"/>.</returns>
         Task<IEnumerable<GitRepository>> ListRepositoriesAsync(string projectName, bool includeAllUrls = false, bool includeHiddenRepositories = false, bool includeLinks = false);
+
+        /// <summary>
+        /// Create a git repository in a team project.
+        /// </summary>
+        /// <param name="projectName">Name of the project within the organization where the repository will be created</param>
+        /// <param name="repositoryName">Name of the repository</param>
+        /// <returns>The <see cref="GitRepository"/> created.</returns>
+        Task<GitRepository> CreateRepositoryAsync(string projectName, string repositoryName);
     }
 }

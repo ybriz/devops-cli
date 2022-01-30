@@ -22,6 +22,27 @@ namespace Jmelosegui.DevOps.Client
         public IConnection Connection { get; private set; }
 
         /// <summary>
+        /// Create a git repository in a team project.
+        /// </summary>
+        /// <param name="projectName">Name of the project within the organization where the repository will be created</param>
+        /// <param name="repositoryName">Name of the repository</param>
+        /// <returns>The <see cref="GitRepository"/> created.</returns>
+        public async Task<GitRepository> CreateRepositoryAsync(string projectName, string repositoryName)
+        {
+            var parameters = new Dictionary<string, object>();
+
+            FluentDictionary.For(parameters)
+                            .Add("api-version", "4.1");
+
+            var endPoint = new Uri($"{projectName}/_apis/git/repositories", UriKind.Relative);
+
+            var response = await this.Connection.Post<GitRepository>(endPoint, new { Name = repositoryName }, parameters, null)
+                               .ConfigureAwait(false);
+
+            return response.Body;
+        }
+
+        /// <summary>
         /// Retrieve git commits for a project.
         /// </summary>
         /// <param name="projectName">Project ID or project name.</param>
