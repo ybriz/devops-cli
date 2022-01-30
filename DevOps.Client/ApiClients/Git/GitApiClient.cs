@@ -27,7 +27,7 @@ namespace Jmelosegui.DevOps.Client
         /// <param name="projectName">Project ID or project name.</param>
         /// <param name="commitListRequest">Payload used in the request.</param>
         /// <returns>Returns an IEnumerable of <see cref="CommitRef"/>.</returns>
-        public async Task<IEnumerable<CommitRef>> GetCommits(string projectName, CommitListRequest commitListRequest = null)
+        public async Task<IEnumerable<CommitRef>> GetCommitsAsync(string projectName, CommitListRequest commitListRequest = null)
         {
             var parameters = new Dictionary<string, object>();
 
@@ -39,6 +39,24 @@ namespace Jmelosegui.DevOps.Client
             var endPoint = new Uri($"{projectName}/_apis/git/repositories/{commitListRequest.RepositoryId}/commits", UriKind.Relative);
 
             var response = await this.Connection.Get<GenericCollectionResponse<CommitRef>>(endPoint, parameters, null)
+                               .ConfigureAwait(false);
+
+            return response.Body.Values;
+        }
+
+        public async Task<IEnumerable<GitRepository>> ListRepositoriesAsync(string projectName, bool includeAllUrls = false, bool includeHiddenRepositories = false, bool includeLinks = false)
+        {
+            var parameters = new Dictionary<string, object>();
+
+            FluentDictionary.For(parameters)
+                            .Add("api-version", "4.1")
+                            .Add("includeLinks", includeAllUrls, includeAllUrls)
+                            .Add("includeHiddenRepositories", includeHiddenRepositories, includeHiddenRepositories)
+                            .Add("includeLinks", includeLinks, includeLinks);
+
+            var endPoint = new Uri($"{projectName}/_apis/git/repositories", UriKind.Relative);
+
+            var response = await this.Connection.Get<GenericCollectionResponse<GitRepository>>(endPoint, parameters, null)
                                .ConfigureAwait(false);
 
             return response.Body.Values;

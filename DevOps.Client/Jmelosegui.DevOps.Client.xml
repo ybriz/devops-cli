@@ -19,7 +19,7 @@
             Gets the underlying connection.
             </summary>
         </member>
-        <member name="M:Jmelosegui.DevOps.Client.GitApiClient.GetCommits(System.String,Jmelosegui.DevOps.Client.Models.Requests.CommitListRequest)">
+        <member name="M:Jmelosegui.DevOps.Client.GitApiClient.GetCommitsAsync(System.String,Jmelosegui.DevOps.Client.Models.Requests.CommitListRequest)">
             <summary>
             Retrieve git commits for a project.
             </summary>
@@ -27,13 +27,23 @@
             <param name="commitListRequest">Payload used in the request.</param>
             <returns>Returns an IEnumerable of <see cref="T:Jmelosegui.DevOps.Client.Models.CommitRef"/>.</returns>
         </member>
-        <member name="M:Jmelosegui.DevOps.Client.IGitApiClient.GetCommits(System.String,Jmelosegui.DevOps.Client.Models.Requests.CommitListRequest)">
+        <member name="M:Jmelosegui.DevOps.Client.IGitApiClient.GetCommitsAsync(System.String,Jmelosegui.DevOps.Client.Models.Requests.CommitListRequest)">
             <summary>
             Retrieve git commits for a project.
             </summary>
             <param name="projectName">Project ID or project name.</param>
             <param name="commitListRequest">Payload used in the request.</param>
             <returns>Returns an IEnumerable of <see cref="T:Jmelosegui.DevOps.Client.Models.CommitRef"/>.</returns>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.IGitApiClient.ListRepositoriesAsync(System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Retrieve git repositories.
+            </summary>
+            <param name="projectName">Project ID or project name.</param>
+            <param name="includeAllUrls">[optional] True to include all remote URLs. The default value is false.</param>
+            <param name="includeHiddenRepositories">[optional] True to include hidden repositories. The default value is false.</param>
+            <param name="includeLinks">[optional] True to include reference links. The default value is false.</param>
+            <returns>A list of <see cref="T:Jmelosegui.DevOps.Client.Models.GitRepository"/>.</returns>
         </member>
         <member name="P:Jmelosegui.DevOps.Client.ReleaseDefinitionApiClient.Connection">
             <summary>
@@ -260,6 +270,42 @@
         <member name="P:Jmelosegui.DevOps.Client.Models.CommitRef.Comment">
             <summary>
             Gets or sets comment or message of the commit.
+            </summary>
+        </member>
+        <member name="T:Jmelosegui.DevOps.Client.Models.GitRepository">
+            <summary>
+            Provides properties that describe a GitRepository commit and associated metadata.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitRepository.Id">
+            <summary>
+            Gets or sets the Id of the repository.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitRepository.Name">
+            <summary>
+            Gets or sets the Name of the repository.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitRepository.IsFork">
+            <summary>
+            Gets or Sets a value indicating whether the repository was created as a fork;
+            True if the repository was created as a fork.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitRepository.DefaultBranch">
+            <summary>
+            Gets or sets the name of the default branch in the repository.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitRepository.Url">
+            <summary>
+            Gets or sets the Url of the repository.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitRepository.ValidReponUrls">
+            <summary>
+            Gets or sets a collection of valid remote Urls for the repository.
             </summary>
         </member>
         <member name="T:Jmelosegui.DevOps.Client.Models.GitUserDate">

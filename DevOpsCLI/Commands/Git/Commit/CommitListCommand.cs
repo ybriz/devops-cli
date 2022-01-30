@@ -49,7 +49,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
             request.SearchCriteriaVersion = this.SearchCriteriaVersion;
             request.Top = this.Top;
 
-            var result = this.DevOpsClient.Git.GetCommits(this.ProjectName, request).GetAwaiter().GetResult();
+            var result = this.DevOpsClient.Git.GetCommitsAsync(this.ProjectName, request).GetAwaiter().GetResult();
 
             this.PrintOrExport(result);
 

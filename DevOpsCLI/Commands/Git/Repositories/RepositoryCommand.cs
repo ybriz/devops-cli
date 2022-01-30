@@ -6,12 +6,12 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
-    [Command("git", Description = "Commands for managing git repositories is Azure DevOps.")]
-    [Subcommand(typeof(CommitCommand))]
-    [Subcommand(typeof(RepositoryCommand))]
-    public sealed class GitCommand : CommandBase
+    [Command("repository", Description = "Command group to work with git repostories")]
+    [Subcommand(typeof(RepositoryListCommand))]
+    [Subcommand(typeof(RepositoryCreateCommand))]
+    public sealed class RepositoryCommand : CommandBase
     {
-        public GitCommand(ILogger<GitCommand> logger)
+        public RepositoryCommand(ILogger<RepositoryCommand> logger)
             : base(logger)
         {
         }
