@@ -3,8 +3,6 @@
 
 namespace Jmelosegui.DevOps.Client.Models
 {
-    using System;
-
     /// <summary>
     /// Provides properties that describe a Git commit and associated metadata.
     /// </summary>

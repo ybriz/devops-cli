@@ -81,7 +81,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 Console.Error.WriteLine(ex.Message);
                 return ExitCodes.ResourceNotFound;
             }
-}
+        }
 
         private ReleaseDefinition GetReleaseDefinitionByName(string value)
         {

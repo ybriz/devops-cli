@@ -35,6 +35,11 @@
             <param name="commitListRequest">Payload used in the request.</param>
             <returns>Returns an IEnumerable of <see cref="T:Jmelosegui.DevOps.Client.Models.CommitRef"/>.</returns>
         </member>
+        <member name="P:Jmelosegui.DevOps.Client.PipelineApiClient.Connection">
+            <summary>
+            Gets the underlying connection.
+            </summary>
+        </member>
         <member name="P:Jmelosegui.DevOps.Client.ReleaseDefinitionApiClient.Connection">
             <summary>
             Gets the underlying connection.

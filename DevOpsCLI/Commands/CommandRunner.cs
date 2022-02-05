@@ -10,6 +10,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(BuildCommand))]
     [Subcommand(typeof(BuildDefinitionCommand))]
     [Subcommand(typeof(GitCommand))]
+    [Subcommand(typeof(PipelineCommand))]
     [Subcommand(typeof(ReleaseCommand))]
     [Subcommand(typeof(ReleaseDefinitionCommand))]
     [Subcommand(typeof(VariableGroupCommand))]

@@ -10,7 +10,6 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
 
     [Command("create", Description = "Request (create) a release given a release definition.")]
     public class ReleaseCreateCommand : CommandBase
