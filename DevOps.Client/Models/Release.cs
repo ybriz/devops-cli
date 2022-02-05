@@ -17,7 +17,7 @@ namespace Jmelosegui.DevOps.Client
         public string LogsContainerUrl { get; set; }
 
         [JsonProperty("_links")]
-        public LinkDetails Links { get; set;  }
+        public LinkDetails Links { get; set; }
 
         public ReleaseDefinition ReleaseDefinition { get; set; }
 

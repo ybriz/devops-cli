@@ -34,6 +34,8 @@ namespace Jmelosegui.DevOps.Client
             this.ReleaseDefinition = new ReleaseDefinitionApiClient(connection);
 
             this.VariableGroup = new VariableGroupApiClient(connection);
+
+            this.Pipeline = new PipelineApiClient(connection);
         }
 
         public IConnection Connection { get; }
@@ -49,5 +51,7 @@ namespace Jmelosegui.DevOps.Client
         public IReleaseDefinitionApiClient ReleaseDefinition { get; }
 
         public IVariableGroupApiClient VariableGroup { get; }
+
+        public IPipelineApiClient Pipeline { get; set; }
     }
 }
