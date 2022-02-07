@@ -78,8 +78,10 @@ namespace Jmelosegui.DevOpsCLI.Commands
             {
                 try
                 {
-                    JsonSerializerSettings settings = new JsonSerializerSettings();
-                    settings.MissingMemberHandling = MissingMemberHandling.Error;
+                    JsonSerializerSettings settings = new JsonSerializerSettings
+                    {
+                        MissingMemberHandling = MissingMemberHandling.Error,
+                    };
 
                     List<ArtifactDTO> artifactsMetadata = JsonConvert.DeserializeObject<List<ArtifactDTO>>(this.Artifacts, settings);
 

@@ -8,6 +8,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
     [Command("pipeline", Description = "Commands for managing Pipelines.")]
     [Subcommand(typeof(PipelineListCommand))]
+    [Subcommand(typeof(PipelineGetCommand))]
+    [Subcommand(typeof(PipelineCreateCommand))]
     public class PipelineCommand : CommandBase
     {
         public PipelineCommand(ILogger<PipelineCommand> logger)
