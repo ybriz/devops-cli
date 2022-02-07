@@ -11,5 +11,9 @@ namespace Jmelosegui.DevOps.Client
     public interface IPipelineApiClient
     {
         Task<IEnumerable<Pipeline>> GetAllAsync(string projectName, PipelineListRequest pipelineListRequest = null);
+
+        Task<Pipeline> CreateAsync(string projectName, PipelineCreateRequest pipelineCreateRequest);
+
+        Task<Pipeline> GetAsync(string projectName, int id);
     }
 }

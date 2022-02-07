@@ -23,6 +23,19 @@ namespace Jmelosegui.DevOps.Client
         /// </summary>
         public IConnection Connection { get; private set; }
 
+        public async Task<Pipeline> CreateAsync(string projectName, PipelineCreateRequest pipelineCreateRequest)
+        {
+            var parameters = new Dictionary<string, object>();
+
+            FluentDictionary.For(parameters)
+                            .Add("api-version", "6.0-preview.1");
+
+            var response = await this.Connection.Post<Pipeline>(new Uri($"{projectName}/{EndPoint}", UriKind.Relative), pipelineCreateRequest, parameters, null)
+                                    .ConfigureAwait(false);
+
+            return response.Body;
+        }
+
         public async Task<IEnumerable<Pipeline>> GetAllAsync(string projectName, PipelineListRequest pipelineListRequest = null)
         {
             var parameters = new Dictionary<string, object>();
@@ -34,6 +47,20 @@ namespace Jmelosegui.DevOps.Client
                                                 .ConfigureAwait(false);
 
             return response.Body.Values;
+        }
+
+        public async Task<Pipeline> GetAsync(string projectName, int id)
+        {
+            var parameters = new Dictionary<string, object>();
+
+            FluentDictionary.For(parameters)
+                            .Add("api-version", "6.0-preview.1")
+                            .Add("pipelineId", id);
+
+            var response = await this.Connection.Get<Pipeline>(new Uri($"{projectName}/{EndPoint}", UriKind.Relative), parameters, null)
+                                    .ConfigureAwait(false);
+
+            return response.Body;
         }
     }
 }

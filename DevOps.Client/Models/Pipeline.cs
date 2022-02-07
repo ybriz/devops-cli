@@ -14,5 +14,7 @@ namespace Jmelosegui.DevOps.Client.Models
         public string Url { get; set; }
 
         public string Folder { get; set; }
+
+        public PipelineConfiguration Configuration { get; set; }
     }
 }

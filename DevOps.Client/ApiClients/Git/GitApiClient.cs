@@ -43,5 +43,39 @@ namespace Jmelosegui.DevOps.Client
 
             return response.Body.Values;
         }
+
+        public async Task<IEnumerable<GitRepository>> RepositoryGetAllAsync(string projectName, RepositoryListRequest request)
+        {
+            var parameters = new Dictionary<string, object>();
+
+            FluentDictionary.For(parameters)
+                            .Add("api-version", "6.0")
+                            .Add("includeAllUrls", request.IncludeAllUrls)
+                            .Add("includeHidden", request.IncludeHidden)
+                            .Add("includeLinks", request.IncludeLinks);
+
+            var endPoint = new Uri($"{projectName}/_apis/git/repositories", UriKind.Relative);
+
+            var response = await this.Connection.Get<GenericCollectionResponse<GitRepository>>(endPoint, parameters, null)
+                                                .ConfigureAwait(false);
+
+            return response.Body.Values;
+        }
+
+        public async Task<GitRepository> RepositoryGetAsync(string projectName, string repositoryId)
+        {
+            var parameters = new Dictionary<string, object>();
+
+            FluentDictionary.For(parameters)
+                            .Add("api-version", "6.0")
+                            .Add("repositoryId", repositoryId);
+
+            var endPoint = new Uri($"{projectName}/_apis/git/repositories", UriKind.Relative);
+
+            var response = await this.Connection.Get<GitRepository>(endPoint, parameters, null)
+                                                .ConfigureAwait(false);
+
+            return response.Body;
+        }
     }
 }
