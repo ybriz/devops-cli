@@ -55,6 +55,11 @@ namespace Jmelosegui.DevOps.Client
                                      .Get<GenericCollectionResponse<JObject>>(endPointUrl, parameters, null)
                                      .ConfigureAwait(false);
 
+            if (response.Body?.Values.Count <= 0)
+            {
+                return null;
+            }
+
             return JsonConvert.SerializeObject(response.Body.Values[0]);
         }
 

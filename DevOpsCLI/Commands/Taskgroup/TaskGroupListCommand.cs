@@ -21,12 +21,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
             var list = this.DevOpsClient.TaskGroup.GetAllAsync(this.ProjectName).GetAwaiter().GetResult();
 
-            Console.WriteLine();
-
-            foreach (var taskGroup in list)
-            {
-                Console.WriteLine($"{taskGroup.Name} ({taskGroup.Id})");
-            }
+            this.PrintOrExport(list);
 
             return ExitCodes.Ok;
         }

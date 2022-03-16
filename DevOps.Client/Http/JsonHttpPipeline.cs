@@ -66,8 +66,14 @@ namespace Jmelosegui.DevOps.Client
                         body = "[" + body + "]";
                     }
 
-                    var json = JsonConvert.DeserializeObject<T>(body, this.settings);
-                    return new ApiResponse<T>(response, json);
+                    var result = JsonConvert.DeserializeObject<T>(body, this.settings);
+                    return new ApiResponse<T>(response, result);
+                }
+
+                if (body == "null")
+                {
+                    var result = default(T);
+                    return new ApiResponse<T>(response, result);
                 }
             }
 
