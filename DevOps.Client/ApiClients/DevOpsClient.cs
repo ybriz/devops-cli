@@ -35,6 +35,8 @@ namespace Jmelosegui.DevOps.Client
 
             this.VariableGroup = new VariableGroupApiClient(connection);
 
+            this.TaskGroup = new TaskGroupApiClient(connection);
+
             this.Pipeline = new PipelineApiClient(connection);
         }
 
@@ -53,5 +55,7 @@ namespace Jmelosegui.DevOps.Client
         public IVariableGroupApiClient VariableGroup { get; }
 
         public IPipelineApiClient Pipeline { get; set; }
+
+        public ITaskGroupApiClient TaskGroup { get; }
     }
 }

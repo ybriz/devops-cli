@@ -14,6 +14,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(ReleaseCommand))]
     [Subcommand(typeof(ReleaseDefinitionCommand))]
     [Subcommand(typeof(VariableGroupCommand))]
+    [Subcommand(typeof(TaskGroupCommand))]
     [HelpOption("-h|--help")]
     public sealed class CommandRunner
     {

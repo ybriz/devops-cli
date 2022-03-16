@@ -39,7 +39,7 @@
             <summary>
             Retrieve a git reposiroty by id or name.
             </summary>
-            <param name="projectName">Project ID or project name</param>
+            <param name="projectName">Project ID or project name.</param>
             <param name="repositoryId">The name or ID of the repository.</param>
             <returns><see cref="T:Jmelosegui.DevOps.Client.Models.GitRepository"/>.</returns>
         </member>
@@ -47,7 +47,7 @@
             <summary>
             Retrieve git repositories.
             </summary>
-            <param name="projectName">Project Nam</param>
+            <param name="projectName">Project Name.</param>
             <param name="request">Payload used in the request <see cref="T:Jmelosegui.DevOps.Client.Models.Requests.RepositoryListRequest"/>.</param>
             <returns>IEnumerable of <see cref="T:Jmelosegui.DevOps.Client.Models.GitRepository"/>.</returns>
         </member>
@@ -62,6 +62,11 @@
             </summary>
         </member>
         <member name="P:Jmelosegui.DevOps.Client.ReleaseApiClient.Connection">
+            <summary>
+            Gets the underlying connection.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.TaskGroupApiClient.Connection">
             <summary>
             Gets the underlying connection.
             </summary>
