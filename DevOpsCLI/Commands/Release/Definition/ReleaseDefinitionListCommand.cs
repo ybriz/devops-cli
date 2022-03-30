@@ -10,12 +10,18 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("list", Description = "Get a list of release definitions.")]
-    public class ReleaseDefinitionListCommand : CommandBase
+    public class ReleaseDefinitionListCommand : ReleaseCommandBase
     {
         public ReleaseDefinitionListCommand(ILogger<ReleaseDefinitionListCommand> logger)
             : base(logger)
         {
         }
+
+        [Option(
+            "--search-text",
+            "Get release definitions with names starting with searchText.",
+            CommandOptionType.SingleValue)]
+        public string SearchText { get; set; }
 
         [Option(
             "--all-properties",
@@ -27,7 +33,14 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            IEnumerable<ReleaseDefinition> releaseDefinitions = this.DevOpsClient.ReleaseDefinition.GetAllAsync(this.ProjectName).GetAwaiter().GetResult();
+            ReleaseDefinitionListRequest request = null;
+            if (!string.IsNullOrEmpty(this.SearchText))
+            {
+                request = new ReleaseDefinitionListRequest();
+                request.SearchText = this.SearchText;
+            }
+
+            IEnumerable<ReleaseDefinition> releaseDefinitions = this.DevOpsClient.ReleaseDefinition.GetAllAsync(this.ProjectName, request).GetAwaiter().GetResult();
 
             if (this.IncludeAllProperties)
             {

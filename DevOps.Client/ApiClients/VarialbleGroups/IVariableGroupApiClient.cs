@@ -8,7 +8,7 @@ namespace Jmelosegui.DevOps.Client
 
     public interface IVariableGroupApiClient
     {
-        Task<IEnumerable<VariableGroup>> GetAllAsync(string projectName);
+        Task<IEnumerable<VariableGroup>> GetAllAsync(string projectName, VariableGroupListRequest request = null);
 
         Task<string> GetAsync(string projectName, int variableGroupId);
 

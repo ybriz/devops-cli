@@ -6,7 +6,6 @@ namespace Jmelosegui.DevOps.Client
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Newtonsoft.Json.Linq;
 
     public interface ITaskGroupApiClient
     {

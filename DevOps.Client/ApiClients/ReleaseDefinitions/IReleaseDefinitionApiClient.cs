@@ -8,8 +8,10 @@ namespace Jmelosegui.DevOps.Client
 
     public interface IReleaseDefinitionApiClient
     {
-        Task<IEnumerable<ReleaseDefinition>> GetAllAsync(string projectName);
+        Task<IEnumerable<ReleaseDefinition>> GetAllAsync(string projectName, ReleaseDefinitionListRequest request = null);
 
         Task<string> GetAsync(string projectName, int releaseDefinitionId);
+
+        Task<string> AddOrUpdateAsync(string projectName, int releaseDefinitionId, string jsonBody);
     }
 }

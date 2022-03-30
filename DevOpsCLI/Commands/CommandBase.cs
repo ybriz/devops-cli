@@ -23,7 +23,7 @@ namespace Jmelosegui.DevOpsCLI
 
         [Option(
             "-u|--service-url",
-            "URL to the service you will connect to, e.g. https://youraccount.visualstudio.com/DefaultCollection.",
+            "URL to the service you will connect to, e.g. https://dev.azure.com/organization.",
             CommandOptionType.SingleValue)]
         public string ServiceUrl { get; set; }
 
@@ -48,6 +48,16 @@ namespace Jmelosegui.DevOpsCLI
                            .Any();
             }
         }
+
+        /// <summary>
+        /// Gets the HostPrefix value.
+        /// </summary>
+        /// <remarks>
+        /// There are some endpoints that add a prefix to the default azure devops domain name.
+        /// For instance the end point url to manage release is "vsrm.dev.azure.com" instead of dev.azure.com.
+        /// On those scenarios, use this property to add that extra prefix to the default hostname.
+        /// </remarks>
+        protected virtual string HostPrefix => string.Empty;
 
         protected ILogger Logger { get; }
 
@@ -76,7 +86,9 @@ namespace Jmelosegui.DevOpsCLI
                     this.ProjectName = Prompt.GetString("> ProjectName:", null, ConsoleColor.DarkGray);
                 }
 
-                this.DevOpsClient = new DevOpsClient(new Uri(this.ServiceUrl), new Credentials(string.Empty, this.Token));
+                var serviceUri = this.GetServiceUri(this.ServiceUrl);
+
+                this.DevOpsClient = new DevOpsClient(serviceUri, new Credentials(string.Empty, this.Token));
             }
 
             return ExitCodes.Ok;
@@ -115,6 +127,18 @@ namespace Jmelosegui.DevOpsCLI
 
                 File.WriteAllText(outputFile, outPutContent);
             }
+        }
+
+        private Uri GetServiceUri(string serviceUrl)
+        {
+            var uri = new Uri(serviceUrl);
+
+            if (uri.Host == "dev.azure.com")
+            {
+                return new Uri($"{uri.Scheme}://{this.HostPrefix}dev.azure.com{uri.AbsolutePath}");
+            }
+
+            return uri;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("list", Description = "Get a list of release.")]
-    public class ReleaseListCommand : CommandBase
+    public class ReleaseListCommand : ReleaseCommandBase
     {
         public ReleaseListCommand(ILogger<ReleaseListCommand> logger)
             : base(logger)

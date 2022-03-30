@@ -9,9 +9,10 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("release-definition", Description = "Commands for managing Release Definitions.")]
     [Subcommand(typeof(ReleaseDefinitionListCommand))]
     [Subcommand(typeof(ReleaseDefinitionExportCommand))]
-    public class ReleaseDefinitionCommand : CommandBase
+    [Subcommand(typeof(ReleaseDefinitionImportCommand))]
+    public class ReleaseDefinitionCommand : ReleaseCommandBase
     {
-        public ReleaseDefinitionCommand(ILogger<ReleaseCommand> logger)
+        public ReleaseDefinitionCommand(ILogger<ReleaseDefinitionCommand> logger)
             : base(logger)
         {
         }

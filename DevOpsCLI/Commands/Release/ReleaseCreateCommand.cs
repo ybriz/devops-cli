@@ -12,7 +12,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Newtonsoft.Json;
 
     [Command("create", Description = "Request (create) a release given a release definition.")]
-    public class ReleaseCreateCommand : CommandBase
+    public class ReleaseCreateCommand : ReleaseCommandBase
     {
         public ReleaseCreateCommand(ILogger<ReleaseCreateCommand> logger)
             : base(logger)

@@ -8,9 +8,9 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("export", Description = "Export release environment.")]
-    public class ReleaseEnvironmentExportCommand : CommandBase
+    public class ReleaseEnvironmentExportCommand : ReleaseCommandBase
     {
-        public ReleaseEnvironmentExportCommand(ILogger<CommandBase> logger)
+        public ReleaseEnvironmentExportCommand(ILogger<ReleaseEnvironmentExportCommand> logger)
             : base(logger)
         {
         }

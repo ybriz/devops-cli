@@ -9,7 +9,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("approval", Description = "Operation related with release approval process.")]
     [Subcommand(typeof(ReleaseApprovalListCommand))]
     [Subcommand(typeof(ReleaseApprovalUpdateCommand))]
-    public class ReleaseApprovalCommand : CommandBase
+    public class ReleaseApprovalCommand : ReleaseCommandBase
     {
         public ReleaseApprovalCommand(ILogger<ReleaseApprovalCommand> logger)
             : base(logger)

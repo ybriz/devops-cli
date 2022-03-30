@@ -10,7 +10,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("export", Description = "Show ReleaseDefinition details.")]
-    public class ReleaseDefinitionExportCommand : CommandBase
+    public class ReleaseDefinitionExportCommand : ReleaseCommandBase
     {
         public ReleaseDefinitionExportCommand(ILogger<ReleaseDefinitionExportCommand> logger)
             : base(logger)
@@ -85,12 +85,17 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
         private ReleaseDefinition GetReleaseDefinitionByName(string value)
         {
+            var request = new ReleaseDefinitionListRequest
+            {
+                SearchText = value,
+            };
+
             ReleaseDefinition releaseDefinition = this.DevOpsClient
                                                     .ReleaseDefinition
-                                                    .GetAllAsync(this.ProjectName)
+                                                    .GetAllAsync(this.ProjectName, request)
                                                     .GetAwaiter()
                                                     .GetResult()
-                                                    .FirstOrDefault(rd => rd.Name.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0);
+                                                    .FirstOrDefault(rd => rd.Name.Equals(value, StringComparison.OrdinalIgnoreCase));
 
             return releaseDefinition;
         }

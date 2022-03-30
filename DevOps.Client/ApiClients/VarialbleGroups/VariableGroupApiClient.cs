@@ -21,7 +21,7 @@ namespace Jmelosegui.DevOps.Client
         /// </summary>
         public IConnection Connection { get; private set; }
 
-        public async Task<IEnumerable<VariableGroup>> GetAllAsync(string projectName)
+        public async Task<IEnumerable<VariableGroup>> GetAllAsync(string projectName, VariableGroupListRequest request = null)
         {
             Ensure.ArgumentNotNullOrEmptyString(projectName, nameof(projectName));
 
@@ -29,6 +29,12 @@ namespace Jmelosegui.DevOps.Client
             {
                 { "api-version", "4.1-preview.1" },
             };
+
+            if (request != null)
+            {
+                FluentDictionary.For(parameters)
+                                .Add("groupName", request.SearchText, () => !string.IsNullOrEmpty(request.SearchText));
+            }
 
             var endPointUrl = new Uri($"{projectName}/{EndPoint}", UriKind.Relative);
             var response = await this.Connection

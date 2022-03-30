@@ -4,6 +4,9 @@
 namespace Jmelosegui.DevOpsCLI.Commands
 {
     using System;
+    using System.Collections.Generic;
+    using System.Text.Json;
+    using Jmelosegui.DevOps.Client;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
@@ -15,18 +18,32 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
         }
 
+        [Option(
+        "--search-text",
+        "Get variable gorups with names starting with searchText.",
+        CommandOptionType.SingleValue)]
+        public string SearchText { get; set; }
+
         protected override int OnExecute(CommandLineApplication app)
         {
             base.OnExecute(app);
 
-            var list = this.DevOpsClient.VariableGroup.GetAllAsync(this.ProjectName).GetAwaiter().GetResult();
+            VariableGroupListRequest request = null;
+            if (!string.IsNullOrEmpty(this.SearchText))
+            {
+                request = new VariableGroupListRequest
+                {
+                    SearchText = this.SearchText,
+                };
+            }
+
+            IEnumerable<VariableGroup> list = this.DevOpsClient.VariableGroup.GetAllAsync(this.ProjectName, request).GetAwaiter().GetResult();
 
             Console.WriteLine();
 
-            foreach (var variableGroup in list)
-            {
-                Console.WriteLine($"{variableGroup.Name} ({variableGroup.Id})");
-            }
+            string json = JsonSerializer.Serialize(list);
+
+            Console.WriteLine(json);
 
             return ExitCodes.Ok;
         }
