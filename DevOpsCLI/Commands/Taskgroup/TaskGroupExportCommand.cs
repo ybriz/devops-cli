@@ -4,6 +4,8 @@
 namespace Jmelosegui.DevOpsCLI.Commands
 {
     using System;
+    using System.Linq;
+    using Jmelosegui.DevOps.Client;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
@@ -19,7 +21,13 @@ namespace Jmelosegui.DevOpsCLI.Commands
             "--task-group-id",
             "Task group id",
             CommandOptionType.SingleValue)]
-        public string TaskGroupId { get; set; }
+        public Guid TaskGroupId { get; set; }
+
+        [Option(
+        "--task-group-name",
+        "Task group name",
+        CommandOptionType.SingleValue)]
+        public string TaskGroupName { get; set; }
 
         [Option(
             "--output-file",
@@ -31,21 +39,59 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (string.IsNullOrEmpty(this.TaskGroupId))
+            while (this.TaskGroupId == Guid.Empty && string.IsNullOrEmpty(this.TaskGroupName))
             {
-                this.TaskGroupId = Prompt.GetString("> TaskGroupId:", null, ConsoleColor.DarkGray);
+                string value = Prompt.GetString("> TaskGroupId:", null, ConsoleColor.DarkGray);
+                if (Guid.TryParse(value, out Guid taskGroupId))
+                {
+                    this.TaskGroupId = taskGroupId;
+                }
+                else
+                {
+                    this.TaskGroupName = value;
+                }
             }
 
-            if (!Guid.TryParse(this.TaskGroupId, out Guid taskGroupId))
+            if (this.TaskGroupId == Guid.Empty)
             {
-                throw new InvalidCastException("Invalid TaskGroupId format");
+                var taskGroup = this.GetTaskGroupByName(this.TaskGroupName);
+
+                if (taskGroup != null)
+                {
+                    this.TaskGroupId = taskGroup.Id;
+                }
+                else
+                {
+                    Console.Error.WriteLine($"Cannot find a task group named: {this.TaskGroupName}");
+                    return ExitCodes.ResourceNotFound;
+                }
             }
 
-            string taskGroup = this.DevOpsClient.TaskGroup.GetAsync(this.ProjectName, taskGroupId).GetAwaiter().GetResult();
+            try
+            {
+                string taskGroup = this.DevOpsClient.TaskGroup.GetAsync(this.ProjectName, this.TaskGroupId).GetAwaiter().GetResult();
 
-            this.PrintOrExport(taskGroup, this.OutputFile);
+                this.PrintOrExport(taskGroup, this.OutputFile);
 
-            return ExitCodes.Ok;
+                return ExitCodes.Ok;
+            }
+            catch (NotFoundException ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                return ExitCodes.ResourceNotFound;
+            }
+        }
+
+        private TaskGroup GetTaskGroupByName(string taskGroupName)
+        {
+            TaskGroup taskGroup = this.DevOpsClient
+                                                    .TaskGroup
+                                                    .GetAllAsync(this.ProjectName)
+                                                    .GetAwaiter()
+                                                    .GetResult()
+                                                    .FirstOrDefault(rd => rd.Name.Equals(taskGroupName, StringComparison.OrdinalIgnoreCase));
+
+            return taskGroup;
         }
     }
 }

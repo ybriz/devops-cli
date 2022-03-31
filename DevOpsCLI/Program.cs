@@ -25,7 +25,7 @@ namespace Jmelosegui.DevOpsCLI
 
             try
             {
-                var app = new CommandLineApplication<CommandRunner>() { ThrowOnUnexpectedArgument = false };
+                var app = new CommandLineApplication<CommandRunner>();
                 app.Conventions
                    .UseDefaultConventions()
                    .UseConstructorInjection(servicesProvider);

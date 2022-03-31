@@ -4,6 +4,11 @@
         <name>Jmelosegui.DevOps.Client</name>
     </assembly>
     <members>
+        <member name="P:Jmelosegui.DevOps.Client.AgentQueueApiClient.Connection">
+            <summary>
+            Gets the underlying connection.
+            </summary>
+        </member>
         <member name="P:Jmelosegui.DevOps.Client.BuildDefinitionApiClient.Connection">
             <summary>
             Gets the underlying connection.
