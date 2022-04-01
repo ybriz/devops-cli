@@ -3,16 +3,14 @@
 
 namespace Jmelosegui.DevOpsCLI.Commands
 {
-    using Jmelosegui.DevOpsCLI.Commands.Graph.Groups;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
-    [Subcommand(typeof(GroupExportCommand))]
-    [Subcommand(typeof(GraphGroupListCommand))]
-    [Command("group", Description = "Commands for managing groups.")]
-    public class GraphGroupCommand : CommandBase
+    [Subcommand(typeof(IdentityListCommand))]
+    [Command("identity", Description = "Resolve legacy identity information for use with older APIs such as the Security APIs.")]
+    public class IdentityCommand : CommandBase
     {
-        public GraphGroupCommand(ILogger<GraphGroupCommand> logger)
+        public IdentityCommand(ILogger<IdentityCommand> logger)
             : base(logger)
         {
         }

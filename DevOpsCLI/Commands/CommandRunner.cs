@@ -17,6 +17,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(TaskGroupCommand))]
     [Subcommand(typeof(AgentQueueCommand))]
     [Subcommand(typeof(GraphCommand))]
+    [Subcommand(typeof(IdentityCommand))]
     [HelpOption("-h|--help")]
     public sealed class CommandRunner
     {
