@@ -7,7 +7,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("list", Description = "Get a list of task groups.")]
-    public class TaskGroupListCommand : CommandBase
+    public class TaskGroupListCommand : ProjectCommandBase
     {
         public TaskGroupListCommand(ILogger<TaskGroupListCommand> logger)
             : base(logger)

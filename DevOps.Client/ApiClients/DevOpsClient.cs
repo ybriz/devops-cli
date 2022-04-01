@@ -40,6 +40,8 @@ namespace Jmelosegui.DevOps.Client
             this.Pipeline = new PipelineApiClient(connection);
 
             this.AgentQueue = new AgentQueueApiClient(connection);
+
+            this.Graph = new GraphApiClient(connection);
         }
 
         public IConnection Connection { get; }
@@ -60,6 +62,8 @@ namespace Jmelosegui.DevOps.Client
 
         public ITaskGroupApiClient TaskGroup { get; }
 
-        public IAgentQueueApiClient AgentQueue { get;  }
+        public IAgentQueueApiClient AgentQueue { get; }
+
+        public IGraphApiClient Graph { get; }
     }
 }

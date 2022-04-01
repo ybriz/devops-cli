@@ -12,7 +12,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(ReleaseExportCommand))]
     [Subcommand(typeof(ReleaseEnvironmentCommand))]
     [Subcommand(typeof(ReleaseApprovalCommand))]
-    public class ReleaseCommand : CommandBase
+    public class ReleaseCommand : ProjectCommandBase
     {
         public ReleaseCommand(ILogger<ReleaseCommand> logger)
             : base(logger)

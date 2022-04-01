@@ -10,9 +10,9 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("list", Description = "Get a list of pipelines.")]
-    internal class PipelineListCommand : CommandBase
+    internal class PipelineListCommand : ProjectCommandBase
     {
-        public PipelineListCommand(ILogger<CommandBase> logger)
+        public PipelineListCommand(ILogger<PipelineListCommand> logger)
             : base(logger)
         {
         }

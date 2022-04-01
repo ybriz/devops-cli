@@ -10,7 +10,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("export", Description = "Show ReleaseDefinition details.")]
-    public class ReleaseDefinitionExportCommand : ReleaseCommandBase
+    public class ReleaseDefinitionExportCommand : ProjectCommandBase
     {
         public ReleaseDefinitionExportCommand(ILogger<ReleaseDefinitionExportCommand> logger)
             : base(logger)

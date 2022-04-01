@@ -10,7 +10,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("export", Description = "Show BuildDefinition details.")]
-    public class BuildDefinitionExportCommand : CommandBase
+    public class BuildDefinitionExportCommand : ProjectCommandBase
     {
         public BuildDefinitionExportCommand(ILogger<BuildDefinitionExportCommand> logger)
             : base(logger)

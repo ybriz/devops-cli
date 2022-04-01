@@ -9,7 +9,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("import", Description = "CReate or update task group.")]
-    public class TaskGroupImportCommand : CommandBase
+    public class TaskGroupImportCommand : ProjectCommandBase
     {
         public TaskGroupImportCommand(ILogger<TaskGroupExportCommand> logger)
             : base(logger)

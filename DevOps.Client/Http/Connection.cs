@@ -35,22 +35,22 @@ namespace Jmelosegui.DevOps.Client
 
         public Uri ServiceUrl { get; }
 
-        public Task<IApiResponse<T>> Get<T>(Uri uri, IDictionary<string, object> parameters, string accepts)
+        public Task<IApiResponse<T>> Get<T>(Uri uri, IDictionary<string, object> parameters, string accepts, CancellationToken cancellationToken = default, Uri baseUrl = null)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
 
-            return this.SendData<T>(uri.ApplyParameters(parameters), HttpMethod.Get, null, accepts, null, CancellationToken.None);
+            return this.SendData<T>(uri.ApplyParameters(parameters), HttpMethod.Get, null, accepts, null, cancellationToken, baseUrl);
         }
 
-        public Task<IApiResponse<T>> Patch<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts)
+        public Task<IApiResponse<T>> Patch<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts, CancellationToken cancellationToken = default, Uri baseUrl = null)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
             Ensure.ArgumentNotNull(body, nameof(body));
 
-            return this.SendData<T>(uri.ApplyParameters(parameters), HttpMethod.Patch, body, accepts, null, CancellationToken.None);
+            return this.SendData<T>(uri.ApplyParameters(parameters), HttpMethod.Patch, body, accepts, null, cancellationToken, baseUrl);
         }
 
-        public async Task<HttpStatusCode> Patch(Uri uri, object body, IDictionary<string, object> parameters, string accepts)
+        public async Task<HttpStatusCode> Patch(Uri uri, object body, IDictionary<string, object> parameters, string accepts, CancellationToken cancellationToken = default, Uri baseUrl = null)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
             Ensure.ArgumentNotNull(body, nameof(body));
@@ -58,7 +58,7 @@ namespace Jmelosegui.DevOps.Client
             var request = new Request
             {
                 Method = HttpMethod.Patch,
-                BaseAddress = this.ServiceUrl,
+                BaseAddress = baseUrl ?? this.ServiceUrl,
                 Endpoint = uri.ApplyParameters(parameters),
                 ContentType = "application/json",
             };
@@ -74,38 +74,38 @@ namespace Jmelosegui.DevOps.Client
                 this.jsonPipeline.SerializeRequest(request);
             }
 
-            var response = await this.Run<object>(request, CancellationToken.None).ConfigureAwait(false);
+            var response = await this.Run<object>(request, cancellationToken).ConfigureAwait(false);
             return response.HttpResponse.StatusCode;
         }
 
-        public Task<IApiResponse<T>> Put<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts)
+        public Task<IApiResponse<T>> Put<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts, CancellationToken cancellationToken = default, Uri baseUrl = null)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
             Ensure.ArgumentNotNull(body, nameof(body));
 
-            return this.SendData<T>(uri.ApplyParameters(parameters), HttpMethod.Put, body, accepts, null, CancellationToken.None);
+            return this.SendData<T>(uri.ApplyParameters(parameters), HttpMethod.Put, body, accepts, null, cancellationToken, baseUrl);
         }
 
-        public Task<IApiResponse<T>> Post<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts)
+        public Task<IApiResponse<T>> Post<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts, CancellationToken cancellationToken = default, Uri baseUrl = null)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
             Ensure.ArgumentNotNull(body, nameof(body));
 
-            return this.SendData<T>(uri.ApplyParameters(parameters), HttpMethod.Post, body, accepts, null, CancellationToken.None);
+            return this.SendData<T>(uri.ApplyParameters(parameters), HttpMethod.Post, body, accepts, null, cancellationToken, baseUrl);
         }
 
-        public async Task<HttpStatusCode> Delete(Uri uri)
+        public async Task<HttpStatusCode> Delete(Uri uri, CancellationToken cancellationToken = default, Uri baseUrl = null)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
 
             var request = new Request
             {
                 Method = HttpMethod.Delete,
-                BaseAddress = this.ServiceUrl,
+                BaseAddress = baseUrl ?? this.ServiceUrl,
                 Endpoint = uri,
             };
 
-            var response = await this.Run<object>(request, CancellationToken.None).ConfigureAwait(false);
+            var response = await this.Run<object>(request, cancellationToken).ConfigureAwait(false);
             return response.HttpResponse.StatusCode;
         }
 
@@ -157,22 +157,21 @@ namespace Jmelosegui.DevOps.Client
             string accepts,
             string contentType,
             CancellationToken cancellationToken,
-            string twoFactorAuthenticationCode = null,
-            Uri serviceUrl = null)
+            Uri baseUrl = null)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
 
             var request = new Request
             {
                 Method = method,
-                BaseAddress = serviceUrl ?? this.ServiceUrl,
+                BaseAddress = baseUrl ?? this.ServiceUrl,
                 Endpoint = uri,
             };
 
-            return this.SendDataInternal<T>(body, accepts, contentType, cancellationToken, twoFactorAuthenticationCode, request);
+            return this.SendDataInternal<T>(body, accepts, contentType, cancellationToken, request);
         }
 
-        private Task<IApiResponse<T>> SendDataInternal<T>(object body, string accepts, string contentType, CancellationToken cancellationToken, string twoFactorAuthenticationCode, Request request)
+        private Task<IApiResponse<T>> SendDataInternal<T>(object body, string accepts, string contentType, CancellationToken cancellationToken, Request request)
         {
             if (!string.IsNullOrEmpty(accepts))
             {

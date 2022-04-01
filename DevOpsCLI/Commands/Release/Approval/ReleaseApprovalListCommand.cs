@@ -10,7 +10,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("list", Description = "Get a list of release approvals.")]
-    public class ReleaseApprovalListCommand : ReleaseCommandBase
+    public class ReleaseApprovalListCommand : ProjectCommandBase
     {
         public ReleaseApprovalListCommand(ILogger<ReleaseApprovalListCommand> logger)
             : base(logger)

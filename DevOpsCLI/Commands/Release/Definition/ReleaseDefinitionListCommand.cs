@@ -10,7 +10,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("list", Description = "Get a list of release definitions.")]
-    public class ReleaseDefinitionListCommand : ReleaseCommandBase
+    public class ReleaseDefinitionListCommand : ProjectCommandBase
     {
         public ReleaseDefinitionListCommand(ILogger<ReleaseDefinitionListCommand> logger)
             : base(logger)

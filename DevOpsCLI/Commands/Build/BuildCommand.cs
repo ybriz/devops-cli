@@ -8,7 +8,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
     [Command("build", Description = "Commands for managing Builds.")]
     [Subcommand(typeof(BuildListCommand))]
-    public class BuildCommand : CommandBase
+    public class BuildCommand : ProjectCommandBase
     {
         public BuildCommand(ILogger<BuildCommand> logger)
             : base(logger)

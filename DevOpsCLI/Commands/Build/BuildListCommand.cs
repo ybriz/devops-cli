@@ -10,7 +10,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("list", Description = "Get a list of builds.")]
-    public class BuildListCommand : CommandBase
+    public class BuildListCommand : ProjectCommandBase
     {
         public BuildListCommand(ILogger<BuildListCommand> logger)
             : base(logger)

@@ -3,30 +3,34 @@
 
 namespace Jmelosegui.DevOpsCLI.Commands
 {
+    using System;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
 
-    [Command("export", Description = "Get a list of git repositories.")]
-    public sealed class RepositoryGetCommand : CommandBase
+    public abstract class ProjectCommandBase : CommandBase
     {
-        public RepositoryGetCommand(ILogger<RepositoryGetCommand> logger)
+        protected ProjectCommandBase(ILogger<ProjectCommandBase> logger)
             : base(logger)
         {
         }
 
         [Option(
-        "--repositoryId",
-        "The name or ID of the repository.",
+        "-p|--project",
+        "Tfs project name",
         CommandOptionType.SingleValue)]
-        public string RepositoryId { get; set; }
+        public string ProjectName { get; set; }
 
         protected override int OnExecute(CommandLineApplication app)
         {
             base.OnExecute(app);
 
-            var result = this.DevOpsClient.Git.RepositoryGetAsync(this.ProjectName, this.RepositoryId).GetAwaiter().GetResult();
-
-            this.PrintOrExport(result);
+            if (!this.IsCommandGroup)
+            {
+                while (string.IsNullOrEmpty(this.ProjectName))
+                {
+                    this.ProjectName = Prompt.GetString("> ProjectName:", null, ConsoleColor.DarkGray);
+                }
+            }
 
             return ExitCodes.Ok;
         }

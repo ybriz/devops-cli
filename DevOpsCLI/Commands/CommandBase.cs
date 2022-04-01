@@ -1,7 +1,7 @@
 // Copyright (c) All contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Jmelosegui.DevOpsCLI
+namespace Jmelosegui.DevOpsCLI.Commands
 {
     using System;
     using System.IO;
@@ -33,12 +33,6 @@ namespace Jmelosegui.DevOpsCLI
             CommandOptionType.SingleValue)]
         public string Token { get; set; }
 
-        [Option(
-            "-p|--project",
-            "Tfs project name",
-            CommandOptionType.SingleValue)]
-        public string ProjectName { get; set; }
-
         public bool IsCommandGroup
         {
             get
@@ -48,16 +42,6 @@ namespace Jmelosegui.DevOpsCLI
                            .Any();
             }
         }
-
-        /// <summary>
-        /// Gets the HostPrefix value.
-        /// </summary>
-        /// <remarks>
-        /// There are some endpoints that add a prefix to the default azure devops domain name.
-        /// For instance the end point url to manage release is "vsrm.dev.azure.com" instead of dev.azure.com.
-        /// On those scenarios, use this property to add that extra prefix to the default hostname.
-        /// </remarks>
-        protected virtual string HostPrefix => string.Empty;
 
         protected ILogger Logger { get; }
 
@@ -81,14 +65,7 @@ namespace Jmelosegui.DevOpsCLI
                     this.Token = Prompt.GetPassword("> Token:", null, ConsoleColor.DarkGray);
                 }
 
-                while (string.IsNullOrEmpty(this.ProjectName))
-                {
-                    this.ProjectName = Prompt.GetString("> ProjectName:", null, ConsoleColor.DarkGray);
-                }
-
-                var serviceUri = this.GetServiceUri(this.ServiceUrl);
-
-                this.DevOpsClient = new DevOpsClient(serviceUri, new Credentials(string.Empty, this.Token));
+                this.DevOpsClient = new DevOpsClient(new Uri(this.ServiceUrl), new Credentials(string.Empty, this.Token));
             }
 
             return ExitCodes.Ok;
@@ -127,18 +104,6 @@ namespace Jmelosegui.DevOpsCLI
 
                 File.WriteAllText(outputFile, outPutContent);
             }
-        }
-
-        private Uri GetServiceUri(string serviceUrl)
-        {
-            var uri = new Uri(serviceUrl);
-
-            if (uri.Host == "dev.azure.com")
-            {
-                return new Uri($"{uri.Scheme}://{this.HostPrefix}dev.azure.com{uri.AbsolutePath}");
-            }
-
-            return uri;
         }
     }
 }

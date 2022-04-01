@@ -8,7 +8,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
     [Command("environment", Description = "Commands for managing environments.")]
     [Subcommand(typeof(ReleaseEnvironmentUpdateCommand))]
-    public class ReleaseEnvironmentCommand : ReleaseCommandBase
+    public class ReleaseEnvironmentCommand : ProjectCommandBase
     {
         public ReleaseEnvironmentCommand(ILogger<ReleaseEnvironmentCommand> logger)
             : base(logger)

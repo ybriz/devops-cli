@@ -5,21 +5,17 @@ namespace Jmelosegui.DevOps.Client
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading;
     using System.Threading.Tasks;
 
-    public sealed class ReleaseDefinitionApiClient : IReleaseDefinitionApiClient
+    public sealed class ReleaseDefinitionApiClient : ReleaseApiClientBase, IReleaseDefinitionApiClient
     {
         private const string EndPoint = "_apis/release/definitions";
 
         public ReleaseDefinitionApiClient(IConnection connection)
+            : base(connection)
         {
-            this.Connection = connection;
         }
-
-        /// <summary>
-        /// Gets the underlying connection.
-        /// </summary>
-        public IConnection Connection { get; private set; }
 
         public async Task<string> AddOrUpdateAsync(string projectName, int releaseDefinitionId, string jsonBody)
         {
@@ -36,14 +32,14 @@ namespace Jmelosegui.DevOps.Client
             {
                 endPointUrl = new Uri($"{projectName}/{EndPoint}/{releaseDefinitionId}/", UriKind.Relative);
                 response = await this.Connection
-                                     .Put<string>(endPointUrl, jsonBody, parameters, null)
+                                     .Put<string>(endPointUrl, jsonBody, parameters, null, CancellationToken.None, this.BaseUrl)
                                      .ConfigureAwait(false);
             }
             else
             {
                 endPointUrl = new Uri($"{projectName}/{EndPoint}/", UriKind.Relative);
                 response = await this.Connection
-                                     .Post<string>(endPointUrl, jsonBody, parameters, null)
+                                     .Post<string>(endPointUrl, jsonBody, parameters, null, CancellationToken.None, this.BaseUrl)
                                      .ConfigureAwait(false);
             }
 
@@ -63,8 +59,8 @@ namespace Jmelosegui.DevOps.Client
                                 .Add("searchText", request.SearchText, () => !string.IsNullOrEmpty(request.SearchText));
             }
 
-            var response = await this.Connection.Get<GenericCollectionResponse<ReleaseDefinition>>(new Uri($"{projectName}/{EndPoint}", UriKind.Relative), parameters, null)
-                                           .ConfigureAwait(false);
+            var response = await this.Connection.Get<GenericCollectionResponse<ReleaseDefinition>>(new Uri($"{projectName}/{EndPoint}", UriKind.Relative), parameters, null, CancellationToken.None, this.BaseUrl)
+                                                .ConfigureAwait(false);
 
             return response.Body.Values;
         }
@@ -79,7 +75,7 @@ namespace Jmelosegui.DevOps.Client
             var endPointUrl = new Uri($"{projectName}/{EndPoint}/{releaseDefinitionId}", UriKind.Relative);
 
             var response = await this.Connection
-                         .Get<string>(endPointUrl, parameters, null)
+                         .Get<string>(endPointUrl, parameters, null, CancellationToken.None, this.BaseUrl)
                          .ConfigureAwait(false);
 
             return response.Body;

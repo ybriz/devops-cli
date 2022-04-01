@@ -1,7 +1,7 @@
 ﻿// Copyright (c) All contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Jmelosegui.DevOpsCLI
+namespace Jmelosegui.DevOpsCLI.Commands
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace Jmelosegui.DevOpsCLI
     using Microsoft.Extensions.Logging;
 
     [Command("list", Description = "Get a list of agent queues.")]
-    public class AgentQueueListCommand : CommandBase
+    public class AgentQueueListCommand : ProjectCommandBase
     {
         public AgentQueueListCommand(ILogger<AgentQueueListCommand> logger)
             : base(logger)

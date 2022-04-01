@@ -10,7 +10,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("export", Description = "Show variable group details.")]
-    public class VariableGroupExportCommand : CommandBase
+    public class VariableGroupExportCommand : ProjectCommandBase
     {
         public VariableGroupExportCommand(ILogger<VariableGroupExportCommand> logger)
             : base(logger)

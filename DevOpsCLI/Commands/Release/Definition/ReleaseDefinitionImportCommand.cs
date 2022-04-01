@@ -9,7 +9,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("import", Description = "Create or update release definition.")]
-    public sealed class ReleaseDefinitionImportCommand : ReleaseCommandBase
+    public sealed class ReleaseDefinitionImportCommand : ProjectCommandBase
     {
         public ReleaseDefinitionImportCommand(ILogger<ReleaseDefinitionImportCommand> logger)
             : base(logger)
@@ -27,8 +27,6 @@ namespace Jmelosegui.DevOpsCLI.Commands
             "File containing the release definition details to add or update on the target project.",
             CommandOptionType.SingleValue)]
         public string InputFile { get; set; }
-
-        protected override string HostPrefix => "vsrm.";
 
         protected override int OnExecute(CommandLineApplication app)
         {

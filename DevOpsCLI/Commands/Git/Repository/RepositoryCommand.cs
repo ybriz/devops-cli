@@ -8,8 +8,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
     [Command("repository", Description = "Command to manage git repositories")]
     [Subcommand(typeof(RepositoryListCommand))]
-    [Subcommand(typeof(RepositoryGetCommand))]
-    public sealed class RepositoryCommand : CommandBase
+    [Subcommand(typeof(RepositoryExportCommand))]
+    public sealed class RepositoryCommand : ProjectCommandBase
     {
         public RepositoryCommand(ILogger<RepositoryCommand> logger)
             : base(logger)

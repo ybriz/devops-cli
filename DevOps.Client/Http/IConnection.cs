@@ -6,6 +6,7 @@ namespace Jmelosegui.DevOps.Client
     using System;
     using System.Collections.Generic;
     using System.Net;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -13,16 +14,18 @@ namespace Jmelosegui.DevOps.Client
     /// </summary>
     public interface IConnection : IDisposable
     {
-        Task<IApiResponse<T>> Get<T>(Uri uri, IDictionary<string, object> parameters, string accepts);
+        Uri ServiceUrl { get; }
 
-        Task<IApiResponse<T>> Patch<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts);
+        Task<IApiResponse<T>> Get<T>(Uri uri, IDictionary<string, object> parameters, string accepts, CancellationToken cancellationToken = default, Uri baseUrl = null);
 
-        Task<HttpStatusCode> Patch(Uri uri, object body, IDictionary<string, object> parameters, string accepts);
+        Task<IApiResponse<T>> Patch<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts, CancellationToken cancellationToken = default, Uri baseUrl = null);
 
-        Task<IApiResponse<T>> Put<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts);
+        Task<HttpStatusCode> Patch(Uri uri, object body, IDictionary<string, object> parameters, string accepts, CancellationToken cancellationToken = default, Uri baseUrl = null);
 
-        Task<IApiResponse<T>> Post<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts);
+        Task<IApiResponse<T>> Put<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts, CancellationToken cancellationToken = default, Uri baseUrl = null);
 
-        Task<HttpStatusCode> Delete(Uri uri);
+        Task<IApiResponse<T>> Post<T>(Uri uri, object body, IDictionary<string, object> parameters, string accepts, CancellationToken cancellationToken = default, Uri baseUrl = null);
+
+        Task<HttpStatusCode> Delete(Uri uri, CancellationToken cancellationToken = default, Uri baseUrl = null);
     }
 }

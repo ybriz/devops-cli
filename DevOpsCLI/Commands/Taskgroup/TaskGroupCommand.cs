@@ -10,7 +10,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(TaskGroupListCommand))]
     [Subcommand(typeof(TaskGroupExportCommand))]
     [Subcommand(typeof(TaskGroupImportCommand))]
-    public class TaskGroupCommand : CommandBase
+    public class TaskGroupCommand : ProjectCommandBase
     {
         public TaskGroupCommand(ILogger<TaskGroupCommand> logger)
             : base(logger)

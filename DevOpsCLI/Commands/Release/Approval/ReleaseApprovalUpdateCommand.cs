@@ -9,7 +9,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("update", Description = "Update status of an approval.")]
-    public class ReleaseApprovalUpdateCommand : ReleaseCommandBase
+    public class ReleaseApprovalUpdateCommand : ProjectCommandBase
     {
         public ReleaseApprovalUpdateCommand(ILogger<ReleaseApprovalUpdateCommand> logger)
             : base(logger)

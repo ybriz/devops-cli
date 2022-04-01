@@ -9,9 +9,9 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("export", Description = "Get a pipeline.")]
-    internal class PipelineGetCommand : CommandBase
+    internal class PipelineExportCommand : ProjectCommandBase
     {
-        public PipelineGetCommand(ILogger<CommandBase> logger)
+        public PipelineExportCommand(ILogger<PipelineExportCommand> logger)
             : base(logger)
         {
         }

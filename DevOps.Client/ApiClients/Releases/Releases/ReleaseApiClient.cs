@@ -6,21 +6,17 @@ namespace Jmelosegui.DevOps.Client
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
 
-    public sealed class ReleaseApiClient : IReleaseApiClient
+    public sealed class ReleaseApiClient : ReleaseApiClientBase, IReleaseApiClient
     {
         private const string EndPoint = "_apis/release/releases";
 
         public ReleaseApiClient(IConnection connection)
+            : base(connection)
         {
-            this.Connection = connection;
         }
-
-        /// <summary>
-        /// Gets the underlying connection.
-        /// </summary>
-        public IConnection Connection { get; private set; }
 
         public async Task<Release> CreateAsync(string projectName, CreateReleaseRequest request)
         {
@@ -30,7 +26,7 @@ namespace Jmelosegui.DevOps.Client
                             .Add("api-version", "5.0");
 
             IApiResponse<Release> result = await this.Connection
-                                                     .Post<Release>(new Uri($"{projectName}/{EndPoint}", UriKind.Relative), request, parameters, null)
+                                                     .Post<Release>(new Uri($"{projectName}/{EndPoint}", UriKind.Relative), request, parameters, null, CancellationToken.None, this.BaseUrl)
                                                      .ConfigureAwait(false);
 
             return result.Body;
@@ -48,7 +44,7 @@ namespace Jmelosegui.DevOps.Client
                             .Add("$top", releaseListRequest.Top, () => releaseListRequest.Top > 0)
                             .Add("$expand", string.Join(',', releaseListRequest.ExpandPropterties), () => releaseListRequest.ExpandPropterties?.Any() == true);
 
-            var response = await this.Connection.Get<GenericCollectionResponse<Release>>(new Uri($"{projectName}/{EndPoint}", UriKind.Relative), parameters, null)
+            var response = await this.Connection.Get<GenericCollectionResponse<Release>>(new Uri($"{projectName}/{EndPoint}", UriKind.Relative), parameters, null, CancellationToken.None, this.BaseUrl)
                                                 .ConfigureAwait(false);
 
             return response.Body.Values;
@@ -64,7 +60,7 @@ namespace Jmelosegui.DevOps.Client
             var endPointUrl = new Uri($"{projectName}/{EndPoint}/{releaseId}", UriKind.Relative);
 
             var response = await this.Connection
-                         .Get<string>(endPointUrl, parameters, null)
+                         .Get<string>(endPointUrl, parameters, null, CancellationToken.None, this.BaseUrl)
                          .ConfigureAwait(false);
 
             return response.Body;
@@ -86,7 +82,7 @@ namespace Jmelosegui.DevOps.Client
             };
 
             var response = await this.Connection
-                      .Patch<string>(endPointUrl, body, parameters, null)
+                      .Patch<string>(endPointUrl, body, parameters, null, CancellationToken.None, this.BaseUrl)
                       .ConfigureAwait(false);
 
             return response.Body;
@@ -102,7 +98,7 @@ namespace Jmelosegui.DevOps.Client
             var endPointUrl = new Uri($"{projectName}/{EndPoint}/{releaseId}/environments/{environmentId}", UriKind.Relative);
 
             var response = await this.Connection
-                      .Get<string>(endPointUrl, parameters, null)
+                      .Get<string>(endPointUrl, parameters, null, CancellationToken.None, this.BaseUrl)
                       .ConfigureAwait(false);
 
             return response.Body;
@@ -120,7 +116,7 @@ namespace Jmelosegui.DevOps.Client
 
             var endPointUrl = new Uri($"{projectName}/_apis/release/approvals", UriKind.Relative);
 
-            var response = await this.Connection.Get<GenericCollectionResponse<ReleaseApproval>>(endPointUrl, parameters, null)
+            var response = await this.Connection.Get<GenericCollectionResponse<ReleaseApproval>>(endPointUrl, parameters, null, CancellationToken.None, this.BaseUrl)
                                     .ConfigureAwait(false);
 
             return response.Body;
@@ -142,7 +138,7 @@ namespace Jmelosegui.DevOps.Client
             };
 
             var response = await this.Connection
-                      .Patch<ReleaseApproval>(endPointUrl, body, parameters, null)
+                      .Patch<ReleaseApproval>(endPointUrl, body, parameters, null, CancellationToken.None, this.BaseUrl)
                       .ConfigureAwait(false);
 
             return response.Body;

@@ -10,7 +10,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("export", Description = "Show task group details.")]
-    public class TaskGroupExportCommand : CommandBase
+    public class TaskGroupExportCommand : ProjectCommandBase
     {
         public TaskGroupExportCommand(ILogger<TaskGroupExportCommand> logger)
             : base(logger)

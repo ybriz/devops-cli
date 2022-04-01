@@ -9,7 +9,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("import", Description = "Create or update variable group.")]
-    public class VariableGroupImportCommand : CommandBase
+    public class VariableGroupImportCommand : ProjectCommandBase
     {
         public VariableGroupImportCommand(ILogger<VariableGroupExportCommand> logger)
             : base(logger)

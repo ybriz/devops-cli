@@ -9,7 +9,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("git", Description = "Commands for work with git repositories is Azure DevOps.")]
     [Subcommand(typeof(CommitCommand))]
     [Subcommand(typeof(RepositoryCommand))]
-    public sealed class GitCommand : CommandBase
+    public sealed class GitCommand : ProjectCommandBase
     {
         public GitCommand(ILogger<GitCommand> logger)
             : base(logger)

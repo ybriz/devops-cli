@@ -9,7 +9,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("update", Description = "Update the status of a release environment.")]
-    public class ReleaseEnvironmentUpdateCommand : ReleaseCommandBase
+    public class ReleaseEnvironmentUpdateCommand : ProjectCommandBase
     {
         public ReleaseEnvironmentUpdateCommand(ILogger<ReleaseEnvironmentUpdateCommand> logger)
             : base(logger)

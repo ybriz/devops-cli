@@ -9,9 +9,9 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("create", Description = "Create a pipeline.")]
-    internal class PipelineCreateCommand : CommandBase
+    internal class PipelineCreateCommand : ProjectCommandBase
     {
-        public PipelineCreateCommand(ILogger<CommandBase> logger)
+        public PipelineCreateCommand(ILogger<PipelineCreateCommand> logger)
             : base(logger)
         {
         }

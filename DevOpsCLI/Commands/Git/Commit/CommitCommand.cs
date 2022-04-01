@@ -8,7 +8,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
     [Command("commit", Description = "Retrieve git commits for a project")]
     [Subcommand(typeof(CommitListCommand))]
-    public sealed class CommitCommand : CommandBase
+    public sealed class CommitCommand : ProjectCommandBase
     {
         public CommitCommand(ILogger<CommitCommand> logger)
             : base(logger)

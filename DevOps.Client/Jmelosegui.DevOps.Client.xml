@@ -56,17 +56,24 @@
             <param name="request">Payload used in the request <see cref="T:Jmelosegui.DevOps.Client.Models.Requests.RepositoryListRequest"/>.</param>
             <returns>IEnumerable of <see cref="T:Jmelosegui.DevOps.Client.Models.GitRepository"/>.</returns>
         </member>
+        <member name="P:Jmelosegui.DevOps.Client.GraphApiClient.Connection">
+            <summary>
+            Gets the underlying connection.
+            </summary>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.GraphApiClient.GroupGetAllAsync(Jmelosegui.DevOps.Client.GraphGroupListRequest)">
+            <summary>
+            Retrieve User Groups.
+            </summary>
+            <param name="request">Payload used in the request <see cref="T:Jmelosegui.DevOps.Client.GraphGroupListRequest"/>.</param>
+            <returns>IEnumerable of <see cref="T:Jmelosegui.DevOps.GraphGroup"/>.</returns>
+        </member>
         <member name="P:Jmelosegui.DevOps.Client.PipelineApiClient.Connection">
             <summary>
             Gets the underlying connection.
             </summary>
         </member>
-        <member name="P:Jmelosegui.DevOps.Client.ReleaseDefinitionApiClient.Connection">
-            <summary>
-            Gets the underlying connection.
-            </summary>
-        </member>
-        <member name="P:Jmelosegui.DevOps.Client.ReleaseApiClient.Connection">
+        <member name="P:Jmelosegui.DevOps.Client.ReleaseApiClientBase.Connection">
             <summary>
             Gets the underlying connection.
             </summary>
@@ -331,6 +338,12 @@
         <member name="P:Jmelosegui.DevOps.Client.Models.Requests.CommitListRequest.SearchCriteriaVersion">
             <summary>
             Gets or sets the version string identifier (name of tag/branch, SHA1 of commit).
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.GraphGroupListRequest.ScopeDescriptor">
+            <summary>
+            Gets or sets the ScopeDecriptor.
+            Specify a non-default scope (collection, project) to search for groups.
             </summary>
         </member>
     </members>

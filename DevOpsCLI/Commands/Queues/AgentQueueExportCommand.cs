@@ -1,7 +1,7 @@
 ﻿// Copyright (c) All contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Jmelosegui.DevOpsCLI
+namespace Jmelosegui.DevOpsCLI.Commands
 {
     using System;
     using System.Linq;
@@ -10,9 +10,9 @@ namespace Jmelosegui.DevOpsCLI
     using Microsoft.Extensions.Logging;
 
     [Command("export", Description = "Show agent queue details.")]
-    public sealed class AgentQueueExportCommand : CommandBase
+    public sealed class AgentQueueExportCommand : ProjectCommandBase
     {
-        public AgentQueueExportCommand(ILogger<CommandBase> logger)
+        public AgentQueueExportCommand(ILogger<AgentQueueExportCommand> logger)
             : base(logger)
         {
         }

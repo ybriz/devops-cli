@@ -9,7 +9,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("list", Description = "Get a list of commits in a git repository.")]
-    public sealed class CommitListCommand : CommandBase
+    public sealed class CommitListCommand : ProjectCommandBase
     {
         public CommitListCommand(ILogger<CommitListCommand> logger)
             : base(logger)

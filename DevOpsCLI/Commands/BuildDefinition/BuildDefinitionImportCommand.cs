@@ -9,7 +9,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using Microsoft.Extensions.Logging;
 
     [Command("import", Description = "Imports a BuildDefinition.")]
-    public class BuildDefinitionImportCommand : CommandBase
+    public class BuildDefinitionImportCommand : ProjectCommandBase
     {
         public BuildDefinitionImportCommand(ILogger<BuildDefinitionImportCommand> logger)
             : base(logger)
