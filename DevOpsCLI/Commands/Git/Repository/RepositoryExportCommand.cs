@@ -3,9 +3,9 @@
 
 namespace Jmelosegui.DevOpsCLI.Commands
 {
+    using System;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
-    using System;
 
     [Command("export", Description = "Retrieve a git repository.")]
     public sealed class RepositoryExportCommand : ProjectCommandBase

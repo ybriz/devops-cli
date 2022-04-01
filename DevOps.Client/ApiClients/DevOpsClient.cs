@@ -44,6 +44,8 @@ namespace Jmelosegui.DevOps.Client
             this.Graph = new GraphApiClient(connection);
 
             this.Identity = new IdentityApiClient(connection);
+
+            this.Project = new ProjectApiClient(connection);
         }
 
         public IConnection Connection { get; }
@@ -69,5 +71,7 @@ namespace Jmelosegui.DevOps.Client
         public IGraphApiClient Graph { get; }
 
         public IIdentityApiClient Identity { get; }
+
+        public IProjectApiClient Project { get; }
     }
 }

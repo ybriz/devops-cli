@@ -11,6 +11,8 @@ namespace Jmelosegui.DevOps.Client
 
     public sealed class GitApiClient : IGitApiClient
     {
+        private const string EndPoint = "_apis/git/repositories";
+
         public GitApiClient(IConnection connection)
         {
             this.Connection = connection;
@@ -54,7 +56,7 @@ namespace Jmelosegui.DevOps.Client
                             .Add("includeHidden", request.IncludeHidden)
                             .Add("includeLinks", request.IncludeLinks);
 
-            var endPoint = new Uri($"{projectName}/_apis/git/repositories", UriKind.Relative);
+            var endPoint = new Uri($"{projectName}/{EndPoint}", UriKind.Relative);
 
             var response = await this.Connection.Get<GenericCollectionResponse<GitRepository>>(endPoint, parameters, null)
                                                 .ConfigureAwait(false);
@@ -70,7 +72,7 @@ namespace Jmelosegui.DevOps.Client
                             .Add("api-version", "6.0")
                             .Add("repositoryId", repositoryId);
 
-            var endPoint = new Uri($"{projectName}/_apis/git/repositories", UriKind.Relative);
+            var endPoint = new Uri($"{projectName}/{EndPoint}", UriKind.Relative);
 
             var response = await this.Connection.Get<GitRepository>(endPoint, parameters, null)
                                                 .ConfigureAwait(false);

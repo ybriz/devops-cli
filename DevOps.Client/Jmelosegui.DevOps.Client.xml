@@ -78,6 +78,11 @@
             Gets the underlying connection.
             </summary>
         </member>
+        <member name="P:Jmelosegui.DevOps.Client.ProjectApiClient.Connection">
+            <summary>
+            Gets the underlying connection.
+            </summary>
+        </member>
         <member name="P:Jmelosegui.DevOps.Client.ReleaseApiClientBase.Connection">
             <summary>
             Gets the underlying connection.
