@@ -5,6 +5,7 @@ namespace Jmelosegui.DevOps.Client
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading;
     using System.Threading.Tasks;
 
     public partial class IdentityApiClient : IIdentityApiClient
@@ -41,7 +42,7 @@ namespace Jmelosegui.DevOps.Client
                             .Add("queryMembership", request.QueryMembership.ToString());
             }
 
-            var response = await this.Connection.Get<GenericCollectionResponse<Identity>>(new Uri($"{EndPoint}", UriKind.Relative), parameters, null)
+            var response = await this.Connection.Get<GenericCollectionResponse<Identity>>(new Uri($"{EndPoint}", UriKind.Relative), parameters, null, CancellationToken.None, this.BaseUrl)
                                                 .ConfigureAwait(false);
 
             return response.Body.Values;

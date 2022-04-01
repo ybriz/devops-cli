@@ -5,6 +5,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text.Json;
     using Jmelosegui.DevOps.Client;
     using McMaster.Extensions.CommandLineUtils;
@@ -51,10 +52,27 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 IdentityIds = this.IdentityIds,
                 QueryMembership = this.QueryMembership,
                 SearchFilter = this.SearchFilter,
-                FilterValue = this.FilterValue
+                FilterValue = this.FilterValue,
             };
 
-            IEnumerable<Identity> list = this.DevOpsClient.Identity.GetAllAsync(request).GetAwaiter().GetResult();
+            var list = this.DevOpsClient.Identity
+                                                          .GetAllAsync(request)
+                                                          .GetAwaiter()
+                                                          .GetResult()
+                                                          .Select(i => new
+                                                          {
+                                                              i.Id,
+                                                              i.IsContainer,
+                                                              i.UniqueUserId,
+                                                              i.SocialDescriptor,
+                                                              i.SubjectDescriptor,
+                                                              i.CustomDisplayName,
+                                                              i.IsActive,
+                                                              i.ResourceVersion,
+                                                              Mail = i.Properties["Mail"]?["$value"]?.Value,
+                                                          }).ToList();
+
+
 
             Console.WriteLine();
 

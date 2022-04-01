@@ -20,5 +20,7 @@ namespace Jmelosegui.DevOps.Client
         public bool IsActive { get; set; }
 
         public bool IsContainer { get; set; }
+
+        public dynamic Properties { get; set; }
     }
 }
