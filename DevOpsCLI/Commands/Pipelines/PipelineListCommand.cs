@@ -12,8 +12,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("list", Description = "Get a list of pipelines.")]
     internal class PipelineListCommand : ProjectCommandBase
     {
-        public PipelineListCommand(ILogger<PipelineListCommand> logger)
-            : base(logger)
+        public PipelineListCommand(ApplicationConfiguration settings, ILogger<PipelineListCommand> logger)
+            : base(settings, logger)
         {
         }
 

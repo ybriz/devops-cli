@@ -10,8 +10,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("list", Description = "Get a list of git repositories.")]
     public sealed class RepositoryListCommand : ProjectCommandBase
     {
-        public RepositoryListCommand(ILogger<RepositoryListCommand> logger)
-            : base(logger)
+        public RepositoryListCommand(ApplicationConfiguration settings, ILogger<RepositoryListCommand> logger)
+            : base(settings, logger)
         {
         }
 

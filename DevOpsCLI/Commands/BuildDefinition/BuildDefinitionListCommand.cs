@@ -11,8 +11,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("list", Description = "Get a list of build definitions.")]
     public class BuildDefinitionListCommand : ProjectCommandBase
     {
-        public BuildDefinitionListCommand(ILogger<BuildDefinitionListCommand> logger)
-            : base(logger)
+        public BuildDefinitionListCommand(ApplicationConfiguration settings, ILogger<BuildDefinitionListCommand> logger)
+            : base(settings, logger)
         {
         }
 

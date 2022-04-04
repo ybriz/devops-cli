@@ -14,8 +14,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("create", Description = "Request (create) a release given a release definition.")]
     public class ReleaseCreateCommand : ProjectCommandBase
     {
-        public ReleaseCreateCommand(ILogger<ReleaseCreateCommand> logger)
-            : base(logger)
+        public ReleaseCreateCommand(ApplicationConfiguration settings, ILogger<ReleaseCreateCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -59,7 +59,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (this.ReleaseDefinitionId <= 0)
+            while (this.NonInteractive == false && this.ReleaseDefinitionId <= 0)
             {
                 int.TryParse(Prompt.GetString("> ReleaseDefinitionId:", null, ConsoleColor.DarkGray), out int releaseDefinitionId);
                 this.ReleaseDefinitionId = releaseDefinitionId;

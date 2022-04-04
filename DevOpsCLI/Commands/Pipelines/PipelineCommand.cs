@@ -12,8 +12,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(PipelineCreateCommand))]
     public class PipelineCommand : ProjectCommandBase
     {
-        public PipelineCommand(ILogger<PipelineCommand> logger)
-            : base(logger)
+        public PipelineCommand(ApplicationConfiguration settings, ILogger<PipelineCommand> logger)
+            : base(settings, logger)
         {
         }
     }

@@ -11,8 +11,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("import", Description = "Imports a BuildDefinition.")]
     public class BuildDefinitionImportCommand : ProjectCommandBase
     {
-        public BuildDefinitionImportCommand(ILogger<BuildDefinitionImportCommand> logger)
-            : base(logger)
+        public BuildDefinitionImportCommand(ApplicationConfiguration settings, ILogger<BuildDefinitionImportCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -32,7 +32,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (string.IsNullOrEmpty(this.InputFile))
+            while (this.NonInteractive == false && string.IsNullOrEmpty(this.InputFile))
             {
                 this.InputFile = Prompt.GetString("> InputFile:", null, ConsoleColor.DarkGray);
             }

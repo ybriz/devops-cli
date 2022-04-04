@@ -10,8 +10,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(CommitListCommand))]
     public sealed class CommitCommand : ProjectCommandBase
     {
-        public CommitCommand(ILogger<CommitCommand> logger)
-            : base(logger)
+        public CommitCommand(ApplicationConfiguration settings, ILogger<CommitCommand> logger)
+            : base(settings, logger)
         {
         }
     }

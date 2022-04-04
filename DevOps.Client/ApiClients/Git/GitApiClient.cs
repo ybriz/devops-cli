@@ -51,7 +51,7 @@ namespace Jmelosegui.DevOps.Client
             var parameters = new Dictionary<string, object>();
 
             FluentDictionary.For(parameters)
-                            .Add("api-version", "6.0")
+                            .Add("api-version", "5.1")
                             .Add("includeAllUrls", request.IncludeAllUrls)
                             .Add("includeHidden", request.IncludeHidden)
                             .Add("includeLinks", request.IncludeLinks);

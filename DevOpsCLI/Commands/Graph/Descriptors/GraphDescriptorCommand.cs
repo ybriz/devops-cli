@@ -10,8 +10,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("descriptor", Description = "Commands for managing descriptors.")]
     public class GraphDescriptorCommand : CommandBase
     {
-        public GraphDescriptorCommand(ILogger<GraphDescriptorCommand> logger)
-            : base(logger)
+        public GraphDescriptorCommand(ApplicationConfiguration settings, ILogger<GraphDescriptorCommand> logger)
+            : base(settings, logger)
         {
         }
     }

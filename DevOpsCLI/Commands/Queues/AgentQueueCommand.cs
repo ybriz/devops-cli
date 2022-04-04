@@ -11,8 +11,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(AgentQueueExportCommand))]
     public class AgentQueueCommand : ProjectCommandBase
     {
-        public AgentQueueCommand(ILogger<AgentQueueCommand> logger)
-            : base(logger)
+        public AgentQueueCommand(ApplicationConfiguration settings, ILogger<AgentQueueCommand> logger)
+            : base(settings, logger)
         {
         }
     }

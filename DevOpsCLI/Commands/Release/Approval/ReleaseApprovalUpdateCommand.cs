@@ -11,8 +11,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("update", Description = "Update status of an approval.")]
     public class ReleaseApprovalUpdateCommand : ProjectCommandBase
     {
-        public ReleaseApprovalUpdateCommand(ILogger<ReleaseApprovalUpdateCommand> logger)
-            : base(logger)
+        public ReleaseApprovalUpdateCommand(ApplicationConfiguration settings, ILogger<ReleaseApprovalUpdateCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -42,7 +42,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
             ApprovalStatus status = ApprovalStatus.Undefined;
 
-            while (this.ApprovalId <= 0)
+            while (this.NonInteractive == false && this.ApprovalId <= 0)
             {
                 int.TryParse(Prompt.GetString("> Approval Id:", null, ConsoleColor.DarkGray), out int approvalId);
                 this.ApprovalId = approvalId;
@@ -50,12 +50,12 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
             Enum.TryParse(value: this.Status, ignoreCase: true, out status);
 
-            while (status <= 0)
+            while (this.NonInteractive == false && this.NonInteractive == false && status <= 0)
             {
                 Enum.TryParse(Prompt.GetString("> Approval Status:", null, ConsoleColor.DarkGray), ignoreCase: true, out status);
             }
 
-            while (string.IsNullOrEmpty(this.Comments))
+            while (this.NonInteractive == false && this.NonInteractive == false && string.IsNullOrEmpty(this.Comments))
             {
                 this.Token = Prompt.GetString("> Comments:", null, ConsoleColor.DarkGray);
             }

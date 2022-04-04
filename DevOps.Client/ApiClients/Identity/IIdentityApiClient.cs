@@ -9,5 +9,7 @@ namespace Jmelosegui.DevOps.Client
     public partial interface IIdentityApiClient
     {
         Task<IEnumerable<Identity>> GetAllAsync(IdentityListRequest request);
+
+        Task<ConnectionData> GetConnectionData();
     }
 }

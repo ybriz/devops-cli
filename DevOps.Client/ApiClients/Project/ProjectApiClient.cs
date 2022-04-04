@@ -5,9 +5,7 @@ namespace Jmelosegui.DevOps.Client
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Jmelosegui.DevOps.Client.Models;
     using Jmelosegui.DevOps.Client.Models.Requests;
 
     public sealed class ProjectApiClient : IProjectApiClient
@@ -37,7 +35,7 @@ namespace Jmelosegui.DevOps.Client
                             .Add("stateFilter", request.StateFilter);
             }
 
-            var response = await this.Connection.Get<GenericCollectionResponse<TeamProjectReference>>(new Uri($"{EndPoint}", UriKind.Relative), parameters, null)
+            var response = await this.Connection.Get<GenericCollectionResponse<TeamProjectReference>>(new Uri(EndPoint, UriKind.Relative), parameters, null)
                                                 .ConfigureAwait(false);
 
             return response.Body.Values;
@@ -51,7 +49,7 @@ namespace Jmelosegui.DevOps.Client
                             .Add("api-version", "4.0")
                             .Add("projectId", projectId);
 
-            var endPoint = new Uri($"{EndPoint}", UriKind.Relative);
+            var endPoint = new Uri(EndPoint, UriKind.Relative);
 
             var response = await this.Connection.Get<string>(endPoint, parameters, null)
                                                 .ConfigureAwait(false);

@@ -12,8 +12,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("list", Description = "Get a list of release approvals.")]
     public class ReleaseApprovalListCommand : ProjectCommandBase
     {
-        public ReleaseApprovalListCommand(ILogger<ReleaseApprovalListCommand> logger)
-            : base(logger)
+        public ReleaseApprovalListCommand(ApplicationConfiguration settings, ILogger<ReleaseApprovalListCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -45,7 +45,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
             {
                 Enum.TryParse(value: this.StatusFilter, ignoreCase: true, out status);
 
-                while (status <= 0)
+                while (this.NonInteractive == false && status <= 0)
                 {
                     Enum.TryParse(Prompt.GetString("> Approval Status:", null, ConsoleColor.DarkGray), ignoreCase: true, out status);
                 }

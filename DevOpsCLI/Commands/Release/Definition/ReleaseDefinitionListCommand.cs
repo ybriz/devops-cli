@@ -12,8 +12,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("list", Description = "Get a list of release definitions.")]
     public class ReleaseDefinitionListCommand : ProjectCommandBase
     {
-        public ReleaseDefinitionListCommand(ILogger<ReleaseDefinitionListCommand> logger)
-            : base(logger)
+        public ReleaseDefinitionListCommand(ApplicationConfiguration settings, ILogger<ReleaseDefinitionListCommand> logger)
+            : base(settings, logger)
         {
         }
 

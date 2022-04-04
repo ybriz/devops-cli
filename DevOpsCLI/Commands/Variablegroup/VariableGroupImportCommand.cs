@@ -11,8 +11,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("import", Description = "Create or update variable group.")]
     public class VariableGroupImportCommand : ProjectCommandBase
     {
-        public VariableGroupImportCommand(ILogger<VariableGroupExportCommand> logger)
-            : base(logger)
+        public VariableGroupImportCommand(ApplicationConfiguration settings, ILogger<VariableGroupExportCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -32,7 +32,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (string.IsNullOrEmpty(this.InputFile))
+            while (this.NonInteractive == false && string.IsNullOrEmpty(this.InputFile))
             {
                 this.InputFile = Prompt.GetString("> InputFile:", null, ConsoleColor.DarkGray);
             }

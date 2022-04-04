@@ -8,6 +8,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     using System.Linq;
     using System.Reflection;
     using Jmelosegui.DevOps.Client;
+    using Jmelosegui.DevOpsCLI.Services;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
@@ -16,9 +17,10 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [HelpOption("-h| --help")]
     public abstract class CommandBase
     {
-        protected CommandBase(ILogger<CommandBase> logger)
+        protected CommandBase(ApplicationConfiguration settings, ILogger<CommandBase> logger)
         {
             this.Logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.Settings = settings ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [Option(
@@ -33,6 +35,12 @@ namespace Jmelosegui.DevOpsCLI.Commands
             CommandOptionType.SingleValue)]
         public string Token { get; set; }
 
+        [Option(
+        "--non-interactive",
+        "When set, the tool will run in non interactive mode.",
+        CommandOptionType.NoValue)]
+        public bool NonInteractive { get; set; }
+
         public bool IsCommandGroup
         {
             get
@@ -45,6 +53,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
         protected ILogger Logger { get; }
 
+        protected ApplicationConfiguration Settings { get; }
+
         protected DevOpsClient DevOpsClient { get; private set; }
 
         protected virtual int OnExecute(CommandLineApplication app)
@@ -55,14 +65,32 @@ namespace Jmelosegui.DevOpsCLI.Commands
             }
             else
             {
-                while (string.IsNullOrEmpty(this.ServiceUrl))
+                if (string.IsNullOrEmpty(this.ServiceUrl) && !string.IsNullOrEmpty(this.Settings?.Defaults?.Organization))
+                {
+                    this.ServiceUrl = this.Settings.Defaults.Organization;
+                }
+
+                while (this.NonInteractive == false && string.IsNullOrEmpty(this.ServiceUrl))
                 {
                     this.ServiceUrl = Prompt.GetString("> ServiceURL:", null, ConsoleColor.DarkGray);
                 }
 
-                while (string.IsNullOrEmpty(this.Token))
+                var credentialStore = new CredentialStore();
+                var storedToken = credentialStore.GetCredential(this.ServiceUrl);
+
+                if (string.IsNullOrEmpty(this.Token) && !string.IsNullOrEmpty(storedToken))
+                {
+                    this.Token = storedToken;
+                }
+
+                while (this.NonInteractive == false && string.IsNullOrEmpty(this.Token))
                 {
                     this.Token = Prompt.GetPassword("> Token:", null, ConsoleColor.DarkGray);
+                }
+
+                if (string.IsNullOrEmpty(this.Token))
+                {
+                    throw new InvalidOperationException("An Azure DevOps token must be provided. You can run the login command to avoid passing the credential every time.");
                 }
 
                 this.DevOpsClient = new DevOpsClient(new Uri(this.ServiceUrl), new Credentials(string.Empty, this.Token));

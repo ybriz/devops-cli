@@ -10,8 +10,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("list", Description = "Get all projects in the organization that the authenticated user has access to.")]
     public class ProjectListCommand : CommandBase
     {
-        public ProjectListCommand(ILogger<ProjectExportCommand> logger)
-            : base(logger)
+        public ProjectListCommand(ApplicationConfiguration settings, ILogger<ProjectExportCommand> logger)
+            : base(settings, logger)
         {
         }
 

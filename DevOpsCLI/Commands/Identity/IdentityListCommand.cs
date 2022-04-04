@@ -4,7 +4,6 @@
 namespace Jmelosegui.DevOpsCLI.Commands
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Text.Json;
     using Jmelosegui.DevOps.Client;
@@ -14,8 +13,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("list", Description = "Resolve legacy identity information for use with older APIs such as the Security APIs.")]
     public class IdentityListCommand : CommandBase
     {
-        public IdentityListCommand(ILogger<IdentityListCommand> logger)
-            : base(logger)
+        public IdentityListCommand(ApplicationConfiguration settings, ILogger<IdentityListCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -71,8 +70,6 @@ namespace Jmelosegui.DevOpsCLI.Commands
                                                               i.ResourceVersion,
                                                               Mail = i.Properties["Mail"]?["$value"]?.Value,
                                                           }).ToList();
-
-
 
             Console.WriteLine();
 

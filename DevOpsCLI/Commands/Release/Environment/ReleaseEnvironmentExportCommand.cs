@@ -10,8 +10,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("export", Description = "Export release environment.")]
     public class ReleaseEnvironmentExportCommand : ProjectCommandBase
     {
-        public ReleaseEnvironmentExportCommand(ILogger<ReleaseEnvironmentExportCommand> logger)
-            : base(logger)
+        public ReleaseEnvironmentExportCommand(ApplicationConfiguration settings, ILogger<ReleaseEnvironmentExportCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -28,13 +28,13 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (this.ReleaseId <= 0)
+            while (this.NonInteractive == false && this.ReleaseId <= 0)
             {
                 int.TryParse(Prompt.GetString("> ReleaseDefinitionId:", null, ConsoleColor.DarkGray), out int releaseDefinitionId);
                 this.ReleaseId = releaseDefinitionId;
             }
 
-            while (this.EnvironmentId <= 0)
+            while (this.NonInteractive == false && this.EnvironmentId <= 0)
             {
                 int.TryParse(Prompt.GetString("> EnvironmentId:", null, ConsoleColor.DarkGray), out int environmentId);
                 this.EnvironmentId = environmentId;

@@ -3,19 +3,19 @@
 
 namespace Jmelosegui.DevOpsCLI.Commands.Graph.Groups
 {
+    using System;
+    using System.Linq;
     using Jmelosegui.DevOps;
     using Jmelosegui.DevOps.Client;
     using Jmelosegui.DevOps.Client.Models.Requests;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
-    using System;
-    using System.Linq;
 
     [Command("export", Description = "Get a group by its descriptor.")]
     public sealed class GroupExportCommand : CommandBase
     {
-        public GroupExportCommand(ILogger<GroupExportCommand> logger)
-            : base(logger)
+        public GroupExportCommand(ApplicationConfiguration settings, ILogger<GroupExportCommand> logger)
+            : base(settings, logger)
         {
         }
 

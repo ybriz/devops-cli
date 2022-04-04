@@ -11,8 +11,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("create", Description = "Create a pipeline.")]
     internal class PipelineCreateCommand : ProjectCommandBase
     {
-        public PipelineCreateCommand(ILogger<PipelineCreateCommand> logger)
-            : base(logger)
+        public PipelineCreateCommand(ApplicationConfiguration settings, ILogger<PipelineCreateCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -44,12 +44,12 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (string.IsNullOrEmpty(this.Name))
+            while (this.NonInteractive == false && string.IsNullOrEmpty(this.Name))
             {
                 this.Name = Prompt.GetString("> Pipeline Name:", null, ConsoleColor.DarkGray);
             }
 
-            while (string.IsNullOrEmpty(this.ReposirotyId))
+            while (this.NonInteractive == false && string.IsNullOrEmpty(this.ReposirotyId))
             {
                 this.ReposirotyId = Prompt.GetString("> Repository Name or Id:", null, ConsoleColor.DarkGray);
             }

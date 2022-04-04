@@ -12,8 +12,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("export", Description = "Show variable group details.")]
     public class VariableGroupExportCommand : ProjectCommandBase
     {
-        public VariableGroupExportCommand(ILogger<VariableGroupExportCommand> logger)
-            : base(logger)
+        public VariableGroupExportCommand(ApplicationConfiguration settings, ILogger<VariableGroupExportCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -39,7 +39,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (this.VariableGroupId <= 0 && string.IsNullOrEmpty(this.VariableGroupName))
+            while (this.NonInteractive == false && this.VariableGroupId <= 0 && string.IsNullOrEmpty(this.VariableGroupName))
             {
                 string value = Prompt.GetString("> VariableGroup Id or Name:", null, ConsoleColor.DarkGray);
 

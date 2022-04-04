@@ -10,8 +10,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("export", Description = "Retrieve a git repository.")]
     public sealed class RepositoryExportCommand : ProjectCommandBase
     {
-        public RepositoryExportCommand(ILogger<RepositoryExportCommand> logger)
-            : base(logger)
+        public RepositoryExportCommand(ApplicationConfiguration settings, ILogger<RepositoryExportCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -25,7 +25,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (!string.IsNullOrEmpty(this.RepositoryId))
+            while (this.NonInteractive == false && !string.IsNullOrEmpty(this.RepositoryId))
             {
                 this.RepositoryId = Prompt.GetString("> Pipeline Id", null, ConsoleColor.DarkGray);
             }

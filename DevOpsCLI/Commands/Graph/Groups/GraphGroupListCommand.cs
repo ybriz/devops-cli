@@ -14,8 +14,8 @@ namespace Jmelosegui.DevOpsCLI.Commands.Graph.Groups
     [Command("list", Description = "Gets a list of all groups in the current scope (usually organization or account).")]
     public sealed class GraphGroupListCommand : CommandBase
     {
-        public GraphGroupListCommand(ILogger<GraphGroupListCommand> logger)
-            : base(logger)
+        public GraphGroupListCommand(ApplicationConfiguration settings, ILogger<GraphGroupListCommand> logger)
+            : base(settings, logger)
         {
         }
 

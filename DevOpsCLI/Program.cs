@@ -5,7 +5,9 @@ namespace Jmelosegui.DevOpsCLI
 {
     using System;
     using Jmelosegui.DevOpsCLI.Commands;
+    using Jmelosegui.DevOpsCLI.Services;
     using McMaster.Extensions.CommandLineUtils;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
@@ -13,13 +15,24 @@ namespace Jmelosegui.DevOpsCLI
     {
         private static int Main(string[] args)
         {
+            var settings = new ApplicationConfiguration();
+            var configurationFile = settings.GetConfigurationFile();
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile(configurationFile, optional: true, reloadOnChange: true);
+
+            var configuration = builder.Build();
+
+            configuration.Bind(settings);
+
             var servicesProvider = new ServiceCollection()
+                .AddSingleton<ICredentialStore, CredentialStore>()
+                .AddSingleton(settings)
                 .AddLogging(configure =>
                 {
                     configure.AddConsole();
                     configure.SetMinimumLevel(LogLevel.Debug);
                 })
-                .BuildServiceProvider();
+                            .BuildServiceProvider();
 
             var logger = servicesProvider.GetRequiredService<ILogger<Program>>();
 

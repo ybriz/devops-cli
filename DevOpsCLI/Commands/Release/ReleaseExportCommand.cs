@@ -10,8 +10,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("export", Description = "Show the release details.")]
     public class ReleaseExportCommand : ProjectCommandBase
     {
-        public ReleaseExportCommand(ILogger<ReleaseExportCommand> logger)
-            : base(logger)
+        public ReleaseExportCommand(ApplicationConfiguration settings, ILogger<ReleaseExportCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -31,7 +31,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (this.ReleaseId <= 0)
+            while (this.NonInteractive == false && this.ReleaseId <= 0)
             {
                 int.TryParse(Prompt.GetString("> Release Id:", null, ConsoleColor.DarkGray), out int releaseId);
                 this.ReleaseId = releaseId;

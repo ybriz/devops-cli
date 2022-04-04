@@ -11,8 +11,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("import", Description = "Create or update release definition.")]
     public sealed class ReleaseDefinitionImportCommand : ProjectCommandBase
     {
-        public ReleaseDefinitionImportCommand(ILogger<ReleaseDefinitionImportCommand> logger)
-            : base(logger)
+        public ReleaseDefinitionImportCommand(ApplicationConfiguration settings, ILogger<ReleaseDefinitionImportCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -32,7 +32,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (string.IsNullOrEmpty(this.InputFile))
+            while (this.NonInteractive == false && string.IsNullOrEmpty(this.InputFile))
             {
                 this.InputFile = Prompt.GetString("> InputFile:", null, ConsoleColor.DarkGray);
             }

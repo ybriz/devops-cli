@@ -11,8 +11,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(RepositoryExportCommand))]
     public sealed class RepositoryCommand : ProjectCommandBase
     {
-        public RepositoryCommand(ILogger<RepositoryCommand> logger)
-            : base(logger)
+        public RepositoryCommand(ApplicationConfiguration settings, ILogger<RepositoryCommand> logger)
+            : base(settings, logger)
         {
         }
     }

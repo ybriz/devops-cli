@@ -9,8 +9,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("export", Description = "Resolve a storage key to a descriptor.")]
     internal class GraphDescriptorExportCommand : CommandBase
     {
-        public GraphDescriptorExportCommand(ILogger<GraphDescriptorExportCommand> logger)
-            : base(logger)
+        public GraphDescriptorExportCommand(ApplicationConfiguration settings, ILogger<GraphDescriptorExportCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -24,7 +24,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (string.IsNullOrEmpty(this.StorageKey))
+            while (this.NonInteractive == false && string.IsNullOrEmpty(this.StorageKey))
             {
                 this.StorageKey = Prompt.GetString("> Storage Key", null, System.ConsoleColor.DarkGray);
             }

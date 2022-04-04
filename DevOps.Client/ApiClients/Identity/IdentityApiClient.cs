@@ -28,7 +28,7 @@ namespace Jmelosegui.DevOps.Client
         {
             var parameters = new Dictionary<string, object>
             {
-                { "api-version", "5.0" },
+                { "api-version", "5.1-preview.1" },
             };
 
             if (request != null)
@@ -42,10 +42,23 @@ namespace Jmelosegui.DevOps.Client
                             .Add("queryMembership", request.QueryMembership.ToString());
             }
 
-            var response = await this.Connection.Get<GenericCollectionResponse<Identity>>(new Uri($"{EndPoint}", UriKind.Relative), parameters, null, CancellationToken.None, this.BaseUrl)
+            var response = await this.Connection.Get<GenericCollectionResponse<Identity>>(new Uri(EndPoint, UriKind.Relative), parameters, null, CancellationToken.None, this.BaseUrl)
                                                 .ConfigureAwait(false);
 
             return response.Body.Values;
+        }
+
+        public async Task<ConnectionData> GetConnectionData()
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "api-version", "5.1-preview.1" },
+            };
+
+            var response = await this.Connection.Get<ConnectionData>(new Uri("_apis/connectionData", UriKind.Relative), parameters, null)
+                                                .ConfigureAwait(false);
+
+            return response.Body;
         }
 
         private Uri GetBaseUrl()

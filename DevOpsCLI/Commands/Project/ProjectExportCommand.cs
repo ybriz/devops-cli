@@ -13,8 +13,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("export", Description = "Get project with the specified id or name, optionally including capabilities.")]
     public class ProjectExportCommand : CommandBase
     {
-        public ProjectExportCommand(ILogger<ProjectExportCommand> logger)
-            : base(logger)
+        public ProjectExportCommand(ApplicationConfiguration settings, ILogger<ProjectExportCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -40,7 +40,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (this.ProjectId == Guid.Empty && string.IsNullOrEmpty(this.ProjectName))
+            while (this.NonInteractive == false && this.ProjectId == Guid.Empty && string.IsNullOrEmpty(this.ProjectName))
             {
                 string value = Prompt.GetString("> ProjectId:", null, ConsoleColor.DarkGray);
                 if (Guid.TryParse(value, out Guid projectId))

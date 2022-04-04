@@ -11,8 +11,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("export", Description = "Get a pipeline.")]
     internal class PipelineExportCommand : ProjectCommandBase
     {
-        public PipelineExportCommand(ILogger<PipelineExportCommand> logger)
-            : base(logger)
+        public PipelineExportCommand(ApplicationConfiguration settings, ILogger<PipelineExportCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -26,7 +26,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (!this.Id.HasValue)
+            while (this.NonInteractive == false && !this.Id.HasValue)
             {
                 if (int.TryParse(Prompt.GetString("> Pipeline Id", null, ConsoleColor.DarkGray), out int tempId))
                 {

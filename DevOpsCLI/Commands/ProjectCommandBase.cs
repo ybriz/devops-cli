@@ -9,8 +9,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
     public abstract class ProjectCommandBase : CommandBase
     {
-        protected ProjectCommandBase(ILogger<ProjectCommandBase> logger)
-            : base(logger)
+        protected ProjectCommandBase(ApplicationConfiguration settings, ILogger<ProjectCommandBase> logger)
+            : base(settings, logger)
         {
         }
 
@@ -26,7 +26,12 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
             if (!this.IsCommandGroup)
             {
-                while (string.IsNullOrEmpty(this.ProjectName))
+                if (string.IsNullOrEmpty(this.ProjectName) && !string.IsNullOrEmpty(this.Settings?.Defaults?.Project))
+                {
+                    this.ProjectName = this.Settings.Defaults.Project;
+                }
+
+                while (this.NonInteractive == false && string.IsNullOrEmpty(this.ProjectName))
                 {
                     this.ProjectName = Prompt.GetString("> ProjectName:", null, ConsoleColor.DarkGray);
                 }

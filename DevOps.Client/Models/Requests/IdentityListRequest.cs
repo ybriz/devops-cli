@@ -13,7 +13,7 @@ namespace Jmelosegui.DevOps.Client
 
         /// <summary>
         /// Gets or sets QueryMembership.
-        /// The membership information to include with the identities. 
+        /// The membership information to include with the identities.
         /// Values can be None for no membership data or Direct to include the groups that the identity is a
         /// member of and the identities that are a member of this identity (groups only).
         /// </summary>

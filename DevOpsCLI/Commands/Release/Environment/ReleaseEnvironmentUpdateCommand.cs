@@ -11,8 +11,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("update", Description = "Update the status of a release environment.")]
     public class ReleaseEnvironmentUpdateCommand : ProjectCommandBase
     {
-        public ReleaseEnvironmentUpdateCommand(ILogger<ReleaseEnvironmentUpdateCommand> logger)
-            : base(logger)
+        public ReleaseEnvironmentUpdateCommand(ApplicationConfiguration settings, ILogger<ReleaseEnvironmentUpdateCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -32,13 +32,13 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (this.ReleaseId <= 0)
+            while (this.NonInteractive == false && this.ReleaseId <= 0)
             {
                 int.TryParse(Prompt.GetString("> ReleaseDefinitionId:", null, ConsoleColor.DarkGray), out int releaseDefinitionId);
                 this.ReleaseId = releaseDefinitionId;
             }
 
-            while (this.EnvironmentId <= 0)
+            while (this.NonInteractive == false && this.EnvironmentId <= 0)
             {
                 int.TryParse(Prompt.GetString("> EnvironmentId:", null, ConsoleColor.DarkGray), out int environmentId);
                 this.EnvironmentId = environmentId;
@@ -48,7 +48,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
             Enum.TryParse(value: this.Status, ignoreCase: true, out status);
 
-            while (status <= 0)
+            while (this.NonInteractive == false && status <= 0)
             {
                 Enum.TryParse(Prompt.GetString("> Environment Status:", null, ConsoleColor.DarkGray), ignoreCase: true, out status);
             }

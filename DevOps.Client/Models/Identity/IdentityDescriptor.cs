@@ -3,7 +3,6 @@
 
 namespace Jmelosegui.DevOps.Client
 {
-
     public class IdentityDescriptor
     {
         public string Identifier { get; set; }

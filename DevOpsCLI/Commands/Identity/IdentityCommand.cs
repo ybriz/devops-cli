@@ -10,8 +10,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("identity", Description = "Resolve legacy identity information for use with older APIs such as the Security APIs.")]
     public class IdentityCommand : CommandBase
     {
-        public IdentityCommand(ILogger<IdentityCommand> logger)
-            : base(logger)
+        public IdentityCommand(ApplicationConfiguration settings, ILogger<IdentityCommand> logger)
+            : base(settings, logger)
         {
         }
     }

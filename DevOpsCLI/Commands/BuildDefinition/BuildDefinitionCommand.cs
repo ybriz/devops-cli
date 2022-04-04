@@ -12,8 +12,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(BuildDefinitionImportCommand))]
     public class BuildDefinitionCommand : ProjectCommandBase
     {
-        public BuildDefinitionCommand(ILogger<BuildDefinitionCommand> logger)
-            : base(logger)
+        public BuildDefinitionCommand(ApplicationConfiguration settings, ILogger<BuildDefinitionCommand> logger)
+            : base(settings, logger)
         {
         }
     }

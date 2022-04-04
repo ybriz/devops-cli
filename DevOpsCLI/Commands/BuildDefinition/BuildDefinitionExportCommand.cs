@@ -12,8 +12,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("export", Description = "Show BuildDefinition details.")]
     public class BuildDefinitionExportCommand : ProjectCommandBase
     {
-        public BuildDefinitionExportCommand(ILogger<BuildDefinitionExportCommand> logger)
-            : base(logger)
+        public BuildDefinitionExportCommand(ApplicationConfiguration settings, ILogger<BuildDefinitionExportCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -39,7 +39,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (this.BuildDefinitionId <= 0 && string.IsNullOrEmpty(this.BuildDefinitionName))
+            while (this.NonInteractive == false && this.BuildDefinitionId <= 0 && string.IsNullOrEmpty(this.BuildDefinitionName))
             {
                 string value = Prompt.GetString("> ReleaseDefinition Id or Name:", null, ConsoleColor.DarkGray);
 

@@ -11,8 +11,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("import", Description = "CReate or update task group.")]
     public class TaskGroupImportCommand : ProjectCommandBase
     {
-        public TaskGroupImportCommand(ILogger<TaskGroupExportCommand> logger)
-            : base(logger)
+        public TaskGroupImportCommand(ApplicationConfiguration settings, ILogger<TaskGroupExportCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -32,7 +32,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (string.IsNullOrEmpty(this.InputFile))
+            while (this.NonInteractive == false && string.IsNullOrEmpty(this.InputFile))
             {
                 this.InputFile = Prompt.GetString("> InputFile:", null, ConsoleColor.DarkGray);
             }

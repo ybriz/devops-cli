@@ -13,8 +13,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("list", Description = "Get a list of agent queues.")]
     public class AgentQueueListCommand : ProjectCommandBase
     {
-        public AgentQueueListCommand(ILogger<AgentQueueListCommand> logger)
-            : base(logger)
+        public AgentQueueListCommand(ApplicationConfiguration settings, ILogger<AgentQueueListCommand> logger)
+            : base(settings, logger)
         {
         }
 

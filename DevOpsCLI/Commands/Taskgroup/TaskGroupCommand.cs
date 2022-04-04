@@ -12,8 +12,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(TaskGroupImportCommand))]
     public class TaskGroupCommand : ProjectCommandBase
     {
-        public TaskGroupCommand(ILogger<TaskGroupCommand> logger)
-            : base(logger)
+        public TaskGroupCommand(ApplicationConfiguration settings, ILogger<TaskGroupCommand> logger)
+            : base(settings, logger)
         {
         }
     }

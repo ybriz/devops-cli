@@ -9,8 +9,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("list", Description = "Get a list of task groups.")]
     public class TaskGroupListCommand : ProjectCommandBase
     {
-        public TaskGroupListCommand(ILogger<TaskGroupListCommand> logger)
-            : base(logger)
+        public TaskGroupListCommand(ApplicationConfiguration settings, ILogger<TaskGroupListCommand> logger)
+            : base(settings, logger)
         {
         }
 

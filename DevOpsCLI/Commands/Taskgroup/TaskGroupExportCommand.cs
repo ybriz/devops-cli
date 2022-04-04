@@ -12,8 +12,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("export", Description = "Show task group details.")]
     public class TaskGroupExportCommand : ProjectCommandBase
     {
-        public TaskGroupExportCommand(ILogger<TaskGroupExportCommand> logger)
-            : base(logger)
+        public TaskGroupExportCommand(ApplicationConfiguration settings, ILogger<TaskGroupExportCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -39,7 +39,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (this.TaskGroupId == Guid.Empty && string.IsNullOrEmpty(this.TaskGroupName))
+            while (this.NonInteractive == false && this.TaskGroupId == Guid.Empty && string.IsNullOrEmpty(this.TaskGroupName))
             {
                 string value = Prompt.GetString("> TaskGroupId:", null, ConsoleColor.DarkGray);
                 if (Guid.TryParse(value, out Guid taskGroupId))

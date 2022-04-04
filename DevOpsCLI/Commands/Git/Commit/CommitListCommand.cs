@@ -11,8 +11,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("list", Description = "Get a list of commits in a git repository.")]
     public sealed class CommitListCommand : ProjectCommandBase
     {
-        public CommitListCommand(ILogger<CommitListCommand> logger)
-            : base(logger)
+        public CommitListCommand(ApplicationConfiguration settings, ILogger<CommitListCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -40,7 +40,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
 
             var request = new CommitListRequest();
 
-            while (string.IsNullOrEmpty(this.RepositoryId))
+            while (this.NonInteractive == false && string.IsNullOrEmpty(this.RepositoryId))
             {
                 this.RepositoryId = Prompt.GetString("> RepositoryId:", null, ConsoleColor.DarkGray);
             }

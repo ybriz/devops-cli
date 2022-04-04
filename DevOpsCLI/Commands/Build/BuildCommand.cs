@@ -10,8 +10,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(BuildListCommand))]
     public class BuildCommand : ProjectCommandBase
     {
-        public BuildCommand(ILogger<BuildCommand> logger)
-            : base(logger)
+        public BuildCommand(ApplicationConfiguration settings, ILogger<BuildCommand> logger)
+            : base(settings, logger)
         {
         }
     }

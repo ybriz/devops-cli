@@ -11,8 +11,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("project", Description = "Commands for managing TeamProject.")]
     public class ProjectCommand : CommandBase
     {
-        public ProjectCommand(ILogger<ProjectCommand> logger)
-            : base(logger)
+        public ProjectCommand(ApplicationConfiguration settings, ILogger<ProjectCommand> logger)
+            : base(settings, logger)
         {
         }
     }

@@ -13,8 +13,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("list", Description = "Get a list of variable groups.")]
     public class VariableGroupListCommand : ProjectCommandBase
     {
-        public VariableGroupListCommand(ILogger<VariableGroupListCommand> logger)
-            : base(logger)
+        public VariableGroupListCommand(ApplicationConfiguration settings, ILogger<VariableGroupListCommand> logger)
+            : base(settings, logger)
         {
         }
 

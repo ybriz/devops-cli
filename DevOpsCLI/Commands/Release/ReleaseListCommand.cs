@@ -13,8 +13,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("list", Description = "Get a list of release.")]
     public class ReleaseListCommand : ProjectCommandBase
     {
-        public ReleaseListCommand(ILogger<ReleaseListCommand> logger)
-            : base(logger)
+        public ReleaseListCommand(ApplicationConfiguration settings, ILogger<ReleaseListCommand> logger)
+            : base(settings, logger)
         {
         }
 

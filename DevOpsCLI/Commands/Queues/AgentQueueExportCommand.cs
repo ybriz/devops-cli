@@ -12,8 +12,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("export", Description = "Show agent queue details.")]
     public sealed class AgentQueueExportCommand : ProjectCommandBase
     {
-        public AgentQueueExportCommand(ILogger<AgentQueueExportCommand> logger)
-            : base(logger)
+        public AgentQueueExportCommand(ApplicationConfiguration settings, ILogger<AgentQueueExportCommand> logger)
+            : base(settings, logger)
         {
         }
 
@@ -39,7 +39,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
         {
             base.OnExecute(app);
 
-            while (this.AgentQueueId <= 0 && string.IsNullOrEmpty(this.AgentQueueName))
+            while (this.NonInteractive == false && this.AgentQueueId <= 0 && string.IsNullOrEmpty(this.AgentQueueName))
             {
                 string value = Prompt.GetString("> AgentQueueName Id or Name:", null, ConsoleColor.DarkGray);
 

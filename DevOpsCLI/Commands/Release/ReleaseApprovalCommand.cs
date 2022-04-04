@@ -11,8 +11,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(ReleaseApprovalUpdateCommand))]
     public class ReleaseApprovalCommand : ProjectCommandBase
     {
-        public ReleaseApprovalCommand(ILogger<ReleaseApprovalCommand> logger)
-            : base(logger)
+        public ReleaseApprovalCommand(ApplicationConfiguration settings, ILogger<ReleaseApprovalCommand> logger)
+            : base(settings, logger)
         {
         }
     }

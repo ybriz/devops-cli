@@ -12,8 +12,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Command("group", Description = "Commands for managing groups.")]
     public class GraphGroupCommand : CommandBase
     {
-        public GraphGroupCommand(ILogger<GraphGroupCommand> logger)
-            : base(logger)
+        public GraphGroupCommand(ApplicationConfiguration settings, ILogger<GraphGroupCommand> logger)
+            : base(settings, logger)
         {
         }
     }

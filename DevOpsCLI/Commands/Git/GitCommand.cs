@@ -11,8 +11,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(RepositoryCommand))]
     public sealed class GitCommand : ProjectCommandBase
     {
-        public GitCommand(ILogger<GitCommand> logger)
-            : base(logger)
+        public GitCommand(ApplicationConfiguration settings, ILogger<GitCommand> logger)
+            : base(settings, logger)
         {
         }
     }
