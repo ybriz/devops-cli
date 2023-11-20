@@ -16,24 +16,24 @@ steps:
     SourceFolder: '$(Build.SourcesDirectory)'
     Contents: '**/*.nupkg'
 
-- task: NuGetToolInstaller@0
-  displayName: 'Use NuGet 5.2.0'
-  inputs:
-    versionSpec: 5.2.0
+# - task: NuGetToolInstaller@0
+#   displayName: 'Use NuGet 5.2.0'
+#   inputs:
+#     versionSpec: 5.2.0
 
-- task: NuGetCommand@2
-  displayName: 'Nuget Restore'
-  inputs:
-    command: 'restore'
-    restoreSolution: '$(solution)'
-    feedsToUse: 'config'
-    nugetConfigPath: '$(Build.SourcesDirectory)/nuget.config'
+# - task: NuGetCommand@2
+#   displayName: 'Nuget Restore'
+#   inputs:
+#     command: 'restore'
+#     restoreSolution: '$(solution)'
+#     feedsToUse: 'config'
+#     nugetConfigPath: '$(Build.SourcesDirectory)/nuget.config'
 
 - task: VSBuild@1
   displayName: 'Build Solution'
   inputs:
     solution: 
-    msbuildArgs: '/t:Publish /p:OutDir=$(Build.BinariesDirectory) /p:ContinuousIntegrationBuild=true'
+    msbuildArgs: '/t:restore,build /p:OutDir=$(Build.BinariesDirectory) /p:ContinuousIntegrationBuild=true'
     platform: '$(BuildPlatform)'
     configuration: '$(BuildConfiguration)'
 

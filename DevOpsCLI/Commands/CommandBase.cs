@@ -75,8 +75,12 @@ namespace Jmelosegui.DevOpsCLI.Commands
                     this.ServiceUrl = Prompt.GetString("> ServiceURL:", null, ConsoleColor.DarkGray);
                 }
 
-                var credentialStore = new CredentialStore();
-                var storedToken = credentialStore.GetCredential(this.ServiceUrl);
+                string storedToken = null;
+                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                {
+                    var credentialStore = new ProtectedDataCredentialStore();
+                    storedToken = credentialStore.GetCredential(this.ServiceUrl);
+                }
 
                 if (string.IsNullOrEmpty(this.Token) && !string.IsNullOrEmpty(storedToken))
                 {

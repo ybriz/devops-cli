@@ -25,7 +25,7 @@ namespace Jmelosegui.DevOpsCLI
             configuration.Bind(settings);
 
             var servicesProvider = new ServiceCollection()
-                .AddSingleton<ICredentialStore, CredentialStore>()
+                .AddSingleton<ICredentialStore, ProtectedDataCredentialStore>()
                 .AddSingleton(settings)
                 .AddLogging(configure =>
                 {
