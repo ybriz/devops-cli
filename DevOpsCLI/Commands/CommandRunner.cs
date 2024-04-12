@@ -22,6 +22,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(ConfigureCommand))]
     [Subcommand(typeof(LoginCommand))]
     [Subcommand(typeof(LogoutCommand))]
+    [Subcommand(typeof(TeamCommand))]
     [HelpOption("-h|--help")]
     public sealed class CommandRunner
     {

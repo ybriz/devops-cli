@@ -93,6 +93,11 @@
             Gets the underlying connection.
             </summary>
         </member>
+        <member name="P:Jmelosegui.DevOps.Client.TeamApiClient.Connection">
+            <summary>
+            Gets the underlying connection.
+            </summary>
+        </member>
         <member name="P:Jmelosegui.DevOps.Client.VariableGroupApiClient.Connection">
             <summary>
             Gets the underlying connection.

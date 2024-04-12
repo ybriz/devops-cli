@@ -46,6 +46,8 @@ namespace Jmelosegui.DevOps.Client
             this.Identity = new IdentityApiClient(connection);
 
             this.Project = new ProjectApiClient(connection);
+
+            this.Team = new TeamApiClient(connection);
         }
 
         public IConnection Connection { get; }
@@ -73,5 +75,7 @@ namespace Jmelosegui.DevOps.Client
         public IIdentityApiClient Identity { get; }
 
         public IProjectApiClient Project { get; }
+
+        public ITeamApiClient Team { get; }
     }
 }
