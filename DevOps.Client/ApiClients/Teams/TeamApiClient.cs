@@ -76,7 +76,6 @@ namespace Jmelosegui.DevOps.Client
                                                      .ConfigureAwait(false);
 
             return result.Body;
-
         }
     }
 }

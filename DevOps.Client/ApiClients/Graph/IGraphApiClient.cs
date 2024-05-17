@@ -13,5 +13,11 @@ namespace Jmelosegui.DevOps.Client
         Task<GraphGroup> GroupGetAsync(string groupDescriptor);
 
         Task<IEnumerable<GraphGroup>> GroupGetAllAsync(GraphGroupListRequest request);
+
+        Task<GraphUser> UserGetAsync(string userDescriptor);
+
+        Task<IEnumerable<GraphUser>> UserGetAllAsync(GraphUserListRequest request);
+
+        Task<IEnumerable<GraphMembership>> MembershipGetAllAsync(GraphMembershipListRequest request);
     }
 }

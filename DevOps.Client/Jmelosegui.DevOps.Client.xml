@@ -68,6 +68,20 @@
             <param name="request">Payload used in the request <see cref="T:Jmelosegui.DevOps.Client.GraphGroupListRequest"/>.</param>
             <returns>IEnumerable of <see cref="T:Jmelosegui.DevOps.GraphGroup"/>.</returns>
         </member>
+        <member name="M:Jmelosegui.DevOps.Client.GraphApiClient.MembershipGetAllAsync(Jmelosegui.DevOps.Client.GraphMembershipListRequest)">
+            <summary>
+            Retrieve Memberships.
+            </summary>
+            <param name="request">Payload used in the request <see cref="T:Jmelosegui.DevOps.Client.GraphMembershipListRequest"/>.</param>
+            <returns>IEnumerable of <see cref="T:Jmelosegui.DevOps.Client.GraphMembership"/>.</returns>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.GraphApiClient.UserGetAllAsync(Jmelosegui.DevOps.Client.GraphUserListRequest)">
+            <summary>
+            Retrieve Users.
+            </summary>
+            <param name="request">Payload used in the request <see cref="T:Jmelosegui.DevOps.Client.GraphUserListRequest"/>.</param>
+            <returns>IEnumerable of <see cref="T:Jmelosegui.DevOps.Client.GraphUser"/>.</returns>
+        </member>
         <member name="P:Jmelosegui.DevOps.Client.IdentityApiClient.Connection">
             <summary>
             Gets the underlying connection.
@@ -356,6 +370,18 @@
             </summary>
         </member>
         <member name="P:Jmelosegui.DevOps.Client.GraphGroupListRequest.ScopeDescriptor">
+            <summary>
+            Gets or sets the ScopeDecriptor.
+            Specify a non-default scope (collection, project) to search for groups.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.GraphMembershipListRequest.SubjectDescriptor">
+            <summary>
+            Gets or sets the ScopeDecriptor.
+            Specify a non-default scope (collection, project) to search for groups.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.GraphUserListRequest.ScopeDescriptor">
             <summary>
             Gets or sets the ScopeDecriptor.
             Specify a non-default scope (collection, project) to search for groups.
