@@ -10,6 +10,7 @@ namespace Jmelosegui.DevOpsCLI.Commands
     [Subcommand(typeof(GraphGroupCommand))]
     [Subcommand(typeof(GraphUserCommand))]
     [Subcommand(typeof(GraphMembershipCommand))]
+    [Subcommand(typeof(GraphServicePrincipalCommand))]
     [Command("graph", Description = "Commands for managing users, groups, and group memberships.")]
     public class GraphCommand : CommandBase
     {

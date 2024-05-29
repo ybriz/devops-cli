@@ -19,5 +19,9 @@ namespace Jmelosegui.DevOps.Client
         Task<IEnumerable<GraphUser>> UserGetAllAsync(GraphUserListRequest request);
 
         Task<IEnumerable<GraphMembership>> MembershipGetAllAsync(GraphMembershipListRequest request);
+
+        Task<GraphServicePrincipal> ServicePrincipalGetAsync(string servicePrincipalDescriptor);
+
+        Task<IEnumerable<GraphServicePrincipal>> ServicePrincipalGetAllAsync(GraphServicePrincipalListRequest request);
     }
 }
