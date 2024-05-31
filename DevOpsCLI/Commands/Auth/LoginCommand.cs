@@ -91,9 +91,10 @@ namespace Jmelosegui.DevOpsCLI.Commands
                 throw new ArgumentException("The service URL is not valid.", nameof(serviceUrl));
             }
 
-            var devOpsClient = new DevOpsClient(new Uri(serviceUrl), new Credentials(string.Empty, token));
-
-            return await devOpsClient.Identity.GetConnectionData();
+            using (var devOpsClient = new DevOpsClient(new Uri(serviceUrl), new Credentials(string.Empty, token)))
+            {
+                return await devOpsClient.Identity.GetConnectionData();
+            }
         }
     }
 }

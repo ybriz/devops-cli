@@ -15,8 +15,8 @@ namespace Jmelosegui.DevOps.Client
         /// </summary>
         /// <param name="projectName">Project ID or project name.</param>
         /// <param name="commitListRequest">Payload used in the request.</param>
-        /// <returns>Returns an IEnumerable of <see cref="CommitRef"/>.</returns>
-        Task<IEnumerable<CommitRef>> GetCommits(string projectName, CommitListRequest commitListRequest = null);
+        /// <returns>Returns an IEnumerable of <see cref="GitCommitRef"/>.</returns>
+        Task<IEnumerable<GitCommitRef>> GetCommits(string projectName, CommitListRequest commitListRequest = null);
 
         /// <summary>
         /// Retrieve a git reposiroty by id or name.
@@ -33,5 +33,13 @@ namespace Jmelosegui.DevOps.Client
         /// <param name="request">Payload used in the request <see cref="RepositoryListRequest"/>.</param>
         /// <returns>IEnumerable of <see cref="GitRepository"/>.</returns>
         Task<IEnumerable<GitRepository>> RepositoryGetAllAsync(string projectName, RepositoryListRequest request);
+
+        /// <summary>
+        /// Retrieve pull requests for a project.
+        /// </summary>
+        /// <param name="projectName">Project Name.</param>
+        /// <param name="request">Payload used in the request <see cref="PullRequestListRequest"/>.</param>
+        /// <returns>IEnumerable of <see cref="GitPullRequest"/>.</returns>
+        Task<IEnumerable<GitPullRequest>> GetPullRequestsAsync(string projectName, PullRequestListRequest request);
     }
 }

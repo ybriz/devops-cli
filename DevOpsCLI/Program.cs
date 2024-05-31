@@ -32,7 +32,7 @@ namespace Jmelosegui.DevOpsCLI
                     configure.AddConsole();
                     configure.SetMinimumLevel(LogLevel.Debug);
                 })
-                            .BuildServiceProvider();
+                .BuildServiceProvider();
 
             var logger = servicesProvider.GetRequiredService<ILogger<Program>>();
 

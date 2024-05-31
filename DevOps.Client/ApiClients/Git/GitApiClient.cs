@@ -9,7 +9,7 @@ namespace Jmelosegui.DevOps.Client
     using Jmelosegui.DevOps.Client.Models;
     using Jmelosegui.DevOps.Client.Models.Requests;
 
-    public sealed class GitApiClient : IGitApiClient
+    public sealed partial class GitApiClient : IGitApiClient
     {
         private const string EndPoint = "_apis/git/repositories";
 
@@ -28,8 +28,8 @@ namespace Jmelosegui.DevOps.Client
         /// </summary>
         /// <param name="projectName">Project ID or project name.</param>
         /// <param name="commitListRequest">Payload used in the request.</param>
-        /// <returns>Returns an IEnumerable of <see cref="CommitRef"/>.</returns>
-        public async Task<IEnumerable<CommitRef>> GetCommits(string projectName, CommitListRequest commitListRequest = null)
+        /// <returns>Returns an IEnumerable of <see cref="GitCommitRef"/>.</returns>
+        public async Task<IEnumerable<GitCommitRef>> GetCommits(string projectName, CommitListRequest commitListRequest = null)
         {
             var parameters = new Dictionary<string, object>();
 
@@ -40,7 +40,7 @@ namespace Jmelosegui.DevOps.Client
 
             var endPoint = new Uri($"{projectName}/_apis/git/repositories/{commitListRequest.RepositoryId}/commits", UriKind.Relative);
 
-            var response = await this.Connection.Get<GenericCollectionResponse<CommitRef>>(endPoint, parameters, null)
+            var response = await this.Connection.Get<GenericCollectionResponse<GitCommitRef>>(endPoint, parameters, null)
                                .ConfigureAwait(false);
 
             return response.Body.Values;

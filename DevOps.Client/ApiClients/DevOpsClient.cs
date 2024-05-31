@@ -5,7 +5,7 @@ namespace Jmelosegui.DevOps.Client
 {
     using System;
 
-    public class DevOpsClient
+    public class DevOpsClient : IDisposable
     {
         public DevOpsClient(Uri collectionUri)
             : this(collectionUri, Credentials.Anonymous)
@@ -77,5 +77,22 @@ namespace Jmelosegui.DevOps.Client
         public IProjectApiClient Project { get; }
 
         public ITeamApiClient Team { get; }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (this.Connection != null)
+                {
+                    this.Connection.Dispose();
+                }
+            }
+        }
     }
 }

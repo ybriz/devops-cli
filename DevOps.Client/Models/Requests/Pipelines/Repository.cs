@@ -3,12 +3,12 @@
 
 namespace Jmelosegui.DevOps.Client.Models
 {
-    public sealed class PipelineCreateRequest
+    using System;
+
+    public sealed class Repository
     {
-        public string Name { get; set; }
+        public Guid Id { get; set; }
 
-        public string Folder { get; set; }
-
-        public PipelineConfiguration Configuration { get; set; }
+        public string Type { get; set; }
     }
 }

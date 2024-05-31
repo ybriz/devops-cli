@@ -6,7 +6,7 @@ namespace Jmelosegui.DevOps.Client.Models
     /// <summary>
     /// Provides properties that describe a Git commit and associated metadata.
     /// </summary>
-    public class CommitRef
+    public class GitCommitRef
     {
         /// <summary>
         /// Gets or sets iD(SHA-1) of the commit.
@@ -22,5 +22,10 @@ namespace Jmelosegui.DevOps.Client.Models
         /// Gets or sets comment or message of the commit.
         /// </summary>
         public string Comment { get; set; }
+
+        /// <summary>
+        /// Gets or sets committer of the commit.
+        /// </summary>
+        public string Url { get; set; }
     }
 }

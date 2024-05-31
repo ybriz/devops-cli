@@ -30,7 +30,7 @@
             </summary>
             <param name="projectName">Project ID or project name.</param>
             <param name="commitListRequest">Payload used in the request.</param>
-            <returns>Returns an IEnumerable of <see cref="T:Jmelosegui.DevOps.Client.Models.CommitRef"/>.</returns>
+            <returns>Returns an IEnumerable of <see cref="T:Jmelosegui.DevOps.Client.Models.GitCommitRef"/>.</returns>
         </member>
         <member name="M:Jmelosegui.DevOps.Client.IGitApiClient.GetCommits(System.String,Jmelosegui.DevOps.Client.Models.Requests.CommitListRequest)">
             <summary>
@@ -38,7 +38,7 @@
             </summary>
             <param name="projectName">Project ID or project name.</param>
             <param name="commitListRequest">Payload used in the request.</param>
-            <returns>Returns an IEnumerable of <see cref="T:Jmelosegui.DevOps.Client.Models.CommitRef"/>.</returns>
+            <returns>Returns an IEnumerable of <see cref="T:Jmelosegui.DevOps.Client.Models.GitCommitRef"/>.</returns>
         </member>
         <member name="M:Jmelosegui.DevOps.Client.IGitApiClient.RepositoryGetAsync(System.String,System.String)">
             <summary>
@@ -55,6 +55,14 @@
             <param name="projectName">Project Name.</param>
             <param name="request">Payload used in the request <see cref="T:Jmelosegui.DevOps.Client.Models.Requests.RepositoryListRequest"/>.</param>
             <returns>IEnumerable of <see cref="T:Jmelosegui.DevOps.Client.Models.GitRepository"/>.</returns>
+        </member>
+        <member name="M:Jmelosegui.DevOps.Client.IGitApiClient.GetPullRequestsAsync(System.String,Jmelosegui.DevOps.Client.Models.Requests.PullRequestListRequest)">
+            <summary>
+            Retrieve pull requests for a project.
+            </summary>
+            <param name="projectName">Project Name.</param>
+            <param name="request">Payload used in the request <see cref="T:Jmelosegui.DevOps.Client.Models.Requests.PullRequestListRequest"/>.</param>
+            <returns>IEnumerable of <see cref="T:Jmelosegui.DevOps.Client.Models.GitPullRequest"/>.</returns>
         </member>
         <member name="P:Jmelosegui.DevOps.Client.GraphApiClient.Connection">
             <summary>
@@ -316,25 +324,133 @@
                 adding the proper JSON response header.
             </summary>
         </member>
-        <member name="T:Jmelosegui.DevOps.Client.Models.CommitRef">
+        <member name="T:Jmelosegui.DevOps.Client.Models.GitCommitRef">
             <summary>
             Provides properties that describe a Git commit and associated metadata.
             </summary>
         </member>
-        <member name="P:Jmelosegui.DevOps.Client.Models.CommitRef.CommitId">
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitCommitRef.CommitId">
             <summary>
             Gets or sets iD(SHA-1) of the commit.
             </summary>
         </member>
-        <member name="P:Jmelosegui.DevOps.Client.Models.CommitRef.Author">
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitCommitRef.Author">
             <summary>
             Gets or sets author of the commit.
             </summary>
         </member>
-        <member name="P:Jmelosegui.DevOps.Client.Models.CommitRef.Comment">
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitCommitRef.Comment">
             <summary>
             Gets or sets comment or message of the commit.
             </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitCommitRef.Url">
+            <summary>
+            Gets or sets committer of the commit.
+            </summary>
+        </member>
+        <member name="T:Jmelosegui.DevOps.Client.Models.GitPullRequest">
+            <summary>
+            Provides properties that describe a Git pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.Repository">
+            <summary>
+            Gets or sets the repository that contains the target branch of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.PullRequestId">
+            <summary>
+            Gets or sets the id of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.CodeReviewId">
+            <summary>
+            Gets or sets the id of the code review.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.Status">
+            <summary>
+            Gets or sets the status of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.CreatedBy">
+            <summary>
+            Gets or sets the title of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.CreationDate">
+            <summary>
+            Gets or sets the creation date of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.Title">
+            <summary>
+            Gets or sets the title of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.Description">
+            <summary>
+            Gets or sets the description of the pull request.
+            </summary>
+            <remarks>
+            Please note that description field will be truncated up to 400 symbols in the result.
+            </remarks>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.SourceRefName">
+            <summary>
+            Gets or sets the source branch of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.TargetRefName">
+            <summary>
+            Gets or sets the target branch of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.MergeStatus">
+            <summary>
+            Gets or sets the merge status of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.MergeId">
+            <summary>
+            Gets or sets the merge id of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.LastMergeSourceCommit">
+            <summary>
+            Gets or sets the merge commit id of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.LastMergeTargetCommit">
+            <summary>
+            Gets or sets the merge commit id of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.LastMergeCommit">
+            <summary>
+            Gets or sets the merge commit id of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.Reviewers">
+            <summary>
+            Gets or sets the reviewers of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.Url">
+            <summary>
+            Gets or sets the url of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.GitPullRequest.SupportsIterations">
+            <summary>
+            Gets or sets a value indicating whether the pull request support iterations.
+            </summary>
+            <remarks>
+            If true, this pull request supports multiple iterations.
+            Iteration support means individual pushes to the source branch of the pull request can
+            be reviewed and comments left in one iteration will be tracked across future iterations.
+            </remarks>
         </member>
         <member name="T:Jmelosegui.DevOps.Client.Models.GitUserDate">
             <summary>
@@ -374,6 +490,51 @@
         <member name="P:Jmelosegui.DevOps.Client.Models.Requests.CommitListRequest.SearchCriteriaVersion">
             <summary>
             Gets or sets the version string identifier (name of tag/branch, SHA1 of commit).
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.Requests.PullRequestListRequest.RepositoryId">
+            <summary>
+            Gets or sets the id or friendly name of the repository.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.Requests.PullRequestListRequest.Status">
+            <summary>
+            Gets or sets the status of the pull request.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.Requests.PullRequestListRequest.TimeRageType">
+            <summary>
+            Gets or sets the type of time range which should be used for minTime and maxTime. Defaults to Created if unset.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.Requests.PullRequestListRequest.MinTime">
+            <summary>
+            Gets or sets the request min datetime. If specified, filters pull requests that created/closed after this date based on the queryTimeRangeType specified.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.Requests.PullRequestListRequest.MaxTime">
+            <summary>
+            Gets or sets the request max datetime. If specified, filters pull requests that created/closed before this date based on the queryTimeRangeType specified.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.Requests.PullRequestListRequest.Top">
+            <summary>
+            Gets or sets the number of pull requests to get.
+            </summary>
+        </member>
+        <member name="P:Jmelosegui.DevOps.Client.Models.Requests.PullRequestListRequest.Skip">
+            <summary>
+            Gets or sets the number of pull requests to skip.
+            </summary>
+        </member>
+        <member name="T:Jmelosegui.DevOps.Client.Models.Requests.PullRequestStatus">
+            <summary>
+            Defines the status of the pull request.
+            </summary>
+        </member>
+        <member name="T:Jmelosegui.DevOps.Client.Models.Requests.PullRequestTimeRangeType">
+            <summary>
+            Defines the type of time range which should be used for minTime and maxTime.
             </summary>
         </member>
         <member name="P:Jmelosegui.DevOps.Client.GraphGroupListRequest.ScopeDescriptor">
