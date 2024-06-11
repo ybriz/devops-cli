@@ -105,6 +105,8 @@ namespace Jmelosegui.DevOpsCLI.Commands
                         ContractResolver = new CamelCasePropertyNamesContractResolver(),
                     };
 
+                    writer.Write("[");
+
                     while (true)
                     {
                         request.Top = top;
@@ -121,15 +123,21 @@ namespace Jmelosegui.DevOpsCLI.Commands
                         {
                             Console.WriteLine($"Exporting pull requests to {this.OutputFile}");
                         }
+                        else
+                        {
+                            writer.Write(",");
+                        }
 
                         var outPutContent = JsonConvert.SerializeObject(result, settings);
-                        writer.Write(outPutContent);
+                        writer.Write(outPutContent.TrimStart('[').TrimEnd(']'));
 
                         totalPr += count;
                         Console.WriteLine($"Iteration {++iteration}. Total pull request exported: {totalPr}.");
 
                         skip += top;
                     }
+
+                    writer.Write("]");
                 }
             }
             else
